@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorbackground"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="85dp" />
+
+    <RelativeLayout
+        android:id="@+id/id_call_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
+
+        <TextView
+            android:id="@+id/label_dialpad_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:fontFamily="sans-serif-condensed"
+            android:padding="5dp"
+            android:text="Account Registered"
+            android:textColor="@color/colorbackground"
+            android:textSize="18sp"
+            android:textStyle="normal" />
+
+        <Chronometer
+            android:id="@+id/tv_time_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/label_dialpad_status"
+            android:background="@color/colorAccent"
+            android:padding="5dp"
+            android:textColor="@color/colorbackground"
+            android:textSize="18sp"
+            android:textStyle="normal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/layout_dialpad"
+            android:layout_below="@+id/tv_time_count"
+            android:background="@color/colorfragmentbackground"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edittext_enter_number"
+                style="@style/EditTextFullWidth"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:ems="11"
+                android:focusableInTouchMode="false"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:inputType="text"
+                android:labelFor="@+id/edittext_enter_number"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text=""
+                android:textSize="30sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_dialpad"
+            style="@style/VerticalLayoutDialPad"
+            android:layout_alignParentBottom="true">
+
+            <LinearLayout style="@style/HorizontalLayoutDialPad">
+
+                <LinearLayout
+                    android:id="@+id/dialpad_num1"
+                    style="@style/LayoutForRoundButtonNumbers">
+
+                    <TextView
+                        style="@style/MainTextViewRoundButton"
+                        android:text="@string/_1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/dialpad_num2"
+                    style="@style/LayoutForRoundButtonNumbers">
+
+                    <TextView
+                        style="@style/MainTextViewRoundButton"
+                        android:text="@string/_2" />
+
+                    <TextView
+                        style="@style/SubTextViewRoundButton"
+                        android:text="@string/abc" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/dialpad_num3"
+                    style="@style/LayoutForRoundButtonNumbers">
+
+                    <TextView
+                        style="@style/MainTextViewRoundButton"
+                        android:text="@string/_3" />
+
+                    <TextView
+                        style="@style/SubTextViewRoundButton"
+                        android:text="@string/def" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/dialpad_delete"
+                    style="@style/LayoutForRoundButton">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_keyboard_backspace_black_24dp"
+                        android:tint="@color/colorAccent" />
+
+                    <TextView
+                        style="@style/SubTextViewRoundButton"
+                        android:text="@string/delete" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/HorizontalLayoutDialPad">
+
+                <LinearLayout
+                    android:id="@+id/dialpad_num4"
+                    style="@style/LayoutForRoundButtonNumbers">
+
+                    <TextView
+                        style="@style/MainTextViewRoundButton"
+                        android:text="@string/_4" />
+
+                    <TextView
+                        style="@style/SubTextViewRoundButton"
+                        android:text="@string/ghi" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/dialpad_num5"
+                    style="@style/LayoutForRoundButtonNumbers">
+
+                    <TextView
+                        style="@style/MainTextViewRoundButton"
+                        android:text="@string/_5" />
+
+                    <TextView
+                        style="@style/SubTextViewRoundButton"
+                        android:text="@string/jkl" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/dialpad_num6"
+                    style="@style/LayoutForRoundButtonNumbers">
+
+                    <TextView
+                        style="@style/MainTextViewRoundButton"
+                        android:text="@string/_6" />
+
+                    <TextView
+                        style="@style/SubTextViewRoundButton"
+                        android:text="@string/mno" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/layout_end_call"
+                    style="@style/LayoutForRoundButtonEndCall"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="30dp"
+                    android:visibility="gone">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/videocam1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_call_end" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/dialpad_hold"
+                    style="@style/LayoutForRoundButtonHoldButton"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:contentDescription="@string/hold"
+                        android:src="@drawable/ic_call_end"
+                        android:tint="@color/colorAccent" />
+
+                    <TextView
+                        style="@style/SubTextViewRoundButton"
+                        android:text="@string/hold"
+                        android:textColor="@drawable/textview_state_default_accent" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/call_end"
+                    style="@style/LayoutForRoundButtonHoldButton">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:contentDescription="@string/hold"
+                        android:src="@drawable/ic_call_end"
+                        android:tint="@color/colorAccent" />
+
+                    <TextView
+                        style="@style/SubTextViewRoundButton"
+                        android:text="@string/hold"
+                        android:textColor="@drawable/textview_state_default_accent" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/HorizontalLayoutDialPad">
+
+                <LinearLayout
+                    android:id="@+id/dialpad_num7"
+                    style="@style/LayoutForRoundButtonNumbers">
+
+                    <TextView
+                        style="@style/MainTextViewRoundButton"
+                        android:text="@string/_7" />
+
+                    <TextView
+                        style="@style/SubTextViewRoundButton"
+                        android:text="@string/pqrs" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/dialpad_num8"
+                    style="@style/LayoutForRoundButtonNumbers">
+
+                    <TextView
+                        style="@style/MainTextViewRoundButton"
+                        android:text="@string/_8" />
+
+                    <TextView
+                        style="@style/SubTextViewRoundButton"
+                        android:text="@string/tuv" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/dialpad_num9"
+                    style="@style/LayoutForRoundButtonNumbers">
+
+                    <TextView
+                        style="@style/MainTextViewRoundButton"
+                        android:text="@string/_9" />
+
+                    <TextView
+                        style="@style/SubTextViewRoundButton"
+                        android:text="@string/wxyz" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/dialpad_contacts"
+                    style="@style/LayoutForRoundButtonAccentBorderButton">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/contact_button_icon_state" />
+
+                    <TextView
+                        style="@style/SubTextViewRoundButton"
+                        android:text="@string/contacts"
+                        android:textColor="@drawable/textview_state_default_accent" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/HorizontalLayoutDialPad">
+
+                <LinearLayout
+                    android:id="@+id/dialpad_star"
+                    style="@style/LayoutForRoundButtonNumbers">
+
+                    <TextView
+                        style="@style/MainTextViewRoundButton"
+                        android:text="@string/star" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/dialpad_num0"
+                    style="@style/LayoutForRoundButtonNumbers">
+
+                    <TextView
+                        style="@style/MainTextViewRoundButton"
+                        android:text="@string/_0" />
+
+                    <TextView
+                        style="@style/SubTextViewRoundButton"
+                        android:text="@string/plus" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/dialpad_hash"
+                    style="@style/LayoutForRoundButtonNumbers">
+
+                    <TextView
+                        style="@style/MainTextViewRoundButton"
+                        android:text="@string/hash" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/dialpad_dial"
+                    style="@style/LayoutForRoundButtonAccentBorderDialEnd">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/dial_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/dial_button_icon_state" />
+
+                    <TextView
+                        android:id="@+id/DialText"
+                        style="@style/SubTextViewRoundButton"
+                        android:text="@string/dial"
+                        android:textColor="@drawable/textview_state_default_primary" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

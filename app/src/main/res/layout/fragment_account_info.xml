@@ -1,0 +1,285 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorfragmentbackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context="vaxsoft.com.vaxphone.AccountLogin.AccountInfoFragment">
+
+        <include
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="85dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:paddingBottom="2dp">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="5dp"
+                android:paddingStart="0dp"
+                app:srcCompat="@drawable/ic_account_edit" />
+
+            <TextView
+                style="@style/TextViewHeading"
+                android:layout_gravity="bottom"
+                android:text="@string/account_profile"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:cardCornerRadius="3dp"
+            app:cardMaxElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/username_row"
+                    style="@style/RowLayout">
+
+                    <TextView
+                        android:id="@+id/tv_username"
+                        style="@style/TextView"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="0dp"
+                        android:text="@string/username" />
+
+                    <EditText
+                        android:id="@+id/ai_username"
+                        style="@style/EditText"
+                        android:layout_toEndOf="@id/tv_username"
+                        android:ellipsize="end"
+                        android:hint="@string/john"
+                        android:inputType="text"
+                        android:maxLines="1" />
+
+                </RelativeLayout>
+
+                <View style="@style/HorizontalLineWithMargin" />
+
+                <RelativeLayout
+                    android:id="@+id/display_name_row"
+                    style="@style/RowLayout">
+
+                    <TextView
+                        android:id="@+id/tv_display_name"
+                        style="@style/TextView"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="0dp"
+                        android:text="@string/display_name" />
+
+                    <EditText
+                        android:id="@+id/ai_display_name"
+                        style="@style/EditText"
+                        android:layout_toEndOf="@id/tv_display_name"
+                        android:ellipsize="end"
+                        android:hint="@string/john_becker"
+                        android:inputType="text"
+                        android:maxLines="1" />
+
+                </RelativeLayout>
+
+                <View style="@style/HorizontalLineWithMargin" />
+
+                <RelativeLayout
+                    android:id="@+id/auth_login_row"
+                    style="@style/RowLayout">
+
+                    <TextView
+                        android:id="@+id/tv_auth_login"
+                        style="@style/TextView"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="0dp"
+                        android:text="@string/auth_login" />
+
+                    <EditText
+                        android:id="@+id/ai_auth_login"
+                        style="@style/EditText"
+                        android:layout_toEndOf="@id/tv_auth_login"
+                        android:ellipsize="end"
+                        android:hint="@string/login_hint"
+                        android:inputType="text"
+                        android:maxLines="1" />
+
+                </RelativeLayout>
+
+                <View style="@style/HorizontalLineWithMargin" />
+
+                <RelativeLayout
+                    android:id="@+id/auth_password_row"
+                    style="@style/RowLayout">
+
+                    <TextView
+                        android:id="@+id/tv_auth_password"
+                        style="@style/TextView"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="0dp"
+                        android:text="@string/auth_password" />
+
+                    <EditText
+                        android:id="@+id/ai_auth_pwd"
+                        style="@style/EditText"
+                        android:layout_toEndOf="@id/tv_auth_password"
+                        android:ellipsize="end"
+                        android:hint="@string/password_hint"
+                        android:inputType="textPassword"
+                        android:maxLines="1" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:paddingBottom="2dp">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="5dp"
+                android:paddingStart="0dp"
+                app:srcCompat="@drawable/ic_account_settings" />
+
+            <TextView
+                style="@style/TextViewHeading"
+                android:layout_gravity="bottom"
+                android:text="@string/account_settings"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:cardCornerRadius="3dp"
+            app:cardMaxElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/domain_row"
+                    style="@style/RowLayout">
+
+                    <TextView
+                        android:id="@+id/tv_domain_realm"
+                        style="@style/TextView"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="0dp"
+                        android:text="@string/domain_realm" />
+
+                    <EditText
+                        android:id="@+id/ai_domain_realm"
+                        style="@style/EditText"
+                        android:layout_toEndOf="@id/tv_domain_realm"
+                        android:ellipsize="end"
+                        android:hint="@string/domain_realm_hint"
+                        android:inputType="text"
+                        android:maxLines="1" />
+
+                </RelativeLayout>
+
+                <View style="@style/HorizontalLineWithMargin" />
+
+                <RelativeLayout
+                    android:id="@+id/Server_ip_row"
+                    style="@style/RowLayout">
+
+                    <TextView
+                        android:id="@+id/tv_server_ip"
+                        style="@style/TextView"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="0dp"
+                        android:text="@string/server_ip" />
+
+                    <EditText
+                        android:id="@+id/ai_server_ip"
+                        style="@style/EditText"
+                        android:layout_toEndOf="@id/tv_server_ip"
+                        android:ellipsize="end"
+                        android:hint="@string/server_ip_or_domain"
+                        android:inputType="text"
+                        android:maxLines="1" />
+
+                </RelativeLayout>
+
+                <View style="@style/HorizontalLineWithMargin" />
+
+                <RelativeLayout
+                    android:id="@+id/server_port_row"
+                    style="@style/RowLayout">
+
+                    <TextView
+                        android:id="@+id/tv_Server_port"
+                        style="@style/TextView"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="0dp"
+                        android:text="@string/server_port" />
+
+                    <EditText
+                        android:id="@+id/ai_server_port"
+                        style="@style/EditText"
+                        android:layout_toEndOf="@id/tv_Server_port"
+                        android:ellipsize="end"
+                        android:hint="@string/server_port_default_5060"
+                        android:inputType="text"
+                        android:maxLines="1" />
+
+                </RelativeLayout>
+
+                <View style="@style/HorizontalLineWithMargin" />
+
+                <RelativeLayout
+                    android:id="@+id/sip_registration_row"
+                    style="@style/CheckBoxRowLayout">
+
+                    <TextView
+                        style="@style/TextView"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="0dp"
+                        android:text="@string/sip_registration" />
+
+                    <CheckBox
+                        android:id="@+id/ai_sip_registration"
+                        style="@style/AlignRightEnd"
+                        android:layout_margin="0dp"
+                        android:checked="true"
+                        android:padding="0dp"
+                        android:textColor="@color/colorAccent" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <View style="@style/EmptyRow" />
+
+    </LinearLayout>
+
+</ScrollView>

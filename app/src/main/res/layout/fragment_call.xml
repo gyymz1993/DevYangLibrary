@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ParentView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorbackground"
+    tools:context=".MainTab.CallTab.CallTabFragment">
+
+    <TextView
+        android:id="@+id/label_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:background="@color/colorAccent"
+        android:fontFamily="sans-serif-condensed"
+        android:padding="5dp"
+        android:text="Account Registered"
+        android:textColor="@color/colorbackground"
+        android:textSize="18sp"
+        android:textStyle="normal" />
+
+    <vaxsoft.com.vaxphone.MainTab.CallTab.RemoteSurfaceView
+        android:id="@+id/SurfaceViewRemote"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/label_status" />
+
+    <vaxsoft.com.vaxphone.MainTab.CallTab.DeviceSurfaceView
+        android:id="@+id/DeviceSurfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/label_status" />
+
+    <include
+        android:id="@+id/IconsLayout"
+        layout="@layout/layout_call_tab_side_icons"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/layout_end_call"
+        style="@style/LayoutForRoundButtonEndCall"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="30dp"
+        android:visibility="gone">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/videocam1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_call_end" />
+
+    </LinearLayout>
+
+</RelativeLayout>
+
