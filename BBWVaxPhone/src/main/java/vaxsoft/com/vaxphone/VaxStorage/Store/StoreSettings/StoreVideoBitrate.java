@@ -1,0 +1,25 @@
+package vaxsoft.com.vaxphone.VaxStorage.Store.StoreSettings;
+
+import vaxsoft.com.vaxphone.MainUtil.PreferenceUtil;
+
+public class StoreVideoBitrate
+{
+    private final String VIDEO_BITRATE = "VaxVideoBitrate";
+    private final int VIDEO_BITRATE_DEFAULT_VALUE = 1;
+
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void SetVideoBitrate(int nBitrate)
+    {
+        PreferenceUtil.WritePreferenceValue(VIDEO_BITRATE, nBitrate);
+    }
+
+    public int GetVideoBitrate()
+    {
+        return PreferenceUtil.ReadPreferenceValue(VIDEO_BITRATE, VIDEO_BITRATE_DEFAULT_VALUE);
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////
+}

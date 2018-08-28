@@ -32,7 +32,7 @@ import vaxsoft.com.vaxphone.R;
 public abstract class BaseWebMvpActivity extends AppCompatActivity {
     protected AgentWebX5 mAgentWeb;
     LinearLayout container;
-
+    public static final String CONTRL = "JSCallMobile";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,7 +44,9 @@ public abstract class BaseWebMvpActivity extends AppCompatActivity {
     private WebViewClient mWebViewClient = new WebViewClient() {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-            return super.shouldOverrideUrlLoading(view, request);
+          //  return super.shouldOverrideUrlLoading(view, request);
+            view.loadUrl(mUrl);
+            return true;
 
         }
 
@@ -112,6 +114,15 @@ public abstract class BaseWebMvpActivity extends AppCompatActivity {
                         setWebChromeClient(mWebChromeClient).
                         setWebViewClient(mWebViewClient).
                         setSecutityType(AgentWebX5.SecurityType.strict);
+
+
+//        webView.setWebViewClient(new WebViewClient(){
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                view.loadUrl(url);
+//                return true;
+//            }
+//        });
         // .setWebLayout(new WebLayout(this))
         //preAgentWeb.go(getUrl());
         // long n = System.currentTimeMillis();
@@ -127,7 +138,10 @@ public abstract class BaseWebMvpActivity extends AppCompatActivity {
 
     }
 
+    private String mUrl;
+
     public void initAgentWeb(String url) {
+        mUrl=url;
         mAgentWeb = getWebBuilder().createAgentWeb().ready().go(url);
         // getWebView().setBackgroundColor();
         // getWebView().setBackgroundResource(R.color.apptheme_bg);
@@ -165,6 +179,7 @@ public abstract class BaseWebMvpActivity extends AppCompatActivity {
         // webSetting.setPreFectch(true);
         CookieSyncManager.createInstance(this);
         CookieSyncManager.getInstance().sync();
+
 
     }
 

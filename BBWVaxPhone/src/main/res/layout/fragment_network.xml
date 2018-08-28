@@ -1,0 +1,198 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorHeadingBackgraound"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/actionbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="2dp">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="2dp"
+            android:paddingStart="0dp"
+            app:srcCompat="@drawable/ic_port" />
+
+        <TextView
+            style="@style/TextViewHeading"
+            android:layout_gravity="bottom"
+            android:text="Port SIP Info"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+   <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/colorfragmentbackground"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout style="@style/RowLayout">
+
+                <TextView
+                    android:id="@+id/label_encryption_tunnel"
+                    style="@style/TextView"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="10dp"
+                    android:text="@string/local_port_sip" />
+
+                <EditText
+                    android:id="@+id/edit_text_local_port_sip"
+                    style="@style/EditText"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:layout_toEndOf="@id/label_encryption_tunnel"
+                    android:hint="000000" />
+
+            </RelativeLayout>
+
+            <View style="@style/HorizontalLineWithMargin" />
+
+            <RelativeLayout style="@style/RowLayout">
+
+                <TextView
+                    style="@style/TextView"
+                    android:text="@string/choose_randomly" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_choose_randomly_sip"
+                    style="@style/AlignRightEnd"
+                    android:checked="true" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="2dp">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="2dp"
+            android:paddingStart="0dp"
+            app:srcCompat="@drawable/ic_port" />
+
+        <TextView
+            style="@style/TextViewHeading"
+            android:layout_gravity="bottom"
+            android:text="Port RTP Info"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/colorfragmentbackground"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout style="@style/RowLayout">
+
+                <TextView
+                    style="@style/TextView"
+                    android:text="@string/local_port_rtp" />
+
+                <EditText
+                    android:id="@+id/edit_text_local_port_rtp"
+                    style="@style/EditText"
+                    android:hint="00000" />
+
+            </RelativeLayout>
+
+            <View style="@style/HorizontalLineWithMargin" />
+
+            <RelativeLayout style="@style/RowLayout">
+
+                <TextView
+                    style="@style/TextView"
+                    android:text="@string/choose_randomly" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_choose_randomly_rtp"
+                    style="@style/AlignRightEnd"
+                    android:checked="true" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="2dp">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="2dp"
+            android:paddingStart="0dp"
+            app:srcCompat="@drawable/ic_speaker_phone" />
+
+        <TextView
+            style="@style/TextViewHeading"
+            android:layout_gravity="bottom"
+            android:text="Auto Reachability"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/colorfragmentbackground"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="2dp">
+
+        <RelativeLayout style="@style/RowLayout">
+
+            <TextView
+                style="@style/TextView"
+                android:text="@string/auto_reachability" />
+
+            <CheckBox
+                android:id="@+id/checkbox_auto_reachability"
+                style="@style/AlignRightEnd"
+                android:checked="true" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

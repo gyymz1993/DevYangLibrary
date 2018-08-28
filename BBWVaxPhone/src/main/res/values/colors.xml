@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!--<color name="colorAccent">#dfce37</color>-->
+    <!--<color name="colorPrimary">#EEEE60</color> Orignal Color in PSD-->
+
+    <!--<color name="colorPrimary">#e1e135</color>--> <!-- old Color -->
+
+    <color name="colorPrimary">#cccc33</color>
+    <color name="colorAccent">#506754</color>
+
+    <color name="colorbackground">#fcfbdf</color>
+    <color name="colorfragmentbackground">#f2f1d8</color>
+
+    <color name="colorHeadingBackgraound">#f2f1d8</color>
+    <color name="LineColor">#e7e5c9</color>
+
+    <color name="selected_row_transparent">#323232 </color>
+
+    <color name="selected_row_accent_transparent">#53506754</color>
+
+    <color name="colorPrimaryLight">#eded6d</color>
+    <color name="colorAccentLight">#8aa48e</color>
+    <color name="colorAccentLighter">#c6e9cb</color>
+
+    <!--<color name="statusBarColor">#DCD037</color>-->
+    <color name="statusBarColor">#b1b12c</color>
+
+    <color name="online">#22b14c</color>
+    <color name="offline">#7f7f7f</color>
+    <color name="away">#ff7f27</color>
+    <color name="busy">#ed1c24</color>
+    <color name="on_phone">#7625df</color>
+
+    <color name="reset_button_start">#f75f5b</color>
+    <color name="reset_button_end">#ed1c24</color>
+    <color name="colorAccentButton">#799e7f</color>
+
+    <color name="colorPrimaryOpacity">#baeded6d</color>
+
+    <color name="GrayColor">#898787</color>
+</resources>

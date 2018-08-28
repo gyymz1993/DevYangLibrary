@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<body>
+<div onclick="kk({sj:'13312331311',name:'zhg'})">kk</div>
+<script>
+			function kk (obj){
+				console.log(obj)
+				window.android.callBack(obj)
+			}
+
+
+
+
+</script>
+
+<button id="button" onclick="ss()">点击调用Android方法</button>
+
+</body>
+
+
+<script>
+
+
+function ss() {
+                //调用原生的方法，android为约定的别名；back()为原生的方法
+                var result=window.android.back("13177008851");
+                //将返回结果显示在id为p的控件上
+                document.getElementById("content").innerHTML=result;
+            }
+
+</script>
+
+</html>

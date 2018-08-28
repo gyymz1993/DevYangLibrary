@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>光银网-主页</title>
+    <link rel="stylesheet" href="../../lib/mui.css">
+    <link rel="stylesheet" href="../../fonts/iconfont.css">
+    <link rel="stylesheet" href="../../lib/base.css">
+    <link rel="stylesheet" href="../../css/index.css">
+</head>
+
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="left">
+            <div class="clearfix">
+                <img src="../../images/1.png" alt="" class="left">
+                <i class="left">光银网</i>
+            </div>
+            <p>靠谱的信贷助手</p>
+        </div>
+        <div class="right">
+            <i class="infor"></i>
+        </div>
+    </header>
+    
+    <div id="content">
+        <div class="personMsg">
+            <div class="top">
+                <script id="roleInteraction" type="text/html">
+                    <div class="name">
+                        <i class="mui-icon"></i>&nbsp;&nbsp;{{data.nike_name}}</div>
+                    <div class="mui-icon iconfont icon-set" onclick="toPage('../login/my_person.html')"></div>
+                    <div class="overTime">剩余通话时长：{{data.remainder_call_time}} min &nbsp;
+                        <span onclick="toPage('../pay/pay.html')" style="float:right;">充值
+                            <i class="mui-icon mui-icon-forward"></i>
+                        </span>
+                    </div>
+                    <div class="order">
+                        <div class="orderNumber">
+                            <span>成功率: {{data.success_convert_rate}}</span>
+                            <span>竞拍率：{{data.bid_convert_rate}}</span>
+                            <span>拨打客户数：{{data.call_customer_num}}</span>
+                        </div>
+                        <div class="orderList">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </script>
+            </div>
+        </div>
+        <div class="client">
+            <p class="clearfix">
+                <span class="left">最新客户</span>
+                <span class="right" onclick="toPage('../auction/auction.html')">更多</span>
+            </p>
+            <div class="cellTotal">
+                <script id="guwenInteraction" type="text/html">
+                    {{each data.customers as value i}}
+                    	{{if data.customers != ""}}
+		                    <div class="newClient" lang="{{value.id}}">
+		                        <div>
+		                            <span>称呼：
+		                                <i>{{value.name}}</i>
+		                            </span>
+		                            <span>地域：
+		                                <i>{{value.area_name}}</i>
+		                            </span>
+		                        </div>
+		
+		                        <div>
+		                            <span>最高价：
+		                                <i>&yen;{{value.price}}</i>
+		                            </span>
+		                            <span>上架时间：
+		                                <i>{{dateFormat value.shelf_time}}</i>
+		                            </span>
+		                        </div>
+		                        <div>
+		                            <span>倒计时： {{if value.can_call_time !=''}}
+		                                <i>
+		                                    <div class="daojishi{{i}}">
+		                                        <span class="d">00</span>天
+		                                        <span class="h">00</span>时
+		                                        <span class="m">00</span>分
+		                                        <span class="s">00</span>秒
+		                                    </div>
+		                                </i>
+		                                {{else}}
+		                                <i>----</i>
+		                                {{/if}}
+		                            </span>
+		                        </div>
+		                        <div class="button">
+		                            <span>
+		                                {{if value.can_call_time ==''}}
+		                                <a  lang="{{value.phone}}" class="contac" onclick="lianxi($(event))">
+			                                <button class="contact">待联系</button>
+		                                </a>
+		                                {{else}}
+		                                <a href="tel:{{value.phone}}" lang="{{value.phone}}" class="contac" onclick="lianxi($(event))">
+		                                	<button class="contacted" style="background-color:#fa7e2c;">联系他</button>
+		                                </a>
+		                                {{/if}}
+		                            </span>
+		                            <span>
+		                                <button>最高价购</button>
+		                            </span>
+		                            <span>
+		                                <button class="chujia">出价</button>
+		                                <!-- <button>已出价</button> -->
+		                            </span>
+		                        </div>
+		                    </div>
+		                {{else}}
+		                	<img src="../../images/empty2.png" style="display:block;width:50vw;margin:0 auto;"/>
+		                {{/if}}
+                    {{/each}}
+                </script>
+                 </div> 
+            </div>
+        </div>
+        
+        
+    <!--暂无资格-->
+	<div class="mask mask1">
+		<div class="mask_wrap">
+			<h4>暂无资格</h4>
+			<p>出价前请先联系该客户，<br />
+			或选择<a href="javascript:;">最高价购买</a>
+			</p>
+			<div class="queding_wrap">
+				<div class="queding">确认</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!--选择出价-->
+	<div class="mask mask2">
+		<div class="mask_wrap mui-input-row mui-input-range">
+			<h4>选择出价</h4>
+	       	<h5 style="clear: left;">出价：<span id='block-range-val'>0</span></h5>   
+	        <div class="mui-input-row mui-input-range" style="margin-bottom:12vw;">
+	            <input type="range" id='block-range' value="0" min="0" max="1000" >
+	        </div>
+			<div class="queding_wrap">
+				<div class="quxiao">取消</div>
+				<div class="queding">确认</div>
+			</div>
+		</div>
+	</div>
+	
+	<!--余额不足-->
+	<div class="mask mask3">
+		<div class="mask_wrap mui-input-row mui-input-range">
+			<h4>余额不足</h4>
+			<div class="queding_wrap">
+				<div class="quxiao">取消</div>
+				<div class="queding">充值</div>
+			</div>
+		</div>
+	</div>
+	
+	<!--成功出价-->
+	<div class="mask mask4">
+		<div class="mask_wrap">
+			<h4>成功出价</h4>
+			<p>竞拍成功后，<br />系统会第一时间通知你竞拍情况</p>
+			<div class="queding_wrap">
+				<div class="queding">确认</div>
+			</div>
+		</div>
+	</div>
+    
+    <!--竞拍人数已达限额-->
+	<div class="mask mask5">
+		<div class="mask_wrap">
+			<h4>提示</h4>
+			<p>竞拍人数已达限额，无法竞拍</p>
+			<div class="queding_wrap">
+				<div class="queding">确认</div>
+			</div>
+		</div>
+	</div>
+    
+    
+    <!--我的消息-->
+    <div class="myinfor">
+    	<div class="tops">
+			<img src="../../images/return.png" class="return">
+			<span>我的消息</span>
+		</div>
+	    <div id="content1">
+	    	<script id="imageFilename" type="text/html">
+			    {{each data as value i}}
+			   		{{if data.data.length != 0}}
+					    <div class="cell clearfix" lang="{{value.id}}">
+					        <img src="../../images/4.png" alt="" class="left">
+					        <div class="left">
+					            <div>{{value.create_time}}</div>
+					            <div>{{value.content}}</div>
+					        </div>
+					        <button class="right">删除</button>
+					    </div>
+					{{else}}
+					    <img src="../../images/empty2.png" style="display:block;width:30vw;margin:50vw auto;"/>
+					{{/if}}
+			    {{/each}}
+			</script>
+	        <!-- <div class="cell clearfix">
+	            <img src="../../images/4.png" alt="" class="left">
+	            <div class="left">
+	                <div>2016-10-12 12:10</div>
+	                <div>客户张三, 竞拍失败</div>
+	            </div>
+	        </div> -->
+	    </div>
+    </div>
+    
+    
+    
+    <!-- 底部nav -->
+    <div class="nav">
+    	<div lang="../index/index.html">
+    		<img src="../../images/6.png"/>
+    		<span class="active">首页</span>
+    	</div>
+    	<div lang="../auction/auction.html">
+    		<img src="../../images/77.png"/>
+    		<span>竞拍</span>
+    	</div>
+    	<div lang="../phone/gongdanguanli.html">
+    		<img src="../../images/88.png"/>
+    		<span>我的客户</span>
+    	</div>
+    </div>
+    
+    
+</body>
+<script src="../../lib/mui.min.js"></script>
+<script src="../../lib/jquery.min.js"></script>
+<script src="../../lib/leftTime.min.js"></script>
+<script src="../../lib/template.js"></script>
+<script src="../../lib/common.js"></script>
+<script src="../../js/index.js"></script>
+<script>
+	function lianxi(){
+		var str = $(event)[0].path[1].lang
+		console.log(str)
+		window.android.callBack(str)
+	}
+	
+    $(".nav div").on("tap", function () {
+        var lang = $(this).attr("lang")
+        toPage(lang);
+    })
+    $(".mui-input-range .range1").on("input",function(){
+    	$(".mui-input-range i").html('出价金额：'+$(".mui-input-range input").val())
+    })
+</script>
+
+
+
+</html>
+
+

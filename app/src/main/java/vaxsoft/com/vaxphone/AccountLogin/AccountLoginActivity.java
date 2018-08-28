@@ -93,8 +93,8 @@ public class AccountLoginActivity extends AppCompatActivity
         String sServerPort = ServerPort.toString();
         boolean bRegistrationSIP = RegistrationSIP.get();
 
-        EditTextUsername.setText(AuthLogin);
-        EditTextPassword.setText(sPassword);
+       // EditTextUsername.setText(AuthLogin);
+       // EditTextPassword.setText(sPassword);
 
         String sServerAddr = "";
 
@@ -106,7 +106,7 @@ public class AccountLoginActivity extends AppCompatActivity
             sServerAddr = sServerIP + ":" + sServerPort;
         }
 
-        EditTextServerAddr.setText(sServerAddr);
+        //EditTextServerAddr.setText(sServerAddr);
         SwitchRegistrationSIP.setChecked(bRegistrationSIP);
 
         if(VaxPhoneSIP.m_objVaxVoIP.IsOnline())
@@ -197,10 +197,10 @@ public class AccountLoginActivity extends AppCompatActivity
         long nDateTime = System.currentTimeMillis();
         String sDateTime = String.valueOf(nDateTime);
 
-        EditTextUsername.setText(sDateTime);
-        EditTextPassword.setText(sDateTime);
+        //EditTextUsername.setText(sDateTime);
+       // EditTextPassword.setText(sDateTime);
 
-        EditTextServerAddr.setText("demo.vaxvoip.com:8891");
+       // EditTextServerAddr.setText("demo.vaxvoip.com:8891");
 
         SwitchRegistrationSIP.setEnabled(true);
     }

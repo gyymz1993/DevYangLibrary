@@ -1,0 +1,177 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingEnd="8dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingStart="8dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="5dp">
+
+                <LinearLayout
+                    android:id="@+id/layout_switch_camera"
+                    style="@style/LayoutForRoundButtonCallScreen"
+                    android:layout_marginEnd="8dp">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_switch_video"
+                        android:tint="@color/colorPrimary" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_video"
+                    style="@style/LayoutForRoundButtonCallScreen">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/videocam"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_video_states"
+                        android:tint="@color/colorPrimary" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <LinearLayout
+                    android:id="@+id/layout_mic"
+                    style="@style/LayoutForRoundButtonCallScreen"
+                    android:layout_marginEnd="8dp">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/icon_mic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_mic_states"
+                        android:tint="@color/colorPrimary" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_voice_changer"
+                    style="@style/LayoutForRoundButtonCallScreen">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/icon_voice_changer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_voice_changer_states"
+                        android:tint="@color/colorPrimary" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <LinearLayout
+                    android:id="@+id/layout_mute_spk"
+                    style="@style/LayoutForRoundButtonCallScreen"
+                    android:layout_marginEnd="8dp">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/icon_mute_spk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_volume_states"
+                        android:tint="@color/colorPrimary" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_spk_phone"
+                    style="@style/LayoutForRoundButtonCallScreen">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/icon_spk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_speaker_phone_call"
+                        android:tint="@color/colorPrimary" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <LinearLayout
+                    android:id="@+id/layout_hold_call"
+                    style="@style/LayoutForRoundButtonCallScreen"
+                    android:visibility="invisible"
+                    android:layout_marginEnd="8dp">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/ic_holdcall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/hold_button_icon_state"
+                        android:tint="@color/colorPrimary" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_dialpad"
+                    style="@style/LayoutForRoundButtonCallScreen">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/appCompatImageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_action_dialpad"
+                        android:tint="@color/colorPrimary" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
+
+
+    <!--<LinearLayout--><!--style="@style/LayoutForRoundButtonCallScreen"--><!--android:visibility="gone">-->
+
+    <!--<android.support.v7.widget.AppCompatImageView--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="center_horizontal"--><!--android:src="@drawable/ic_fullscreen"--><!--android:tint="@color/colorPrimary" />-->
+
+    <!--</LinearLayout>-->

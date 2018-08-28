@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>光银网-工单管理</title>
+	<link rel="stylesheet" type="text/css" href="../../lib/base.css" />
+	<link rel="stylesheet" type="text/css" href="../../lib/mui.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/gongdanguanli.css" />
+</head>
+<body>
+	<!--tops-->
+	<div class="tops">
+		<span>工单管理</span>
+	</div>
+
+	<!--list-->
+	<!-- 内容 -->
+	<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="top:15vw;bottom:12vw;">
+		<div class="mui-scroll">
+			<!--数据列表-->
+			<ul class="mui-table-view">
+				<script id="areaInteraction" type="text/html">
+					{{each data.page as value i}}
+					<div class="list">
+						<div class="wrap">
+							<span class="s1">姓名：</span>
+							<span class="s2">{{value.name}}</span>
+							<span class="s3">成单时间：</span>
+							<span class="s4">{{dateFormat value.order_time}}</span>
+						</div>
+						<div class="wrap">
+							<span class="s1">所在地：</span>
+							<span class="s2">{{value.area_name}}</span>
+							<span class="s3">客户来源：</span>
+							<span class="s4">{{value.work_status}}</span>
+						</div>
+						<div class="wrap">
+							<span class="s1">电话：</span>
+							<span class="s2">{{value.phone}}</span>
+							<!-- <span class="s3">客户编号：</span>
+							<span class="s4">654654</span> -->
+						</div>
+						<p>最新备注：</p>
+						<p contenteditable="false" class="p1">{{value.remark}}</p>
+						<div class="wrap2">
+							<a href="tel:{{value.phone}}" lang="{{value.phone}}"  onclick="lianxi(this)">
+								<img src="../../images/phone.png" />
+							</a>
+							<i data-id="{{value.id}}">去备注</i>
+						</div>
+					</div>
+					{{/each}}
+				</script>
+				<!-- <div class="list">
+					<div class="wrap">
+						<span class="s1">姓名：</span>
+						<span class="s2">孜孜做</span>
+						<span class="s3">成单时间：</span>
+						<span class="s4">2018-01-01</span>
+					</div>
+					<div class="wrap">
+						<span class="s1">所在地：</span>
+						<span class="s2">武汉市</span>
+						<span class="s3">客户来源：</span>
+						<span class="s4">竞拍</span>
+					</div>
+					<div class="wrap">
+						<span class="s1">电话：</span>
+						<span class="s2">13212345678</span>
+						<span class="s3">客户编号：</span>
+						<span class="s4">654654</span>
+					</div>
+					<p>最新备注：</p>
+					<p contenteditable="false" class="p1">成单时间成单时间成单时间成单时间成单时间成单时间成单时间成单时间成单时间成单时间成单时间</p>
+					<div class="wrap2">
+						<a href="javascript:;">
+							<img src="../../images/phone.png" />
+						</a>
+						<i>去备注</i>
+					</div>
+				</div> -->
+			</ul>
+		</div>
+	</div>
+	<!-- 底部nav -->
+    <div class="nav">
+    	<div lang="../index/index.html">
+    		<img src="../../images/66.png"/>
+    		<span>首页</span>
+    	</div>
+    	<div lang="../auction/auction.html">
+    		<img src="../../images/77.png"/>
+    		<span>竞拍</span>
+    	</div>
+    	<div lang="../phone/gongdanguanli.html">
+    		<img src="../../images/8.png"/>
+    		<span class="active">我的客户</span>
+    	</div>
+    </div>
+
+
+	<script src="../../lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../lib/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../lib/common.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/gongdanguanli.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		$(".nav div").on("tap", function () {
+        var lang = $(this).attr("lang")
+        toPage(lang);
+    })
+	function lianxi(){
+		var contac = document.getElementsByClassName("contac");
+	    for(var i = 0;i < contac.length; i++){
+	        (function(l){
+	            contac[l].onclick = function(){
+	                console.log(l);
+	                console.log(contac[l].getAttribute("lang"));
+	            }
+	        })(i)
+	    }
+	}
+	
+	</script>
+</body>
+
+</html>

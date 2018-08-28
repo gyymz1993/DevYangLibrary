@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>光银网-其它</title>
+    <link rel="stylesheet" href="../../lib/mui.css">
+    <link rel="stylesheet" href="../../fonts/iconfont.css">
+    <link rel="stylesheet" href="../../lib/base.css">
+    <link rel="stylesheet" href="../../css/other.css">
+
+</head>
+
+<body>
+    <!--tops-->
+	<div class="tops">
+		<img src="../../images/return.png" class="return" onclick="toPage('../pay/pay.html')">
+		<span>其它账号</span>
+	</div>
+	
+    <!--inpu-->
+    <div class="inpu">
+    	<input type="text" maxlength="20"/>
+    	<img src="../../images/sousuo.png" class="sousuo"/>
+    </div>
+    
+    <div class="wrap">
+	    <!--<div class="list">
+	    	<div class="left">
+	    		<p>充值帐号：13212345678</p>
+	    		<p>姓名：孜孜做</p>
+	    	</div>
+	    	<div class="right">去充值</div>
+	    </div>-->
+    </div>
+
+	<div id="pullrefresh" class="mui-content mui-scroll-wrapper" >
+		<div class="mui-scroll">
+			<!--数据列表-->
+			<ul class="mui-table-view">
+			    <div class="r">
+			        <p class="p1">历史充值账号</p>
+			        <script id="qita" type="text/html">
+				         {{each data.page as value i}}
+				             <p class="p2">充值账号：{{value.recharge_phone}}</p>
+				             <p class="p2">姓名：{{value.recharge_name}}</p>
+				        {{/each}}
+				    </script>
+			    </div>
+			</ul>
+		</div>
+	</div>
+
+
+</body>
+<script src="../../lib/mui.min.js"></script>
+<script src="../../lib/jquery.min.js"></script>
+<script src="../../lib/template.js"></script>
+<script src="../../lib/common.js"></script>
+<script src="../../js/other.js"></script>
+<script id="lists" type="text/html">
+	{{each data as value i}}
+	<div class="list">
+		<div class="left" lang="{{data.id}}">
+    		<p>充值帐号：{{data.phone}}</p>
+    		<p>姓名：{{data.nike_name}}</p>
+    	</div>
+    	<div class="right">去充值</div>
+    </div>
+	{{/each}}
+</script>
+
+
+</html>

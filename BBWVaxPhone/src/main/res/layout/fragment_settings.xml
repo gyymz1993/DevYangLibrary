@@ -1,0 +1,287 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorHeadingBackgraound"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/actionbar" />
+
+        <!--<include layout="@layout/toolbar" />-->
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorfragmentbackground"
+            card_view:cardCornerRadius="3dp"
+            card_view:cardElevation="2dp">
+
+            <LinearLayout
+                android:id="@+id/EncryptionTunnelRow"
+                style="@style/RowLayout">
+
+                <ImageView
+                    style="@style/IconSettings"
+                    android:src="@drawable/ic_encryption" />
+
+                <TextView
+                    style="@style/TextViewSettings"
+                    android:text="@string/encryption_tunnel" />
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            card_view:cardCornerRadius="3dp"
+            card_view:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/VideoBitrateRow"
+                    style="@style/RowLayout"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        style="@style/IconSettings"
+                        android:src="@drawable/ic_video_bitrate" />
+
+                    <TextView
+                        style="@style/TextViewSettings"
+                        android:text="@string/video_bitrate" />
+                </LinearLayout>
+
+                <View style="@style/HorizontalLineWithMargin" />
+
+                <LinearLayout
+                    android:id="@+id/VideoQualityRow"
+                    style="@style/RowLayout"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        style="@style/IconSettings"
+                        android:src="@drawable/ic_video_quality" />
+
+                    <TextView
+                        style="@style/TextViewSettings"
+                        android:text="@string/video_quality" />
+                </LinearLayout>
+
+
+                <View style="@style/HorizontalLineWithMargin" />
+
+                <LinearLayout
+                    android:id="@+id/VideoCodecsRow"
+                    style="@style/RowLayout">
+
+                    <ImageView
+                        style="@style/IconSettings"
+                        android:src="@drawable/ic_video_codec" />
+
+                    <TextView
+                        style="@style/TextViewSettings"
+                        android:text="@string/video_codecs" />
+                </LinearLayout>
+
+                <View style="@style/HorizontalLineWithMargin" />
+
+                <LinearLayout
+                    android:id="@+id/AudioCodecsRow"
+                    style="@style/RowLayout">
+
+                    <ImageView
+                        style="@style/IconSettings"
+                        android:src="@drawable/ic_audio_codec" />
+
+                    <TextView
+                        style="@style/TextViewSettings"
+                        android:text="@string/audio_codecs" />
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            card_view:cardCornerRadius="3dp"
+            card_view:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/SpkMicRow"
+                    style="@style/RowLayout"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        style="@style/IconSettings"
+                        android:src="@drawable/ic_spk_mic" />
+
+                    <TextView
+                        style="@style/TextViewSettings"
+                        android:text="@string/speaker_microphone" />
+                </LinearLayout>
+
+                <View style="@style/HorizontalLineWithMargin" />
+
+                <LinearLayout
+                    android:id="@+id/RingTonesRow"
+                    style="@style/RowLayout"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        style="@style/IconSettings"
+                        android:src="@drawable/ic_ringtones" />
+
+                    <TextView
+                        style="@style/TextViewSettings"
+                        android:text="@string/ring_tones" />
+                </LinearLayout>
+
+                <View style="@style/HorizontalLineWithMargin" />
+
+                <LinearLayout
+                    android:id="@+id/VoiceChangerRow"
+                    style="@style/RowLayout"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        style="@style/IconSettings"
+                        android:src="@drawable/ic_voice" />
+
+                    <TextView
+                        style="@style/TextViewSettings"
+                        android:text="@string/voice_changer" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            card_view:cardCornerRadius="3dp"
+            card_view:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/NetworkRow"
+                    style="@style/RowLayout"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        style="@style/IconSettings"
+                        android:src="@drawable/ic_network" />
+
+                    <TextView
+                        style="@style/TextViewSettings"
+                        android:text="@string/network" />
+                </LinearLayout>
+
+                <View style="@style/HorizontalLineWithMargin" />
+
+                <LinearLayout
+                    android:id="@+id/DigitDTMFRow"
+                    style="@style/RowLayout"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        style="@style/IconSettings"
+                        android:src="@drawable/ic_dtmf" />
+
+                    <TextView
+                        style="@style/TextViewSettings"
+                        android:text="@string/digit_dtmf" />
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            card_view:cardCornerRadius="3dp"
+            card_view:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout style="@style/RowLayout">
+
+                    <TextView
+                        style="@style/TextView"
+                        android:text="@string/multi_task_mode" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_multi_task_mode"
+                        style="@style/AlignRightEnd"
+                        android:checked="true" />
+
+                </RelativeLayout>
+
+                <View style="@style/HorizontalLineWithMargin" />
+
+                <RelativeLayout style="@style/RowLayout">
+
+                    <TextView
+                        style="@style/TextView"
+                        android:text="@string/diagnostic_log" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_diagnostic_log"
+                        style="@style/AlignRightEnd"
+                        android:checked="true" />
+
+                </RelativeLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/ResetAllSettingsRow"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/reset_button_round_corners"
+            android:paddingEnd="50dp"
+            android:paddingStart="50dp"
+            android:text="Reset All Settings"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+</ScrollView>

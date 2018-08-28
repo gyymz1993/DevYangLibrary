@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import VaxVoIP.VaxUserAgentLib.VaxUserAgentLib;
+import vaxsoft.com.vaxphone.AccountLogin.AccountLoginActivity;
+import vaxsoft.com.vaxphone.MainAPP.VaxPhoneAPP;
 import vaxsoft.com.vaxphone.MainDrawer.MainDrawerSettings.AudioCodecsDialog;
 import vaxsoft.com.vaxphone.MainDrawer.MainDrawerSettings.DigitDTMFDialog;
 import vaxsoft.com.vaxphone.MainDrawer.MainDrawerSettings.NetworkFragment;
@@ -25,21 +27,18 @@ import vaxsoft.com.vaxphone.MainDrawer.MainDrawerSettings.VideoBitrateDialog;
 import vaxsoft.com.vaxphone.MainDrawer.MainDrawerSettings.VideoCodecsDialog;
 import vaxsoft.com.vaxphone.MainDrawer.MainDrawerSettings.VideoQualityDialog;
 import vaxsoft.com.vaxphone.MainDrawer.MainDrawerSettings.VoiceChangerDialog;
-import vaxsoft.com.vaxphone.AccountLogin.AccountLoginActivity;
-import vaxsoft.com.vaxphone.MainAPP.VaxPhoneAPP;
+import vaxsoft.com.vaxphone.MainTab.CallTab.CallTabFragment;
 import vaxsoft.com.vaxphone.MainTab.CallTab.DialpadFragment;
+import vaxsoft.com.vaxphone.MainTab.ChatTab.ChatContactRecyclerView;
+import vaxsoft.com.vaxphone.MainTab.ChatTab.ChatContactTabFragment;
+import vaxsoft.com.vaxphone.MainTab.MainTabActivity;
+import vaxsoft.com.vaxphone.MainTab.RecentTab.RecentRecyclerView;
 import vaxsoft.com.vaxphone.PhoneSIP.BusyRing.BusyRing;
 import vaxsoft.com.vaxphone.PhoneSIP.CallInfo.CallInfo;
 import vaxsoft.com.vaxphone.PhoneSIP.DialRing.DialRing;
 import vaxsoft.com.vaxphone.PhoneSIP.DigitTone.PlayDTMF;
 import vaxsoft.com.vaxphone.PhoneSIP.ProximitySensor.ProximitySensor;
 import vaxsoft.com.vaxphone.PhoneSIP.RingTone.RingTone;
-import vaxsoft.com.vaxphone.MainTab.CallTab.CallTabFragment;
-import vaxsoft.com.vaxphone.MainTab.ChatTab.ChatContactTabFragment;
-import vaxsoft.com.vaxphone.MainTab.ChatTab.ChatContactRecyclerView;
-import vaxsoft.com.vaxphone.MainTab.RecentTab.RecentRecyclerView;
-import vaxsoft.com.vaxphone.MainTab.MainTabActivity;
-import vaxsoft.com.vaxphone.MainUtil.DialogUtil;
 import vaxsoft.com.vaxphone.VaxStorage.Store.StoreChatContact;
 import vaxsoft.com.vaxphone.VaxStorage.Store.StoreChatMsg;
 import vaxsoft.com.vaxphone.VaxStorage.Store.StoreLoginInfo;
@@ -681,11 +680,12 @@ public class VaxPhoneSIP extends VaxUserAgentLib {
 
     @Override
     public void OnConnectedCall(int nLineNo, String sToRTPIP, int nToRTPPort) {
+        Log.e("TAG", "用户接听操作 OnConnectedCall");
+        CallActivity.onStartTimeCount();
         OnVaxStatusMsg("Call", "Connected");
         CallTabFragment.PostConnectedCall();
-        Log.e("TAG", "用户接听操作 OnConnectedCall");
         m_objProximitySensor.SetProximityMonitoringEnabled(true);
-        CallActivity.onStartTimeCount();
+
     }
 
     @Override

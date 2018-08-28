@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:tag="recent_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainTab.RecentTab.RecentTabFragment"
+    android:background="@color/colorfragmentbackground">
+
+    <vaxsoft.com.vaxphone.MainTab.RecentTab.RecentRecyclerView
+        android:id="@+id/recent_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/no_records"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="No Records Available"
+        android:visibility="visible"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-condensed"/>
+
+</LinearLayout>

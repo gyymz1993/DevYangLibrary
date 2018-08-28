@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorbackground"
+    android:orientation="vertical">
+
+
+    <Chronometer
+        android:id="@+id/tv_time_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:padding="5dp"
+        android:textColor="@color/colorbackground"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        android:visibility="gone" />
+
+
+    <RelativeLayout
+        android:id="@+id/id_call_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/ly_calling"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone" />
+
+
+</LinearLayout>

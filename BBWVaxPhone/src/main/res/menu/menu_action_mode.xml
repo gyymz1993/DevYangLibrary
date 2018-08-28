@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="vaxsoft.com.vaxphone.MainTab.MainTabActivity">
+
+    <item
+        android:title="select_all"
+        android:id="@+id/select_all"
+        android:icon="@drawable/ic_select_all" />
+
+    <item
+        android:title="delete"
+        android:id="@+id/delete"
+        android:icon="@drawable/ic_delete" />
+</menu>

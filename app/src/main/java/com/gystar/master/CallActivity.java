@@ -1,233 +1,111 @@
 package com.gystar.master;
 
 import android.Manifest;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.provider.CallLog;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatImageView;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.widget.Chronometer;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
+
+import com.gystar.master.fragment.CallingFragment;
+import com.gystar.master.fragment.DialpadFragment;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import vaxsoft.com.vaxphone.MainTab.CallTab.DialpadFragment;
 import vaxsoft.com.vaxphone.MainUtil.DialogUtil;
-import vaxsoft.com.vaxphone.PhoneSIP.Contacts.Contacts;
 import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.VaxPhoneSIP;
-import vaxsoft.com.vaxphone.VaxStorage.Store.StoreDialNo;
 
 public class CallActivity extends AppCompatActivity {
-    private static Chronometer tv_time_count;
-    public TextView TextViewStatus;
-    public TextView ToolbarTitle;
-    public EditText EditText_DialNo;
-    public LinearLayout Dialpad_No1, Dialpad_No2, Dialpad_No3, Dialpad_No4, Dialpad_No5, Dialpad_No6,
-            Dialpad_No7, Dialpad_No8, Dialpad_No9, Dialpad_Delete, Dialpad_Hold, Dialpad_Contacts,
-            Dialpad_Star, Dialpad_No0, Dialpad_Hash, Dialpad_Dial, CellEnd;
-    public AppCompatImageView DialIcon;
-    public TextView DialBtnText;
-    public Contacts m_objContacts = null;
-    public static DialpadFragment mDialpadFragment = null;
-    private static String m_sLastStatusText = "Account is online";
-    private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 2001;
-    private final int CONTACT_PICKER = 2000;
+    private Chronometer tv_time_count;
+    private FragmentTransaction transaction;
+    private DialpadFragment rightFragment;
+    private CallingFragment callingFragment;
+    private static CallActivity instance;
+
+
+    String sAuthLogin = "106001";
+    String sAuthPwd = "bbw@2018";
+    String sServerAddr = "120.79.114.71:5060";
 
     //////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_call_dialpad);
-        LoadViewAll();
-        InitListeners();
-        InitObjects();
-        SetIcons();
-        BtnLogIn();
-        String sDialNo = new StoreDialNo().GetDialNo();
-        EditText_DialNo.setText(sDialNo);
-        ToolbarTitle.setText(R.string.dialpad);
-    }
-    //////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////
-
-    private void LoadViewAll() {
-        ToolbarTitle = findViewById(R.id.label_screen_name);
-        TextViewStatus = findViewById(R.id.label_dialpad_status);
-        TextViewStatus.setText(m_sLastStatusText);
-        EditText_DialNo = findViewById(R.id.edittext_enter_number);
-        Dialpad_No0 = findViewById(R.id.dialpad_num0);
-        Dialpad_No1 = findViewById(R.id.dialpad_num1);
-        Dialpad_No2 = findViewById(R.id.dialpad_num2);
-        Dialpad_No3 = findViewById(R.id.dialpad_num3);
-        Dialpad_No4 = findViewById(R.id.dialpad_num4);
-        Dialpad_No5 = findViewById(R.id.dialpad_num5);
-        Dialpad_No6 = findViewById(R.id.dialpad_num6);
-        Dialpad_No7 = findViewById(R.id.dialpad_num7);
-        Dialpad_No8 = findViewById(R.id.dialpad_num8);
-        Dialpad_No9 = findViewById(R.id.dialpad_num9);
-        Dialpad_Star = findViewById(R.id.dialpad_star);
-        Dialpad_Hash = findViewById(R.id.dialpad_hash);
-        Dialpad_Delete = findViewById(R.id.dialpad_delete);
-        Dialpad_Hold = findViewById(R.id.dialpad_hold);
-        Dialpad_Contacts = findViewById(R.id.dialpad_contacts);
-        Dialpad_Dial = findViewById(R.id.dialpad_dial);
-        DialBtnText = findViewById(R.id.DialText);
-        DialIcon = findViewById(R.id.dial_icon);
-        CellEnd = findViewById(R.id.call_end);
+        instance = this;
+        setContentView(R.layout.gy_activity_call_dialpad);
         tv_time_count = findViewById(R.id.tv_time_count);
-        tv_time_count.setFormat("计时:%s");
+        BtnLogIn();
+        //步骤一：添加一个FragmentTransaction的实例
+        FragmentManager fragmentManager = getFragmentManager();
+        //beginTransaction()
+        //Start a series of edit operations on the Fragments associated with this FragmentManager.
+        transaction = fragmentManager.beginTransaction();
+        //步骤二：用add()方法加上Fragment的对象rightFragment
+        rightFragment = new DialpadFragment();
+        transaction.add(R.id.id_call_layout, rightFragment);
+        //步骤三：调用commit()方法使得FragmentTransaction实例的改变生效
+        //transaction.commit();
+        //步骤二：用add()方法加上Fragment的对象rightFragment
+        callingFragment = new CallingFragment();
+        transaction.add(R.id.ly_calling, callingFragment);
+        //步骤三：调用commit()方法使得FragmentTransaction实例的改变生效
+        transaction.commit();
+
     }
+
+    public void showCallFragment(String number) {
+        CallingFragment.mCallFragment.setPhoneNumber(number);
+        UpdateOtherBtnView();
+    }
+
+    public void showDialpadFragment() {
+        UpdateOtherBtnView();
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+
+    private void UpdateOtherBtnView() {
+        RelativeLayout linearLayoutCallD = findViewById(R.id.id_call_layout);
+        LinearLayout linearLayoutCall = findViewById(R.id.ly_calling);
+        TranslateAnimation animate = null;
+        int nVisibility;
+        if (linearLayoutCall.getVisibility() == View.VISIBLE) {
+            nVisibility = View.GONE;
+            animate = new TranslateAnimation(0, linearLayoutCall.getWidth(), 0, 0);
+            animate.setFillAfter(false);
+            linearLayoutCallD.setVisibility(View.VISIBLE);
+        } else {
+            nVisibility = View.VISIBLE;
+            animate = new TranslateAnimation(linearLayoutCall.getWidth(), 0, 0, 0);
+            animate.setFillAfter(true);
+            linearLayoutCallD.setVisibility(View.GONE);
+        }
+        animate.setDuration(100);
+        linearLayoutCall.startAnimation(animate);
+        linearLayoutCall.setVisibility(nVisibility);
+    }
+
 
     public static void onStartTimeCount() {
-        if (tv_time_count == null) return;
-        tv_time_count.setBase(SystemClock.elapsedRealtime());//计时器清零
-        int hour = (int) ((SystemClock.elapsedRealtime() - tv_time_count.getBase()) / 1000 / 60);
-        tv_time_count.setFormat("0" + String.valueOf(hour) + ":%s");
-        tv_time_count.start();
-        //tv_time_count.start();
-        // CharSequence text=tv_time_count.getText();
-        // char charAt=text.charAt(text.length()-1);
+        CallingFragment.mCallFragment.onStartTimeCount();
     }
 
     public static void onStopTimeCount() {
-        if (tv_time_count == null) return;
-        tv_time_count.setBase(SystemClock.elapsedRealtime());//计时器清零
-        tv_time_count.stop();
+        CallingFragment.mCallFragment.onStopTimeCount();
     }
 
-    public static void onResetTimeCount() {
-        if (tv_time_count == null) return;
-        tv_time_count.setBase(SystemClock.elapsedRealtime());
-    }
-
-    private void InitListeners() {
-        Dialpad_No0.setOnClickListener(new OnClickListenerEx("0"));
-        Dialpad_No1.setOnClickListener(new OnClickListenerEx("1"));
-        Dialpad_No2.setOnClickListener(new OnClickListenerEx("2"));
-        Dialpad_No3.setOnClickListener(new OnClickListenerEx("3"));
-        Dialpad_No4.setOnClickListener(new OnClickListenerEx("4"));
-        Dialpad_No5.setOnClickListener(new OnClickListenerEx("5"));
-        Dialpad_No6.setOnClickListener(new OnClickListenerEx("6"));
-        Dialpad_No7.setOnClickListener(new OnClickListenerEx("7"));
-        Dialpad_No8.setOnClickListener(new OnClickListenerEx("8"));
-        Dialpad_No9.setOnClickListener(new OnClickListenerEx("9"));
-        Dialpad_Star.setOnClickListener(new OnClickListenerEx("*"));
-        Dialpad_Hash.setOnClickListener(new OnClickListenerEx("#"));
-
-        Dialpad_Delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClickDeleteButton();
-            }
-        });
-        Dialpad_Delete.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                return onLongClickDeleteButton();
-            }
-        });
-        Dialpad_Hold.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClickHoldButton();
-            }
-        });
-        Dialpad_Contacts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClickContactButton();
-            }
-        });
-        Dialpad_Dial.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Dialpad_Dial.setEnabled(false);
-                onClickDialButton();
-            }
-        });
-        CellEnd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Dialpad_Dial.setEnabled(true);
-                OnClickBtnCallEnd();
-            }
-        });
-    }
-
-    private void InitObjects() {
-        m_objContacts = new Contacts();
-    }
-
-
-    private void SetIcons() {
-        if (VaxPhoneSIP.m_objVaxVoIP.IsLineConnected()) {
-            DialIconSelected(true);
-            DialBtnText.setText("END");
-        }
-        Boolean bIsHold = VaxPhoneSIP.m_objVaxVoIP.IsLineHold();
-        Dialpad_Hold.setSelected(bIsHold);
-    }
-
-    public void setDialState() {
-        if (VaxPhoneSIP.m_objVaxVoIP.DisconnectCall()) {
-            DialIconSelected(false);
-            DialBtnText.setText("DIAL");
-        } else {
-            DialIconSelected(true);
-            DialBtnText.setText("END");
-        }
-        if (VaxPhoneSIP.m_objVaxVoIP.IsLineConnected()) {
-            DialIconSelected(true);
-            DialBtnText.setText("END");
-        } else {
-            DialIconSelected(false);
-            DialBtnText.setText("DIAL");
-        }
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////
-
-    private void onClickDeleteButton() {
-        String sNum = EditText_DialNo.getText().toString().trim();
-        if (sNum.length() <= 1) {
-            EditText_DialNo.getText().clear();
-            return;
-        }
-        sNum = sNum.substring(0, sNum.length() - 1);
-        EditText_DialNo.setText(sNum);
-    }
-
-    private boolean onLongClickDeleteButton() {
-        EditText_DialNo.getText().clear();
-        return true;
-    }
-
-    private void onClickHoldButton() {
-        if (!VaxPhoneSIP.m_objVaxVoIP.IsLineConnected())
-            return;
-        boolean bHoldLine = VaxPhoneSIP.m_objVaxVoIP.IsLineHold();
-        if (!bHoldLine) {
-            VaxPhoneSIP.m_objVaxVoIP.HoldLine();
-            Dialpad_Hold.setSelected(true);
-            return;
-        }
-        VaxPhoneSIP.m_objVaxVoIP.UnHoldLine();
-        Dialpad_Hold.setSelected(false);
-
-    }
 
     private void onClickContactButton() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
@@ -238,13 +116,7 @@ public class CallActivity extends AppCompatActivity {
 
     private void onClickDialButton() {
         boolean bIsLineBusy = VaxPhoneSIP.m_objVaxVoIP.IsLineConnected();
-        OnClickBtnCall();
-//        if (bIsLineBusy) {
-//
-//        } else {
-//
-//        }
-        //onBackPressed();
+        //   OnClickBtnCall();
     }
 
     /**
@@ -253,32 +125,13 @@ public class CallActivity extends AppCompatActivity {
     private void OnClickBtnCallEnd() {
         //挂断
         VaxPhoneSIP.m_objVaxVoIP.DisconnectCall();
-        DialIconSelected(false);
-        DialBtnText.setText("DIAL");
-    }
-
-    /**
-     * 拨号
-     */
-    private void OnClickBtnCall() {
-
-        String sDialNo = EditText_DialNo.getText().toString().trim();
-        if (sDialNo.length() == 0) return;
-        if (VaxPhoneSIP.m_objVaxVoIP.DialCall(sDialNo)) {
-            StoreDialNo objStoreDialNo = new StoreDialNo();
-            objStoreDialNo.SaveDialNo(sDialNo);
-            DialIconSelected(true);
-            DialBtnText.setText("END");
-        }
     }
 
 
     public void BtnLogIn() {
         if (!UpdateLogInInfo())
             return;
-
         if (VaxPhoneSIP.m_objVaxVoIP.IsOnline()) {
-            //onClickDialButton();
             VaxPhoneSIP.m_objVaxVoIP.UnInitialize();
             return;
         }
@@ -316,8 +169,8 @@ public class CallActivity extends AppCompatActivity {
 
 
     private boolean UpdateLogInInfo() {
-        String sAuthLogin = "106001";
-        String sServerAddr = "120.79.114.71:5060";
+        // String sAuthLogin = "106001";
+        // String sServerAddr = "120.79.114.71:5060";
         if (sAuthLogin.length() <= 0) {
             DialogUtil.ShowDialog(this, "Please enter Auth Login");
             return false;
@@ -350,77 +203,23 @@ public class CallActivity extends AppCompatActivity {
             DomainRealm.setLength(0);
             DomainRealm.append(sServerIP);
         }
-        String sAuthPwd = "bbw@2018";
+        // String sAuthPwd = "bbw@2018";
         VaxPhoneSIP.m_objVaxVoIP.SetLoginInfo(Username.toString(), DisplayName.toString(), sAuthLogin, sAuthPwd, DomainRealm.toString(), sServerIP, sServerPort, bRegistrationSIP);
         return true;
     }
 
 
     public void OnDialpadClosed() {
+        CallingFragment.mCallFragment = null;
+        DialpadFragment.mDialpadFragment = null;
+        OnClickBtnCallEnd();
     }
 
     @Override
     public void onDestroy() {
-        mDialpadFragment = null;
         OnDialpadClosed();
+        Log.e("TAG","onDestroy");
         super.onDestroy();
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (data == null)
-            return;
-
-        if (requestCode == CONTACT_PICKER) {
-            if (resultCode == RESULT_OK) {
-                String sContactNum = m_objContacts.GetPickedContactNum(this, data);
-                EditText_DialNo.getText().clear();
-                EditText_DialNo.setText(sContactNum);
-            }
-        }
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////
-
-    private class OnClickListenerEx implements View.OnClickListener {
-        String m_sDigit;
-
-        OnClickListenerEx(String sTextNo) {
-            m_sDigit = sTextNo;
-        }
-
-        public void onClick(View v) {
-            EditText_DialNo.append(m_sDigit);
-            VaxPhoneSIP.m_objVaxVoIP.PlayDTMF(m_sDigit);
-        }
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    public static void PostStatusText(String sMsg) {
-        m_sLastStatusText = sMsg;
-        if (mDialpadFragment != null)
-            mDialpadFragment.OnStatusText(sMsg);
-    }
-
-    public void OnStatusText(String sMsg) {
-        TextViewStatus.setText(sMsg);
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////
-
-    private void DialIconSelected(boolean bSelected) {
-        DialIcon.setSelected(bSelected);
-        Dialpad_Dial.setSelected(bSelected);
-        DialBtnText.setSelected(bSelected);
     }
 
 }

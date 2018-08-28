@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>光银网-我的消息</title>
+    <link rel="stylesheet" href="../../lib/mui.css">
+    <link rel="stylesheet" href="../../lib/base.css">
+    <!-- <link rel="stylesheet" href="../../css/myclien.css"> -->
+</head>
+<style>
+    body {
+        font-size: 3.73vw;
+    }
+
+    header {
+        height: 14vw !important;
+        padding-top: 1vw !important;
+        padding-left: 3.2vw !important;
+        color: #fff;
+        background-image: linear-gradient(0deg, #fc4810 0%, #ff7449 100%);
+        overflow: hidden;
+    }
+
+    header>div {
+        font-size: 3.73vw;
+        padding: 3vw;
+    }
+
+    #content {
+        margin-top: 15vw;
+        padding: 0 5vw;
+    }
+
+    header .mui-title,
+    header a {
+        color: #fff;
+    }
+
+    .cell {
+        border-bottom: .3vw solid #ccc;
+        width: 90vw;
+        margin-top: 5vw;
+        color: rgb(110, 108, 108);
+        padding-bottom: 2vw;
+    }
+
+    #content .cell img {
+        display: inline-block;
+        width: 6vw;
+        height: 6vw;
+        margin-top: 3vw;
+        margin-right: 3vw;
+    }
+
+    #content .cell .left {
+        margin-left: 2vw;
+    }
+
+    #content .cell button {
+        width: 20vw;
+        height: 7.5vw;
+        display: inline-block;
+        margin-top: 1vw;
+    }
+</style>
+
+<body>
+    <!--tops-->
+    <header class="mui-bar mui-bar-nav">
+        <a class="mui-icon mui-icon-left-nav mui-pull-left back" href="javascript:history.go(-1)"></a>
+        <h1 class="mui-title">我的消息</h1>
+    </header>
+    <div id="content">
+        <!-- <div class="cell clearfix">
+            <img src="../../images/4.png" alt="" class="left">
+            <div class="left">
+                <div>2016-10-12 12:10</div>
+                <div>客户张三, 竞拍失败</div>
+            </div>
+        </div> -->
+    </div>
+</body>
+<script src="../../lib/jquery.min.js"></script>
+<script src="../../lib/mui.min.js"></script>
+<script src="../../lib/common.js"></script>
+<script src="../../lib//template.js"></script>
+<script id="imageFilename" type="text/html">
+    {{each data as value i}}
+    <div class="cell clearfix" lang="{{value.id}}">
+        <img src="../../images/4.png" alt="" class="left">
+        <div class="left">
+            <div>{{value.create_time}}</div>
+            <div>{{value.content}}</div>
+        </div>
+        <button class="right">删除</button>
+    </div>
+    {{/each}}
+</script>
+<script>
+    $(function () {
+        var sessionStorage = window.sessionStorage;
+        var user_id = sessionStorage.getItem("user_id");
+        console.log(user_id)
+        $("button").on("click", function () {
+            console.log(111)
+        })
+        
+        $.ajax({
+            type: "get",
+            url: configIp + "/mobileterminal/home/queryInformation",
+            dataType: 'jsonp',
+            data: {
+                "user_id": 1
+            },
+            crossDomain: true,
+            success: function (data) {
+                console.log(data)
+                console.log(data.data.length)
+                if (data.code == 0) {
+                    var imageFilename = template("imageFilename", data);
+                    $("#content").append(imageFilename);
+                    $("button").on("click", function () {
+                        console.log($(this).parents(".cell").attr("lang"))
+                        $.ajax({
+                            type: "get",
+                            url: configIp + "/mobileterminal/home/delInformation",
+                            dataType: 'jsonp',
+                            data: {
+                                "mid": $(this).parents(".cell").attr("lang")
+                            },
+                            crossDomain: true,
+                            success: function (data1) {
+                                if (data.code == 0) {
+                                    mui.toast("删除完成")
+                                }
+                            }
+                        })
+                    })
+                }
+            }
+        })
+
+    })
+</script>
+
+</html>

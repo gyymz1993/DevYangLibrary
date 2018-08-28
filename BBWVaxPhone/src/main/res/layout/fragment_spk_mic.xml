@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorfragmentbackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
+
+    <!--<include layout="@layout/toolbar" />-->
+    <include layout="@layout/actionbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="2dp">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="2dp"
+            android:paddingStart="0dp"
+            app:srcCompat="@drawable/ic_speaker_phone" />
+
+        <TextView
+            style="@style/TextViewHeading"
+            android:layout_gravity="bottom"
+            android:text="@string/speaker"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:cardCornerRadius="3dp"
+        app:cardMaxElevation="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/auto_gain_row"
+                style="@style/RowLayout">
+
+                <TextView
+                    android:id="@+id/label_auto_gain"
+                    style="@style/TextView"
+                    android:text="@string/auto_gain" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_auto_gain_spk"
+                    style="@style/AlignRightEnd"
+                    android:checked="true" />
+
+            </RelativeLayout>
+
+            <View style="@style/HorizontalLineWithMargin" />
+
+            <RelativeLayout
+                android:id="@+id/volume_boost_row"
+                style="@style/RowLayout">
+
+                <TextView
+                    android:id="@+id/volume_boost"
+                    style="@style/TextView"
+                    android:text="@string/volume_boost" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_volume_boost_spk"
+                    style="@style/AlignRightEnd"
+                    android:checked="true" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="2dp">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="2dp"
+            android:paddingStart="0dp"
+            app:srcCompat="@drawable/ic_mic_tinted" />
+
+        <TextView
+            style="@style/TextViewHeading"
+            android:layout_gravity="bottom"
+            android:text="@string/microphone"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:cardCornerRadius="3dp"
+        app:cardMaxElevation="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/mic_auto_gain_row"
+                style="@style/RowLayout">
+
+                <TextView
+                    android:id="@+id/label_auto_gain_mic"
+                    style="@style/TextView"
+                    android:text="@string/auto_gain" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_auto_gain_mic"
+                    style="@style/AlignRightEnd"
+                    android:checked="true" />
+
+            </RelativeLayout>
+
+            <View style="@style/HorizontalLineWithMargin" />
+
+            <RelativeLayout
+                android:id="@+id/volume_boost_row_mic"
+                style="@style/RowLayout">
+
+                <TextView
+                    android:id="@+id/volume_boost_mic"
+                    style="@style/TextView"
+                    android:text="@string/volume_boost" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_volume_boost_mic"
+                    style="@style/AlignRightEnd"
+                    android:checked="true" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="2dp">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="2dp"
+            android:paddingStart="0dp"
+            app:srcCompat="@drawable/ic_speaker_phone" />
+
+        <TextView
+            style="@style/TextViewHeading"
+            android:layout_gravity="bottom"
+            android:text="@string/echo_cancellation"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:cardCornerRadius="3dp"
+        app:cardMaxElevation="2dp">
+
+        <RelativeLayout
+            android:id="@+id/echo_cancellation_row"
+            style="@style/RowLayout">
+
+            <TextView
+                android:id="@+id/label_e"
+                style="@style/TextView"
+                android:text="@string/echo_cancellation" />
+
+            <CheckBox
+                android:id="@+id/checkbox_echo_cancellation"
+                style="@style/AlignRightEnd"
+                android:checked="true" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

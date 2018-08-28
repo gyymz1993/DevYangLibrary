@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="vertical"
+    android:paddingEnd="10dp"
+    android:paddingStart="10dp">
+
+    <CheckBox
+        android:id="@+id/checkbox_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="5dp"
+        android:backgroundTint="@color/colorAccent"
+        android:clickable="false"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/checkbox_delete"
+        android:background="@drawable/imgview_user_icon"
+        android:padding="15dp"
+        android:src="@drawable/ic_contact" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/imageView"
+        android:layout_toStartOf="@+id/last_message_date"
+        android:orientation="vertical"
+        android:paddingEnd="2dp"
+        android:paddingStart="10dp">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/stats_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:paddingEnd="5dp"
+            android:paddingStart="0dp"
+            app:srcCompat="@drawable/ic_contact_online" />
+
+        <TextView
+            android:id="@+id/contact_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/stats_icon"
+            android:fontFamily="sans-serif-condensed"
+            android:text="UserName"
+            android:textColor="@color/colorAccent"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/last_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/contact_name"
+            android:layout_toRightOf="@id/stats_icon"
+            android:fontFamily="sans-serif-condensed"
+            android:text="i am here "
+            android:textSize="12dp"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/last_message_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:fontFamily="sans-serif-condensed"
+        android:text="27 July"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_missed_badge"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/badge_background"
+        android:gravity="center|center_vertical"
+        android:text="5"
+        android:textColor="@color/colorbackground"
+        android:textSize="12sp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone"/>
+
+</RelativeLayout>

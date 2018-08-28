@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorHeadingBackgraound"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/actionbar" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        card_view:cardCornerRadius="5dp"
+        card_view:cardElevation="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorfragmentbackground"
+            android:orientation="vertical">
+
+            <RelativeLayout style="@style/RowLayout">
+
+                <TextView
+                    android:id="@+id/tunnel_ip_txtview"
+                    style="@style/TextView"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
+                    android:text="@string/tunnel_ip" />
+
+                <EditText
+                    android:id="@+id/tunnel_ip"
+                    style="@style/EditText"
+                    android:layout_toEndOf="@+id/tunnel_ip_txtview"
+                    android:hint="@string/tunnel_server_ip"
+                    android:inputType="text"
+                    android:maxLines="1" />
+            </RelativeLayout>
+
+            <View style="@style/HorizontalLineWithMargin" />
+
+            <RelativeLayout style="@style/RowLayout">
+
+                <TextView
+                    android:id="@+id/tunnel_port_txtview"
+                    style="@style/TextView"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
+                    android:text="@string/tunnel_port" />
+
+                <EditText
+                    android:id="@+id/tunnel_port"
+                    style="@style/EditText"
+                    android:layout_toEndOf="@+id/tunnel_port_txtview"
+                    android:hint="@string/tunnel_server_port"
+                    android:inputType="number"
+                    android:maxLines="1" />
+
+            </RelativeLayout>
+
+            <View style="@style/HorizontalLineWithMargin" />
+
+            <RelativeLayout style="@style/CheckBoxRowLayout">
+
+                <TextView
+                    style="@style/TextView"
+                    android:text="@string/tunnel_enable" />
+
+                <CheckBox
+                    android:id="@+id/tunnel_activation"
+                    style="@style/AlignRightEnd"
+                    android:layout_marginEnd="8dp"
+                    android:checked="true" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

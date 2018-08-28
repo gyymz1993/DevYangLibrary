@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../lib//mui.css">
+    <script src="../lib/jquery.min.js"></script>
+    <script src="../lib/mui.min.js"></script>
+</head>
+
+<body>
+    <div class="mui-content">
+        <div class="mui-input-row mui-input-range">
+            <label class="block-range-val"></label>
+            <input type="range" min="0" max="100" id="range1">
+        </div>
+    </div>
+    <script>
+        mui.init({
+            swipeBack: true //启用右滑关闭功能
+        });
+        //监听input事件，获取range的value值，也可以直接element.value获取该range的值
+        var rangeList = document.querySelectorAll('input[type="range"]');
+        for (var i = 0, len = rangeList.length; i < len; i++) {
+            rangeList[i].addEventListener('input', function () {
+                if (this.id.indexOf('field') >= 0) {
+                    $('#'+this.id + '-input').val(this.value)
+                } else {
+                    $('#'+this.id + '-val').html(this.value)
+                }
+
+
+            });
+        }
+
+        // document.getElementById('field-range-input').addEventListener('input', function () {
+        //     document.getElementById('field-range').value = this.value;
+        // });
+    </script>
+</body>
+
+</html>

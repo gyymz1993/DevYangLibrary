@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript">
+    function sum(a,b){
+    return a+b;
+    }
+     function s(){
+    var result =window.android.back();
+    document.getElementById("p").innerHTML=result;
+    }
+
+     function testClick1() {
+            var str1 = "13177008851";
+            window.android.callPerson(str1);
+        }
+
+
+    	function lianxiren(obj){
+			     var result=window.android.back(obj);
+		}
+
+		function lianxi(str){
+		console.log(str)
+		window.android.callBack(str)
+	}
+
+
+
+    function jsAlert(){
+        var r = alert("我是Alert的提示框");
+        document.getElementById("p").innerHTML="Java成功调的JS的alert方法";
+        window.android.jcmToast("我是被JS执行的Android代码");
+    }
+
+    function jsConFirm(){
+      var r = confirm("我是ConFirm的弹出框");
+      if (r == true)
+      {
+        document.getElementById("p").innerHTML="用户点击了确认按钮";
+      }else{
+        document.getElementById("p").innerHTML="用户点击了取消按钮";
+      }
+    }
+
+    function jsPrompt(){
+        //第一个参数是提示
+        //第二个参数是默认值
+        var r = prompt("请输入姓名：","小明同学");
+        if (r != null)
+        {
+         document.getElementById("p").innerHTML="用户输入的姓名为："+r;
+        }else{
+         document.getElementById("p").innerHTML="用户点击了取消按钮";
+        }
+
+    }
+    function jsJava(){
+        //调用java的方法，顶级对象，java方法
+        //可以直接访问JSTest，这是因为JSTest挂载到js的window对象下了
+        JSTest.showToast("我是被JS执行的Android代码");
+    }
+
+    function sum(a,b){
+    return a+b;
+    }
+
+    function showInfoFromJava(){
+    document.getElementById("p").innerHTML="JS方法成功被Java调用";
+    }
+
+    </script>
+</head>
+
+<body>
+
+<h3 id="p">界面成功初始化</h3>
+
+<h5 onclick="jsAlert()">调用jsAlert方法</h5>
+<input type="button" value="开启Alert提示框" onclick="jsAlert()"/>
+<h5 onclick="jsAlert()">调用jsConFirm方法</h5>
+<input type="button" value="开启ConFirm弹窗" onclick="jsConFirm()"/>
+<h5 onclick="jsAlert()">调用jsPrompt方法</h5>
+<input type="button" value="开启Prompt弹窗" onclick="jsPrompt()"/>
+<h5 onclick="jsAlert()">调用jsJava方法</h5>
+<input type="button" value="调用Java方法" onclick="jsJava()"/>
+
+
+<p>
+    <button class="chujia" onclick="lianxi({sj:'13177008851',name:'ymz'})">出价</button>
+</p>
+
+
+<p>
+    <button onclick="s()">调用本地方法</button>
+</p>
+
+<p>
+    <input type="button" id="enter" value="发消息给Native" onclick="testClick();"
+    />
+</p>
+<p>
+    <input type="button" id="enter1" value="调用Native方法" onclick="testClick1();"
+    />
+</p>
+
+<p>
+    <button class="chujia" onclick="lianxi()">出价</button>
+</p>
+
+
+<p>
+    <button id="button" onclick="lianxiren('{name:ymz:number:13177008851,1111111}')">点击联系人</button>
+    <span class="contacted" style="background-color:#fa7e2c;">联系他</span>
+</p>
+
+<p>
+<a href="tel:{{value.phone}}" lang="{{value.phone}}"
+   class="contac" onclick="lianxiren('{name:ymz:number:13177008851,1111111}')">
+    <span class="contact">待联系11</span>
+</a>
+</p>
+
+<p>
+    <button id="button1" onclick="lianxi($(event))">点击联系人</button>
+</p>
+
+</body>
+</html>

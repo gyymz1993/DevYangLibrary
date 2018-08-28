@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ChatMsgParentView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorHeadingBackgraound"
+    tools:context=".MainTab.ChatTab.ChatMsgFragment"
+    android:clickable="true"
+    android:focusable="true">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/chat_conv_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary" />
+
+    <RelativeLayout
+        android:id="@+id/presence_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chat_conv_actionbar"
+        android:background="@color/colorAccent"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:text="Accept chat request for presence. " />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/BtnAcceptPresence"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:background="@drawable/button_bg_round_corners_primary"
+            android:text="Accept"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent" />
+    </RelativeLayout>
+
+    <vaxsoft.com.vaxphone.MainTab.ChatTab.ChatMsgRecyclerView
+        android:id="@+id/recycler_conversation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/type_send_msg_layout"
+        android:layout_below="@id/presence_view" />
+
+    <RelativeLayout
+        android:id="@+id/type_send_msg_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="5dp">
+
+        <EditText
+            android:id="@+id/edit_text_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="3dp"
+            android:layout_toStartOf="@+id/ic_send"
+            android:background="@drawable/edit_text_round_corners"
+            android:fontFamily="sans-serif-condensed"
+            android:hint="Type a Message"
+            android:inputType="text|textMultiLine"
+            android:maxLines="3"
+            android:padding="8dp" />
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/ic_send"
+            android:layout_width="45dp"
+            android:layout_height="43dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/button_bg_round_yellow_border"
+            android:backgroundTint="@color/colorAccent"
+            android:paddingStart="5dp"
+            android:src="@drawable/ic_send" />
+
+    </RelativeLayout>
+</RelativeLayout>

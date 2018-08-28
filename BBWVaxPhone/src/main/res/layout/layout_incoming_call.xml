@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="250dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="32dp"
+    android:background="@drawable/dialog_bg"
+    android:elevation="5dp">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:srcCompat="@drawable/vaxphone_logo_accent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Caller Name: " />
+
+        <TextView
+            android:id="@+id/caller_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1200" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Caller Id: " />
+
+        <TextView
+            android:id="@+id/caller_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1200" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/accept_call"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="140dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_round_corners_accent"
+        android:text="Accept Call"
+        android:textColor="@color/colorPrimaryLight" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/reject_call"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="140dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/reset_button_round_corners"
+        android:text="Reject Call"
+        android:textColor="@android:color/white" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/mute_ring"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="140dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_round_corners_accent"
+        android:text="Mute Ring"
+        android:textColor="@color/colorPrimaryLight" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/cancel"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="140dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_round_corners_accent"
+        android:text="Cancel"
+        android:textColor="@color/colorPrimaryLight" />
+
+</LinearLayout>

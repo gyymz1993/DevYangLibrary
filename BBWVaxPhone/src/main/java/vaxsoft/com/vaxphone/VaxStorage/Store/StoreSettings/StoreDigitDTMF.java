@@ -1,0 +1,25 @@
+package vaxsoft.com.vaxphone.VaxStorage.Store.StoreSettings;
+
+import vaxsoft.com.vaxphone.MainUtil.PreferenceUtil;
+
+public class StoreDigitDTMF
+{
+    private final String DIGIT_DTMF = "VaxDigitDTMF";
+    private final int DIGIT_DTMF_DEFAULT_VALUE = -1;
+
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void SetDigitDTMF(int nDigitDTMF)
+    {
+        PreferenceUtil.WritePreferenceValue(DIGIT_DTMF, nDigitDTMF);
+    }
+
+    public int GetDigitDTMF()
+    {
+        return PreferenceUtil.ReadPreferenceValue(DIGIT_DTMF, DIGIT_DTMF_DEFAULT_VALUE);
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////
+}
