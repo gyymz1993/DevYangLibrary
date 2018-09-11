@@ -92,7 +92,7 @@ public class AccountInfoFragment extends Fragment
 
         boolean bRegistrationSIP = RegistrationSIP.isChecked();
 
-        VaxPhoneSIP.m_objVaxVoIP.SetLoginInfo(sUsername, sDisplayName, sAuthLogin, sAuthPassword, sDoaminRealm, sServerIP, sServerPort, bRegistrationSIP);
+        VaxPhoneSIP.SetLoginInfo(sUsername, sDisplayName, sAuthLogin, sAuthPassword, sDoaminRealm, sServerIP, sServerPort, bRegistrationSIP);
 
         ((AccountLoginActivity) getActivity()).UpdateUI();
 
@@ -114,7 +114,7 @@ public class AccountInfoFragment extends Fragment
 
         AtomicBoolean bRegistrationSIP = new AtomicBoolean();
 
-        VaxPhoneSIP.m_objVaxVoIP.GetLoginInfo(sUsername, sDisplayName, sAuthLogin, sAuthPassword, sDoaminRealm, sServerIP, sServerPort, bRegistrationSIP);
+        VaxPhoneSIP.GetLoginInfo(sUsername, sDisplayName, sAuthLogin, sAuthPassword, sDoaminRealm, sServerIP, sServerPort, bRegistrationSIP);
 
         SetData(sUsername.toString(), sDisplayName.toString(), sAuthLogin.toString(), sAuthPassword.toString(), sDoaminRealm.toString(), sServerIP.toString(), sServerPort.toString(), bRegistrationSIP.get());
     }

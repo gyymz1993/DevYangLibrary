@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import VaxVoIP.VaxUserAgentLib.VaxUserAgentLib;
 import vaxsoft.com.vaxphone.R;
-import vaxsoft.com.vaxphone.VaxPhoneSIP;
 
 public class ChatContactRowViewHolder extends RecyclerView.ViewHolder
 {
@@ -90,27 +90,27 @@ public class ChatContactRowViewHolder extends RecyclerView.ViewHolder
 
         switch(nStatusId)
         {
-            case VaxPhoneSIP.VAX_CHAT_CONTACT_STATUS_ONLINE:
+            case VaxUserAgentLib.VAX_CHAT_CONTACT_STATUS_ONLINE:
                 nImageId = R.drawable.ic_contact_online;
                 break;
 
-            case VaxPhoneSIP.VAX_CHAT_CONTACT_STATUS_OFFLINE:
+            case VaxUserAgentLib.VAX_CHAT_CONTACT_STATUS_OFFLINE:
                 nImageId = R.drawable.ic_contact_offline;
                 break;
 
-            case VaxPhoneSIP.VAX_CHAT_CONTACT_STATUS_AWAY:
+            case VaxUserAgentLib.VAX_CHAT_CONTACT_STATUS_AWAY:
                 nImageId = R.drawable.ic_contact_away;
                 break;
 
-            case VaxPhoneSIP.VAX_CHAT_CONTACT_STATUS_BUSY:
+            case VaxUserAgentLib.VAX_CHAT_CONTACT_STATUS_BUSY:
                 nImageId = R.drawable.ic_contact_busy;
                 break;
 
-            case VaxPhoneSIP.VAX_CHAT_CONTACT_STATUS_ON_PHONE:
+            case VaxUserAgentLib.VAX_CHAT_CONTACT_STATUS_ON_PHONE:
                 nImageId = R.drawable.ic_contact_on_phone;
                 break;
 
-            case VaxPhoneSIP.VAX_CHAT_CONTACT_STATUS_UNKNOWN:
+            case VaxUserAgentLib.VAX_CHAT_CONTACT_STATUS_UNKNOWN:
                 nImageId = R.drawable.ic_contact_unknown;
                 break;
         }

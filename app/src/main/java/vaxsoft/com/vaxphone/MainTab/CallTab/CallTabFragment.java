@@ -17,8 +17,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import vaxsoft.com.vaxphone.CustomViews.TabFragment.CustomTabFragment;
-import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.MainUtil.DialogUtil;
+import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.VaxPhoneSIP;
 
 public class CallTabFragment extends CustomTabFragment implements View.OnClickListener
@@ -26,12 +26,12 @@ public class CallTabFragment extends CustomTabFragment implements View.OnClickLi
     public static CallTabFragment mCallFragment = null;
     private static String m_sLastStatusText = "Account is online";
 
-    private TextView TextViewStatus;
+    TextView TextViewStatus;
 
-    private DeviceSurfaceView mDeviceSurfaceView;
-    private RemoteSurfaceView mRemoteSurfaceView;
+    DeviceSurfaceView mDeviceSurfaceView;
+    RemoteSurfaceView mRemoteSurfaceView;
 
-    private CallIconsFragment mIconsCallFragment = null;
+    CallIconsFragment mIconsCallFragment = null;
 
     private RelativeLayout ParentView;
 
@@ -98,6 +98,14 @@ public class CallTabFragment extends CustomTabFragment implements View.OnClickLi
     ///////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////
 
+    private void AdjustDisplayFrameView()
+    {
+        if(VaxPhoneSIP.m_objVaxVoIP.IsVideoStreamStarted())
+            mCallFragment.mDeviceSurfaceView.AdjustPreviewLayoutToThumbnail();
+        else
+            mCallFragment.mDeviceSurfaceView.AdjustPreviewLayoutToFullScreen();
+    }
+
     public void OnFragmentActivated()
     {
         mCallFragment = this;
@@ -106,6 +114,8 @@ public class CallTabFragment extends CustomTabFragment implements View.OnClickLi
 
         mIconsCallFragment.DisplayBtnAll();
         OpenVideoCamera();
+
+        AdjustDisplayFrameView();
 
         super.OnFragmentActivated();
     }
@@ -190,16 +200,6 @@ public class CallTabFragment extends CustomTabFragment implements View.OnClickLi
         mRemoteSurfaceView.DrawColorOnRemoteSurfaceView();
     }
 
-    private void OnVideoRemoteStart(int nLineNo)
-    {
-
-    }
-
-    private void OnVideoRemoteStop(int nLineNo)
-    {
-
-    }
-
     private void OnDialCallStarted()
     {
         mIconsCallFragment.DisplayBtnAll();
@@ -261,8 +261,7 @@ public class CallTabFragment extends CustomTabFragment implements View.OnClickLi
         if (mCallFragment == null)
             return;
 
-        mCallFragment.OnVideoRemoteStart(nLineNo);
-        mCallFragment.mDeviceSurfaceView.AdjustPreviewLayoutToThumbnail();
+        mCallFragment.AdjustDisplayFrameView();
     }
 
     public static void OnVideoRemoteEnded(int nLineNo)
@@ -270,8 +269,7 @@ public class CallTabFragment extends CustomTabFragment implements View.OnClickLi
         if (mCallFragment == null)
             return;
 
-        mCallFragment.OnVideoRemoteStop(nLineNo);
-        mCallFragment.mDeviceSurfaceView.AdjustPreviewLayoutToFullScreen();
+        mCallFragment.AdjustDisplayFrameView();
     }
 
     ///////////////////////////////////////////////////////////////////////////////

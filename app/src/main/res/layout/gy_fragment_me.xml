@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    >
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/apptheme">
+
+        <com.flyco.tablayout.SlidingTabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/tab_un_selected_color"
+            tl:tl_indicator_color="@color/gytheme"
+            tl:tl_indicator_width_equal_title="true"
+            tl:tl_tab_padding="15dp"
+            tl:tl_tab_space_equal="true"
+            tl:tl_textSelectColor="@color/gytheme"
+            tl:tl_textUnselectColor="@color/black"
+            tl:tl_textsize="14sp" />
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_movies"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

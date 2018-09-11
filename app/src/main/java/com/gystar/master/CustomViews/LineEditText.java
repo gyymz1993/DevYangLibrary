@@ -1,0 +1,40 @@
+package com.gystar.master.CustomViews;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.util.AttributeSet;
+
+import com.utils.gyymz.utils.UIUtils;
+
+
+public class LineEditText extends android.support.v7.widget.AppCompatEditText {
+
+    private Paint mPaint;
+
+    /**
+     * @param context
+     * @param attrs
+     */
+    public LineEditText(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        mPaint = new Paint();
+
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setColor(UIUtils.getColor("#898787"));
+    }
+
+    @Override
+    public void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+//      画底线  
+        canvas.drawLine(0, this.getHeight() - 1, this.getWidth() - 1, this.getHeight() - 1, mPaint);
+    }
+
+
+    public void onDrawClean() {
+        mPaint.setColor(UIUtils.getColor("#898787"));
+        invalidate();
+    }
+}  

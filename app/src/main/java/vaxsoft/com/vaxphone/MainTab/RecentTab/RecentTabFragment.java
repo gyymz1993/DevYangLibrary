@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import vaxsoft.com.vaxphone.CustomViews.TabFragment.CustomTabFragment;
-import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.MainTab.CallTab.DialpadFragment;
 import vaxsoft.com.vaxphone.MainTab.MainTabActivity;
 import vaxsoft.com.vaxphone.MainUtil.PreferenceUtil;
+import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.VaxPhoneSIP;
 
 public class RecentTabFragment extends CustomTabFragment

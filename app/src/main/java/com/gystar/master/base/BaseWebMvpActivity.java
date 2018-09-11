@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.just.agentwebX5.AgentWebX5;
@@ -33,12 +35,16 @@ public abstract class BaseWebMvpActivity extends AppCompatActivity {
     protected AgentWebX5 mAgentWeb;
     LinearLayout container;
     public static final String CONTRL = "JSCallMobile";
+    public EditText editText;
+    public Button tvGo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_web);
         container = findViewById(R.id.container);
+        editText=findViewById(R.id.id_ed_text);
+        tvGo=findViewById(R.id.id_tv_go);
     }
 
     private WebViewClient mWebViewClient = new WebViewClient() {
@@ -147,7 +153,7 @@ public abstract class BaseWebMvpActivity extends AppCompatActivity {
         // getWebView().setBackgroundResource(R.color.apptheme_bg);
         getWebView().setWebContentsDebuggingEnabled(true);
         //设置 缓存模式
-        getWebView().getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);  //设置 缓存模式
+       // getWebView().getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);  //设置 缓存模式
         // 开启 DOM storage API 功能
         getWebView().getSettings().setDomStorageEnabled(true);
         //开启 database storage API 功能

@@ -3,16 +3,18 @@ package vaxsoft.com.vaxphone.MainTab.RecentTab;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
-
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import java.util.ArrayList;
 
-import vaxsoft.com.vaxphone.R;
+import VaxVoIP.VaxUserAgentLib.VaxUserAgentLib;
 import vaxsoft.com.vaxphone.CustomViews.RecyclerView.CustomRecyclerView;
 import vaxsoft.com.vaxphone.CustomViews.RecyclerView.ICustomRecyclerView;
+import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.VaxPhoneSIP;
 import vaxsoft.com.vaxphone.VaxStorage.Store.StoreDataRecents;
 import vaxsoft.com.vaxphone.VaxStorage.Store.StoreRecent;
@@ -85,7 +87,7 @@ public class RecentRecyclerView extends CustomRecyclerView implements ICustomRec
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
-    public ViewHolder OnViewHolderCreate(ViewGroup parent, int viewType)
+    public RecyclerView.ViewHolder OnViewHolderCreate(ViewGroup parent, int viewType)
     {
         if (viewType == VIEW_TYPE_SECTION)
         {
@@ -98,7 +100,7 @@ public class RecentRecyclerView extends CustomRecyclerView implements ICustomRec
     }
 
     @Override
-    public void OnViewHolderBindUI(ViewHolder holder, Boolean bDeleteActivated, Boolean bDeleteSelected, int nPosition, int nViewType)
+    public void OnViewHolderBindUI(RecyclerView.ViewHolder holder, Boolean bDeleteActivated, Boolean bDeleteSelected, int nPosition, int nViewType)
     {
         holder.itemView.setSelected(bDeleteSelected);
 
@@ -126,7 +128,7 @@ public class RecentRecyclerView extends CustomRecyclerView implements ICustomRec
     }
 
     @Override
-    public void OnViewHolderRowClicked(ViewHolder holder, int nPosition)
+    public void OnViewHolderRowClicked(RecyclerView.ViewHolder holder, int nPosition)
     {
         RecentRowViewHolder objViewHolder = (RecentRowViewHolder) holder;
 
@@ -153,7 +155,7 @@ public class RecentRecyclerView extends CustomRecyclerView implements ICustomRec
     }
 
     @Override
-    public void OnViewHolderDeleteSelected(ViewHolder holder, boolean bDeleteEnabled, int nPosition, int nViewType)
+    public void OnViewHolderDeleteSelected(RecyclerView.ViewHolder holder, boolean bDeleteEnabled, int nPosition, int nViewType)
     {
         holder.itemView.setSelected(bDeleteEnabled);
     }
@@ -163,7 +165,7 @@ public class RecentRecyclerView extends CustomRecyclerView implements ICustomRec
 
     public static void PostAddCallHistory(int nRecordId, boolean bOutboundCallType, String sName, String sPhoneNo, long nStartTime, long nEndTime, long nDuration, long nDayNo, long nHistoryTypeId)
     {
-        if(!m_bIsRecentActivated  && !bOutboundCallType && nHistoryTypeId == VaxPhoneSIP.VAX_CALL_HISTORY_TYPE_MISSED)
+        if(!m_bIsRecentActivated  && !bOutboundCallType && nHistoryTypeId == VaxUserAgentLib.VAX_CALL_HISTORY_TYPE_MISSED)
             RecentTabFragment.SetMissedCount(-1);
 
         if(mRecentRecyclerView == null)

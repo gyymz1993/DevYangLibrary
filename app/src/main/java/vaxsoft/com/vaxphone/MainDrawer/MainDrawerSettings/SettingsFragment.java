@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,16 +14,16 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
-import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.MainTab.MainTabActivity;
+import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.VaxPhoneSIP;
 import vaxsoft.com.vaxphone.VaxStorage.Store.StoreSettings.StoreGeneralSettings;
 
 public class SettingsFragment extends Fragment implements CompoundButton.OnCheckedChangeListener
 {
-    Toolbar Toolbar;
+    android.support.v7.widget.Toolbar Toolbar;
 
-    CheckBox MultiTaskMode, DiagnosticLog;
+    CheckBox DiagnosticLog;
 
     LinearLayout EncryptionTunnelRow, VideoBitrateRow, VideoQualityRow, VideoCodecsRow, AudioCodecsRow, SpkMicRow, RingTonesRow, VoiceChangerRow, NetworkRow, DigitDTMFRow;
 
@@ -53,9 +52,6 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
 
         StoreGeneralSettings objSettings = new StoreGeneralSettings();
 
-        boolean bMultiTaskMode = objSettings.GetMultiTaskMode();
-        MultiTaskMode.setChecked(bMultiTaskMode);
-
         boolean bDiagnosticLog = objSettings.GetDiagnosticLog();
         DiagnosticLog.setChecked(bDiagnosticLog);
     }
@@ -79,7 +75,6 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         DigitDTMFRow = view.findViewById(R.id.DigitDTMFRow);
         BtnResetAllSettings = view.findViewById(R.id.ResetAllSettingsRow);
 
-        MultiTaskMode = view.findViewById(R.id.checkbox_multi_task_mode);
         DiagnosticLog = view.findViewById(R.id.checkbox_diagnostic_log);
     }
 
@@ -184,7 +179,6 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
             }
         });
 
-        MultiTaskMode.setOnCheckedChangeListener(this);
         DiagnosticLog.setOnCheckedChangeListener(this);
     }
 
@@ -205,7 +199,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
 
     public void OnClickEncryptionTunnelRow()
     {
-        TunnelFragment  objTunnelFragment = new TunnelFragment();
+        TunnelFragment objTunnelFragment = new TunnelFragment();
 
         FragmentManager objFragManager = getFragmentManager();
         FragmentTransaction objFragTransaction = objFragManager.beginTransaction();
@@ -316,10 +310,6 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
     {
         switch (compoundButton.getId())
         {
-            case R.id.checkbox_multi_task_mode:
-                OnClickMultiTaskMode(Checked);
-                break;
-
             case R.id.checkbox_diagnostic_log:
                 OnClickDiagnosticLog(Checked);
                 break;
@@ -328,14 +318,6 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
 
     /////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////
-
-    private void OnClickMultiTaskMode(boolean bChecked)
-    {
-        VaxPhoneSIP.m_objVaxVoIP.BackgroundMode(bChecked);
-
-        StoreGeneralSettings objSettings = new StoreGeneralSettings();
-        objSettings.SetMultiTaskMode(bChecked);
-    }
 
     private void OnClickDiagnosticLog(boolean bChecked)
     {
@@ -351,9 +333,6 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
     public static void PostInitialized()
     {
         StoreGeneralSettings objSettings = new StoreGeneralSettings();
-
-        boolean bMultiTaskMode = objSettings.GetMultiTaskMode();
-        VaxPhoneSIP.m_objVaxVoIP.BackgroundMode(bMultiTaskMode);
 
         boolean bDiagnosticLog = objSettings.GetDiagnosticLog();
         VaxPhoneSIP.m_objVaxVoIP.DiagnosticLog(bDiagnosticLog);

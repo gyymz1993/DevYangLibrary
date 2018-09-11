@@ -4,10 +4,10 @@ import android.content.Context;
 import android.util.Log;
 
 import VaxVoIP.VaxUserAgentLib.VaxUserAgentSIP.AudioDevice.AudioDevice;
+import VaxVoIP.VaxUserAgentLib.VaxUserAgentSIP.Network.Network;
 import VaxVoIP.VaxUserAgentLib.VaxUserAgentSIP.SocketIP.SocketIP;
 import VaxVoIP.VaxUserAgentLib.VaxUserAgentSIP.UserAgent.VaxUserAgent;
 import VaxVoIP.VaxUserAgentLib.VaxUserAgentSIP.VideoDevice.VideoDevice;
-import VaxVoIP.VaxUserAgentLib.VaxUserAgentSIP.Network.Network;
 
 public class VaxUserAgentSIP extends VaxUserAgent
 {

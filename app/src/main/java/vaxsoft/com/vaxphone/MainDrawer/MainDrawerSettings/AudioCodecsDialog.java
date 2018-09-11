@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
+import VaxVoIP.VaxUserAgentLib.VaxUserAgentLib;
 import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.VaxPhoneSIP;
 import vaxsoft.com.vaxphone.VaxStorage.Store.StoreSettings.StoreAudioCodecs;
@@ -57,20 +58,20 @@ public class AudioCodecsDialog extends DialogFragment
         if (m_aVoiceCodecs == null)
             m_aVoiceCodecs = GetCheckedItems();
 
-        if (nSelectedCodec == VaxPhoneSIP.VAX_CODEC_G711U)
-            m_aVoiceCodecs[VaxPhoneSIP.VAX_CODEC_G711U] = bChecked;
+        if (nSelectedCodec == VaxUserAgentLib.VAX_CODEC_G711U)
+            m_aVoiceCodecs[VaxUserAgentLib.VAX_CODEC_G711U] = bChecked;
 
-        else if (nSelectedCodec == VaxPhoneSIP.VAX_CODEC_G711A)
-            m_aVoiceCodecs[VaxPhoneSIP.VAX_CODEC_G711A] = bChecked;
+        else if (nSelectedCodec == VaxUserAgentLib.VAX_CODEC_G711A)
+            m_aVoiceCodecs[VaxUserAgentLib.VAX_CODEC_G711A] = bChecked;
 
-        else if (nSelectedCodec == VaxPhoneSIP.VAX_CODEC_GSM610)
-            m_aVoiceCodecs[VaxPhoneSIP.VAX_CODEC_GSM610] = bChecked;
+        else if (nSelectedCodec == VaxUserAgentLib.VAX_CODEC_GSM610)
+            m_aVoiceCodecs[VaxUserAgentLib.VAX_CODEC_GSM610] = bChecked;
 
-        else if (nSelectedCodec == VaxPhoneSIP.VAX_CODEC_ILBC)
-            m_aVoiceCodecs[VaxPhoneSIP.VAX_CODEC_ILBC] = bChecked;
+        else if (nSelectedCodec == VaxUserAgentLib.VAX_CODEC_ILBC)
+            m_aVoiceCodecs[VaxUserAgentLib.VAX_CODEC_ILBC] = bChecked;
 
-        else if (nSelectedCodec == VaxPhoneSIP.VAX_CODEC_G729)
-            m_aVoiceCodecs[VaxPhoneSIP.VAX_CODEC_G729] = bChecked;
+        else if (nSelectedCodec == VaxUserAgentLib.VAX_CODEC_G729)
+            m_aVoiceCodecs[VaxUserAgentLib.VAX_CODEC_G729] = bChecked;
     }
 
     private void OnClickOKButton()
@@ -81,7 +82,7 @@ public class AudioCodecsDialog extends DialogFragment
         StoreAudioCodecs objStoreCodecs = new StoreAudioCodecs();
         objStoreCodecs.SetAudioCodecs(m_aVoiceCodecs);
 
-        for(int nCount = 0; nCount < VaxPhoneSIP.VAX_VOICE_CODEC_TOTAL; nCount++)
+        for(int nCount = 0; nCount < VaxUserAgentLib.VAX_VOICE_CODEC_TOTAL; nCount++)
         {
             int nCodecNo = nCount;
             boolean bEnabled = m_aVoiceCodecs[nCount];
@@ -98,7 +99,7 @@ public class AudioCodecsDialog extends DialogFragment
 
     private boolean[] GetCheckedItems()
     {
-        boolean[] aVoiceCodecs = new boolean[VaxPhoneSIP.VAX_VOICE_CODEC_TOTAL];
+        boolean[] aVoiceCodecs = new boolean[VaxUserAgentLib.VAX_VOICE_CODEC_TOTAL];
 
         StoreAudioCodecs objStoreCodecs = new StoreAudioCodecs();
         objStoreCodecs.GetAudioCodecs(aVoiceCodecs);
@@ -118,14 +119,14 @@ public class AudioCodecsDialog extends DialogFragment
 
     private static void ApplyVoiceCodec()
     {
-        boolean[] aVoiceCodecs = new boolean[VaxPhoneSIP.VAX_VOICE_CODEC_TOTAL];
+        boolean[] aVoiceCodecs = new boolean[VaxUserAgentLib.VAX_VOICE_CODEC_TOTAL];
 
         StoreAudioCodecs objStoreCodecs = new StoreAudioCodecs();
         objStoreCodecs.GetAudioCodecs(aVoiceCodecs);
 
         VaxPhoneSIP.m_objVaxVoIP.DeselectAllVoiceCodec();
 
-        for(int nCount = 0; nCount < VaxPhoneSIP.VAX_VOICE_CODEC_TOTAL; nCount++)
+        for(int nCount = 0; nCount < VaxUserAgentLib.VAX_VOICE_CODEC_TOTAL; nCount++)
         {
             int nCodecNo = nCount;
             boolean bEnabled = aVoiceCodecs[nCount];

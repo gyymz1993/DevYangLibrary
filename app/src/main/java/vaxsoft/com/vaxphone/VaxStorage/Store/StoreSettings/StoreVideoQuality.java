@@ -1,12 +1,12 @@
 package vaxsoft.com.vaxphone.VaxStorage.Store.StoreSettings;
 
+import VaxVoIP.VaxUserAgentLib.VaxUserAgentLib;
 import vaxsoft.com.vaxphone.MainUtil.PreferenceUtil;
-import vaxsoft.com.vaxphone.VaxPhoneSIP;
 
 public class StoreVideoQuality
 {
     private final String VIDEO_QUALITY = "Video Quality";
-    private final int DEFAULT_VIDEO_QUALITY = VaxPhoneSIP.VAX_VIDEO_QUALITY_STANDARD;
+    private final int DEFAULT_VIDEO_QUALITY = VaxUserAgentLib.VAX_VIDEO_QUALITY_STANDARD;
 
     //////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////

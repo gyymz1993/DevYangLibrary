@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BBWVaxPhone/BBWVaxPhone.iml" filepath="$PROJECT_DIR$/BBWVaxPhone/BBWVaxPhone.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DevYangLibrary/DevYangLibrary.iml" filepath="$PROJECT_DIR$/DevYangLibrary/DevYangLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/GyStarMasterPhone.iml" filepath="$PROJECT_DIR$/GyStarMasterPhone.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UILibrary/UILibrary.iml" filepath="$PROJECT_DIR$/UILibrary/UILibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libPay/libPay.iml" filepath="$PROJECT_DIR$/libPay/libPay.iml" />
     </modules>
   </component>
 </project>

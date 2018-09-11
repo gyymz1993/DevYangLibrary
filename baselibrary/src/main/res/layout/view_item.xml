@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/id_item_rl"
+    android:layout_width="match_parent"
+    android:layout_height="55dip"
+    android:background="@drawable/item_seletor"
+    android:clickable="true"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="15dp">
+
+    <!--    android:background="@drawable/item_seletor"
+    android:clickable="true"-->
+    <TextView
+        android:id="@+id/tv_left"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:gravity="center_vertical"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/left_image"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/to_right_leftig_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dip"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:text="body" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/valueTv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:textSize="14sp"
+        tools:text="body" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dip"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+
+            android:id="@+id/right_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:gravity="center_vertical"
+            android:textColor="#999999"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/right_icon"
+            android:layout_width="30dip"
+            android:layout_height="15dip"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/icon_back" />
+    </LinearLayout>
+
+</RelativeLayout>

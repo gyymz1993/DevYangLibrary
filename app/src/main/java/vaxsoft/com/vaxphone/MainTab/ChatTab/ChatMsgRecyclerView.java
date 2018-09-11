@@ -12,9 +12,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.CustomViews.RecyclerView.CustomRecyclerView;
 import vaxsoft.com.vaxphone.CustomViews.RecyclerView.ICustomRecyclerView;
+import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.VaxStorage.Store.StoreChatMsg;
 import vaxsoft.com.vaxphone.VaxStorage.Store.StoreDataChatMsgs;
 
@@ -83,14 +83,14 @@ public class ChatMsgRecyclerView extends CustomRecyclerView implements ICustomRe
     ////////////////////////////////////////////////////////////////////////////////////
 
     @Override
-    public ViewHolder OnViewHolderCreate(ViewGroup parent, int viewType)
+    public RecyclerView.ViewHolder OnViewHolderCreate(ViewGroup parent, int viewType)
     {
         View objView = mLayoutInflater.inflate(R.layout.layout_conversation_row, parent, false);
         return new ChatMsgViewHolder(objView);
     }
 
     @Override
-    public void OnViewHolderBindUI(ViewHolder holder, Boolean bDeleteActivated, Boolean bDeleteSelected, int nPosition, int nViewType)
+    public void OnViewHolderBindUI(RecyclerView.ViewHolder holder, Boolean bDeleteActivated, Boolean bDeleteSelected, int nPosition, int nViewType)
     {
         holder.itemView.setTag(holder);
         holder.itemView.setSelected(false);
@@ -115,7 +115,7 @@ public class ChatMsgRecyclerView extends CustomRecyclerView implements ICustomRe
     }
 
     @Override
-    public void OnViewHolderRowClicked(ViewHolder holder, int nPosition)
+    public void OnViewHolderRowClicked(RecyclerView.ViewHolder holder, int nPosition)
     {
 
     }
@@ -133,7 +133,7 @@ public class ChatMsgRecyclerView extends CustomRecyclerView implements ICustomRe
     }
 
     @Override
-    public void OnViewHolderDeleteSelected(ViewHolder holder, boolean bDeleteEnabled, int nPosition, int nViewType)
+    public void OnViewHolderDeleteSelected(RecyclerView.ViewHolder holder, boolean bDeleteEnabled, int nPosition, int nViewType)
     {
 
     }

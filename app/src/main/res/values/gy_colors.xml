@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <color name="gytheme">#FFF84F19</color>
+
+    <color name="login_code">#FF0491E3</color>
+
+    <color name="tab_un_selected_color">#7f7f7f</color>
+    <color name="tab_selected_color">#FFF84F19</color>
+
+    <color name="gold_vip_text_color">#ffe2c283</color>
+</resources>

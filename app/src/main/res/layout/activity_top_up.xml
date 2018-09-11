@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="15dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                style="@style/layout_horizontal"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    style="@style/layout_vertical"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="充值账号：" />
+
+                    <TextView
+                        android:id="@+id/id_tv_client_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="13177008851" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    style="@style/layout_vertical"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="姓名：" />
+
+                    <TextView
+                        android:id="@+id/id_tv_client_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="gyymz1993" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <TextView
+                style="@style/layout_horizontal"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_contact_away"
+                android:gravity="center"
+                android:text="其他账号" />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/id_recyvleview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp" />
+
+        <TextView
+            android:id="@+id/id_tv_buy"
+            android:layout_width="match_parent"
+            android:layout_height="45dip"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="55dp"
+            android:background="@drawable/login_code_shape"
+            android:enabled="true"
+            android:gravity="center"
+            android:text="确定购买"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+</android.support.constraint.ConstraintLayout>

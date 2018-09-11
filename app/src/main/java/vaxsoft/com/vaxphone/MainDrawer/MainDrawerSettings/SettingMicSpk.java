@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
-import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.MainTab.MainTabActivity;
+import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.VaxPhoneSIP;
 import vaxsoft.com.vaxphone.VaxStorage.Store.StoreSettings.StoreSpkMic;
 

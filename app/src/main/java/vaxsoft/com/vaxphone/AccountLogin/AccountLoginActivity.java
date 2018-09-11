@@ -1,18 +1,15 @@
 package vaxsoft.com.vaxphone.AccountLogin;
 
 import android.Manifest;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,10 +18,9 @@ import android.widget.TextView;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import vaxsoft.com.vaxphone.MainAPP.VaxPhoneAPP;
-import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.MainTab.MainTabActivity;
 import vaxsoft.com.vaxphone.MainUtil.DialogUtil;
+import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.VaxPhoneSIP;
 
 public class AccountLoginActivity extends AppCompatActivity
@@ -82,7 +78,7 @@ public class AccountLoginActivity extends AppCompatActivity
         StringBuilder ServerPort = new StringBuilder();
         AtomicBoolean RegistrationSIP = new AtomicBoolean();
 
-        VaxPhoneSIP.m_objVaxVoIP.GetLoginInfo(Username, DisplayName, AuthLogin, AuthPassword, DoaminRealm, ServerIP, ServerPort, RegistrationSIP);
+        VaxPhoneSIP.GetLoginInfo(Username, DisplayName, AuthLogin, AuthPassword, DoaminRealm, ServerIP, ServerPort, RegistrationSIP);
 
         String sUsername = Username.toString();
         String sDisplayName = DisplayName.toString();
@@ -93,8 +89,8 @@ public class AccountLoginActivity extends AppCompatActivity
         String sServerPort = ServerPort.toString();
         boolean bRegistrationSIP = RegistrationSIP.get();
 
-       // EditTextUsername.setText(AuthLogin);
-       // EditTextPassword.setText(sPassword);
+        EditTextUsername.setText(AuthLogin);
+        EditTextPassword.setText(sPassword);
 
         String sServerAddr = "";
 
@@ -106,10 +102,10 @@ public class AccountLoginActivity extends AppCompatActivity
             sServerAddr = sServerIP + ":" + sServerPort;
         }
 
-        //EditTextServerAddr.setText(sServerAddr);
+        EditTextServerAddr.setText(sServerAddr);
         SwitchRegistrationSIP.setChecked(bRegistrationSIP);
 
-        if(VaxPhoneSIP.m_objVaxVoIP.IsOnline())
+        if(VaxPhoneSIP.IsOnline())
         {
             BtnLogin.setText("LOG OUT");
         }
@@ -143,7 +139,7 @@ public class AccountLoginActivity extends AppCompatActivity
         if (!UpdateLogInInfo())
             return;
 
-        if(VaxPhoneSIP.m_objVaxVoIP.IsOnline())
+        if(VaxPhoneSIP.IsOnline())
         {
             StopOpenMainTabWithDelay();
 
@@ -170,7 +166,7 @@ public class AccountLoginActivity extends AppCompatActivity
         StringBuilder ServerPort = new StringBuilder();
         AtomicBoolean RegistrationSIP = new AtomicBoolean();
 
-        VaxPhoneSIP.m_objVaxVoIP.GetLoginInfo(Username, DisplayName, AuthLogin, AuthPassword, DomainRealm, ServerIP, ServerPort, RegistrationSIP);
+        VaxPhoneSIP.GetLoginInfo(Username, DisplayName, AuthLogin, AuthPassword, DomainRealm, ServerIP, ServerPort, RegistrationSIP);
 
         String sUsername = Username.toString();
         String sDisplayName = DisplayName.toString();
@@ -181,7 +177,9 @@ public class AccountLoginActivity extends AppCompatActivity
         int nServerPort = Integer.parseInt(ServerPort.toString());
         boolean bRegistrationSIP = RegistrationSIP.get();
 
-        if(!VaxPhoneSIP.m_objVaxVoIP.Initialize(sDisplayName, sUsername, sAuthLogin, sAuthPassword, sDomainRealm, sServerIP, nServerPort, bRegistrationSIP, this))
+        VaxPhoneSIP.m_objVaxVoIP.SetLicenceKey("TRIAL-LICENSE-KEY", this);
+
+        if(!VaxPhoneSIP.m_objVaxVoIP.Initialize(sDisplayName, sUsername, sAuthLogin, sAuthPassword, sDomainRealm, sServerIP, nServerPort, bRegistrationSIP))
             return false;
 
         if(!bRegistrationSIP)
@@ -197,10 +195,10 @@ public class AccountLoginActivity extends AppCompatActivity
         long nDateTime = System.currentTimeMillis();
         String sDateTime = String.valueOf(nDateTime);
 
-        //EditTextUsername.setText(sDateTime);
-       // EditTextPassword.setText(sDateTime);
+        EditTextUsername.setText(sDateTime);
+        EditTextPassword.setText(sDateTime);
 
-       // EditTextServerAddr.setText("demo.vaxvoip.com:8891");
+        EditTextServerAddr.setText("demo.vaxvoip.com:8891");
 
         SwitchRegistrationSIP.setEnabled(true);
     }
@@ -237,7 +235,7 @@ public class AccountLoginActivity extends AppCompatActivity
         StringBuilder DisplayName = new StringBuilder();
         StringBuilder DomainRealm = new StringBuilder();
 
-        VaxPhoneSIP.m_objVaxVoIP.GetLoginInfo(Username, DisplayName, AuthLogin, null, DomainRealm, null, null, null);
+        VaxPhoneSIP.GetLoginInfo(Username, DisplayName, AuthLogin, null, DomainRealm, null, null, null);
 
         String sServerIP;
         String sServerPort;
@@ -271,7 +269,7 @@ public class AccountLoginActivity extends AppCompatActivity
 
         String sAuthPwd = EditTextPassword.getText().toString();
 
-        VaxPhoneSIP.m_objVaxVoIP.SetLoginInfo(Username.toString(), DisplayName.toString(), sAuthLogin, sAuthPwd, DomainRealm.toString(), sServerIP, sServerPort, bRegistrationSIP);
+        VaxPhoneSIP.SetLoginInfo(Username.toString(), DisplayName.toString(), sAuthLogin, sAuthPwd, DomainRealm.toString(), sServerIP, sServerPort, bRegistrationSIP);
         return true;
     }
 

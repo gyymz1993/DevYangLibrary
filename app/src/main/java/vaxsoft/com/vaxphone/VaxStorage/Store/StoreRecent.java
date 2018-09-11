@@ -1,7 +1,5 @@
 package vaxsoft.com.vaxphone.VaxStorage.Store;
 
-import android.widget.ArrayAdapter;
-
 import java.util.ArrayList;
 
 import vaxsoft.com.vaxphone.VaxStorage.Database.DataSQL;

@@ -31,13 +31,15 @@ public class AccountLoginActivity extends AppCompatActivity
 {
     private static AccountLoginActivity mLoginActivity = null;
     private static String m_sLastStatusText = "Account is offline";
-
     private final int ID_REQUEST_READ_CONTACTS = 1000;
-
     EditText EditTextUsername, EditTextPassword, EditTextServerAddr;
     Switch SwitchRegistrationSIP;
     TextView TextViewStatus;
     Button BtnLogin;
+
+    protected static String sAuthLogin = "119001";
+    protected static String sAuthPwd = "whgyw@2018";
+    protected static String sServerAddr = "59.175.150.29:5060";
 
     private Handler mDelayHandler = null;
 
@@ -217,8 +219,8 @@ public class AccountLoginActivity extends AppCompatActivity
 
     private boolean UpdateLogInInfo()
     {
-        String sAuthLogin = EditTextUsername.getText().toString();
-        String sServerAddr = EditTextServerAddr.getText().toString();
+       // String sAuthLogin = EditTextUsername.getText().toString();
+        //String sServerAddr = EditTextServerAddr.getText().toString();
 
         if (sAuthLogin.length() <= 0)
         {
@@ -269,7 +271,7 @@ public class AccountLoginActivity extends AppCompatActivity
             DomainRealm.append(sServerIP);
         }
 
-        String sAuthPwd = EditTextPassword.getText().toString();
+       // String sAuthPwd = EditTextPassword.getText().toString();
 
         VaxPhoneSIP.m_objVaxVoIP.SetLoginInfo(Username.toString(), DisplayName.toString(), sAuthLogin, sAuthPwd, DomainRealm.toString(), sServerIP, sServerPort, bRegistrationSIP);
         return true;

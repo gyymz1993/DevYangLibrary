@@ -7,7 +7,6 @@ import android.media.AudioTrack;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 
 class MediaSpk extends Thread
 {

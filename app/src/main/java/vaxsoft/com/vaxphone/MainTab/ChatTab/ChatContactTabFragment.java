@@ -19,10 +19,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import vaxsoft.com.vaxphone.CustomViews.TabFragment.CustomTabFragment;
-import vaxsoft.com.vaxphone.PhoneSIP.Contacts.Contacts;
-import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.MainTab.MainTabActivity;
 import vaxsoft.com.vaxphone.MainUtil.PreferenceUtil;
+import vaxsoft.com.vaxphone.PhoneSIP.Contacts.Contacts;
+import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.VaxPhoneSIP;
 
 public class ChatContactTabFragment extends CustomTabFragment
@@ -249,7 +249,7 @@ public class ChatContactTabFragment extends CustomTabFragment
         }
         else
         {
-            Log.w("Main MainActivity", "Error Result");
+            Log.w("Main Activity", "Error Result");
         }
     }
 
@@ -316,13 +316,9 @@ public class ChatContactTabFragment extends CustomTabFragment
     public static void SetMissedCount(int nValue)
     {
         if(nValue == 0)
-        {
             m_nChatContactMissedCount = 0;
-        }
         else
-        {
             m_nChatContactMissedCount++;
-        }
 
         MainTabActivity.SetChatContactBadgeCount(m_nChatContactMissedCount);
         StoreMissedCount();
@@ -333,7 +329,7 @@ public class ChatContactTabFragment extends CustomTabFragment
         PreferenceUtil.WritePreferenceValue(CHAT_CONTACT_MISSED_COUNT_KEY, m_nChatContactMissedCount);
     }
 
-    private static int ReadMissedCount()
+    public static int ReadMissedCount()
     {
         return PreferenceUtil.ReadPreferenceValue(CHAT_CONTACT_MISSED_COUNT_KEY, 0);
     }
@@ -344,16 +340,12 @@ public class ChatContactTabFragment extends CustomTabFragment
     public static void PostChatContactAdded()
     {
         if (mChatContactFragment != null)
-        {
             mChatContactFragment.UpdateUI();
-        }
     }
 
     public static void PostChatContactDeleted()
     {
         if (mChatContactFragment != null)
-        {
             mChatContactFragment.UpdateUI();
-        }
     }
 }

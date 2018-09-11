@@ -9,7 +9,7 @@ public class StoreCryptTunnel
     private final String TUNNEL_ENABLE = "VaxCryptTunnelEnable";
 
     private String TUNNEL_IP_DEFAULT_VALUE = "";
-    private String TUNNEL_PORT_DEFAULT_VALUE = "";
+    private String TUNNEL_PORT_DEFAULT_VALUE = "8891";
     private boolean TUNNEL_ENABLE_DEFAULT_VALUE = false;
 
     //////////////////////////////////////////////////////////////////////////////////////////////

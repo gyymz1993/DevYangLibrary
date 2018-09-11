@@ -21,12 +21,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import vaxsoft.com.vaxphone.AccountLogin.AccountLoginActivity;
+import vaxsoft.com.vaxphone.MainDrawer.MainDrawerSettings.SettingsFragment;
 import vaxsoft.com.vaxphone.MainDrawer.MainDrawerStatus.StatusAdapter;
 import vaxsoft.com.vaxphone.MainDrawer.MainDrawerStatus.StatusData;
-import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.MainTab.MainTabActivity;
-import vaxsoft.com.vaxphone.MainDrawer.MainDrawerSettings.SettingsFragment;
 import vaxsoft.com.vaxphone.MainUtil.DialogUtil;
+import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.VaxPhoneSIP;
 
 public class MainDrawerMenu implements NavigationView.OnNavigationItemSelectedListener
@@ -186,11 +186,11 @@ public class MainDrawerMenu implements NavigationView.OnNavigationItemSelectedLi
     {
         final ArrayList<StatusData> StatusList = new ArrayList<>();
 
-        StatusList.add(new StatusData("Online",R.drawable.ic_contact_online));
-        StatusList.add(new StatusData("Offline",R.drawable.ic_contact_offline));
-        StatusList.add(new StatusData("Away",R.drawable.ic_contact_away));
-        StatusList.add(new StatusData("On Phone",R.drawable.ic_contact_on_phone));
-        StatusList.add(new StatusData("Busy",R.drawable.ic_contact_busy));
+        StatusList.add(new StatusData("Online", R.drawable.ic_contact_online));
+        StatusList.add(new StatusData("Offline", R.drawable.ic_contact_offline));
+        StatusList.add(new StatusData("Away", R.drawable.ic_contact_away));
+        StatusList.add(new StatusData("On Phone", R.drawable.ic_contact_on_phone));
+        StatusList.add(new StatusData("Busy", R.drawable.ic_contact_busy));
 
         final StatusAdapter objStatusAdapter = new StatusAdapter(mMainTabActivity, R.layout.spinner_row, R.id.txt,StatusList);
         mSpinnerStatus.setAdapter(objStatusAdapter);

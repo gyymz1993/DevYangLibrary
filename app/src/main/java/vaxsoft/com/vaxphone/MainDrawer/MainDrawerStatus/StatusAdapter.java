@@ -2,7 +2,6 @@ package vaxsoft.com.vaxphone.MainDrawer.MainDrawerStatus;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;

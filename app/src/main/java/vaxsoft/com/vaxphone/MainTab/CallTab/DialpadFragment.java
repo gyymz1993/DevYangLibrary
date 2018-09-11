@@ -1,22 +1,19 @@
 package vaxsoft.com.vaxphone.MainTab.CallTab;
 
 import android.Manifest;
-import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.AppCompatImageView;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatImageView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.util.Objects;
 
 import vaxsoft.com.vaxphone.PhoneSIP.Contacts.Contacts;
 import vaxsoft.com.vaxphone.R;
@@ -27,19 +24,19 @@ import static android.app.Activity.RESULT_OK;
 
 public class DialpadFragment extends Fragment
 {
-    public TextView TextViewStatus;
-    public TextView ToolbarTitle;
-    public EditText EditText_DialNo;
+    TextView TextViewStatus;
+    TextView ToolbarTitle;
+    EditText EditText_DialNo;
 
-    public LinearLayout Dialpad_No1, Dialpad_No2, Dialpad_No3, Dialpad_No4, Dialpad_No5, Dialpad_No6,
+    LinearLayout Dialpad_No1, Dialpad_No2, Dialpad_No3, Dialpad_No4, Dialpad_No5, Dialpad_No6,
                  Dialpad_No7, Dialpad_No8, Dialpad_No9, Dialpad_Delete, Dialpad_Hold, Dialpad_Contacts,
                  Dialpad_Star, Dialpad_No0, Dialpad_Hash, Dialpad_Dial;
 
-    public AppCompatImageView DialIcon;
+    AppCompatImageView DialIcon;
 
-    public TextView DialBtnText;
+    TextView DialBtnText;
 
-    public Contacts m_objContacts = null;
+    Contacts m_objContacts = null;
 
     public static DialpadFragment mDialpadFragment = null;
     private static String m_sLastStatusText = "Account is online";
@@ -131,6 +128,7 @@ public class DialpadFragment extends Fragment
         Dialpad_No7.setOnClickListener(new OnClickListenerEx("7"));
         Dialpad_No8.setOnClickListener(new OnClickListenerEx("8"));
         Dialpad_No9.setOnClickListener(new OnClickListenerEx("9"));
+
         Dialpad_Star.setOnClickListener(new OnClickListenerEx("*"));
         Dialpad_Hash.setOnClickListener(new OnClickListenerEx("#"));
 

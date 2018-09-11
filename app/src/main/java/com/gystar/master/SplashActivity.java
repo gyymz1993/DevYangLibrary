@@ -8,14 +8,20 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.gystar.master.MainUI.Login.LoginActivity;
+import com.gystar.master.MainUI.full.FuliActivity;
+import com.gystar.master.MainUI.main.MainTabActivity;
+
 import vaxsoft.com.vaxphone.R;
+import vaxsoft.com.vaxphone.VaxPhoneSIP;
 
 public class SplashActivity extends AppCompatActivity {
+
     private Handler mHandler;
     private Runnable intoAppRunnable = new Runnable() {
         @Override
         public void run() {
-            Intent intent = new Intent(getApplicationContext(), GyStarActivity.class);
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
             finish();
         }
@@ -25,6 +31,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gysplash);
+        VaxPhoneSIP.StartService();
         mHandler = new Handler();
         hideBottomUIMenu();
         mHandler.postDelayed(intoAppRunnable, 2000);
@@ -44,5 +51,6 @@ public class SplashActivity extends AppCompatActivity {
             decorView.setSystemUiVisibility(uiOptions);
         }
     }
+
 
 }

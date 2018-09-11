@@ -2,7 +2,6 @@ package VaxVoIP.VaxUserAgentLib.VaxUserAgentSIP.Runnable;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 public class VaxRunnable
 {

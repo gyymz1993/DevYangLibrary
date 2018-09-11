@@ -106,7 +106,7 @@ public class StoreChatContact
         return VAX_CHAT_CONTACT_STATUS_UNKNOWN;
     }
 
-    public void UpdateMissedCount(String m_sContactName, long m_nMissedCount)
+    public void UpdateMissedCount(String sContactName, long nMissedCount)
     {
 
     }

@@ -5,8 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import VaxVoIP.VaxUserAgentLib.VaxUserAgentLib;
 import vaxsoft.com.vaxphone.R;
-import vaxsoft.com.vaxphone.VaxPhoneSIP;
 
 public class RecentRowViewHolder extends RecyclerView.ViewHolder
 {
@@ -37,16 +37,16 @@ public class RecentRowViewHolder extends RecyclerView.ViewHolder
 
     private int GetCallIcon(long nHistoryTypeId)
     {
-        if (nHistoryTypeId == VaxPhoneSIP.VAX_CALL_HISTORY_TYPE_INBOUND)
+        if (nHistoryTypeId == VaxUserAgentLib.VAX_CALL_HISTORY_TYPE_INBOUND)
             return R.drawable.ic_call_received;
 
-        else if (nHistoryTypeId == VaxPhoneSIP.VAX_CALL_HISTORY_TYPE_MISSED)
+        else if (nHistoryTypeId == VaxUserAgentLib.VAX_CALL_HISTORY_TYPE_MISSED)
             return R.drawable.ic_call_missed;
 
-        else if (nHistoryTypeId == VaxPhoneSIP.VAX_CALL_HISTORY_TYPE_REJECTED)
+        else if (nHistoryTypeId == VaxUserAgentLib.VAX_CALL_HISTORY_TYPE_REJECTED)
             return R.drawable.ic_call_received;
 
-        else if (nHistoryTypeId == VaxPhoneSIP.VAX_CALL_HISTORY_TYPE_OUTBOUND)
+        else if (nHistoryTypeId == VaxUserAgentLib.VAX_CALL_HISTORY_TYPE_OUTBOUND)
             return R.drawable.ic_call_made;
 
         return R.drawable.ic_call_made;

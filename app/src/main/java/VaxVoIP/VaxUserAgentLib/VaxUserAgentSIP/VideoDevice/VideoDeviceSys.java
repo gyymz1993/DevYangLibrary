@@ -15,7 +15,6 @@ import android.media.Image;
 import android.media.ImageReader;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 
 import java.nio.ByteBuffer;
 import java.util.Collections;
@@ -379,6 +378,7 @@ class VideoDeviceSys extends VideoDeviceSO
     private String[] GetDeviceIdList()
     {
         String[] aDeviceList = null;
+
         try
         {
             CameraManager objCamMgr = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);

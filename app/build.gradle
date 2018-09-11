@@ -5,7 +5,7 @@ android {
     buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "vaxsoft.com.vaxphone"
-       // applicationId "gystart.com.master"
+        // applicationId "gystart.com.master"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
@@ -17,7 +17,22 @@ android {
                 cppFlags "-fexceptions"
             }
         }
+
+        /*防止x5浏览器 在x64位机器上不能使用*/
+        ndk {
+            abiFilters "arm64-v8a", "armeabi-v7a", "x86_64"
+        }
     }
+
+//    signingConfigs {
+//        config {
+//            keyAlias 'yangshaoapp'
+//            keyPassword 'android123'
+//            storeFile file('yangshaoapp')
+//            storePassword 'android123'
+//        }
+//    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -27,19 +42,29 @@ android {
 
     sourceSets {
         main {
-            // let gradle pack the shared library into apk
             jniLibs.srcDirs = ['libs//VaxUserAgentLib/']
         }
     }
 
-    splits {
-        abi {
-            enable true
-            reset()
-            include 'x86', 'armeabi-v7a'
-            universalApk true
-        }
-    }
+//    splits {
+//        abi {
+//            enable true
+//            reset()
+//            include 'x86', 'armeabi-v7a'
+//            universalApk true
+//        }
+//    }
+
+    /*
+    * enable： 启用ABI拆分机制
+    exclude： 默认情况下所有ABI都包括在内，你可以移除一些ABI。
+    include：指明要包含哪些ABI
+    reset()：重置ABI列表为只包含一个空字符串（这可以实现，在与include一起使用来可以表示要使用哪一个ABI，而不是要忽略哪一些ABI）
+    universalApk：指示是否打包一个通用版本（包含所有的ABI）。默认值为 false。
+    * */
+
+
+
     dexOptions {
         incremental true
     }
@@ -47,6 +72,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+//    lintOptions {
+//        checkReleaseBuilds false
+//        abortOnError false
+//    }
+
 }
 
 dependencies {
@@ -63,4 +94,15 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation 'com.just.agentwebX5:agentwebX5:2.0.0'
     implementation files('libs/tbs_sdk_thirdapp_v3.6.0.1183_43604_sharewithdownload_withoutGame_obfs_20180211_105126.jar')
+    //implementation project(':paylibrary')
+    implementation project(':DevYangLibrary')
+    implementation project(':libPay')
+    implementation project(':UILibrary')
+   // implementation project(':baselibrary')
+
+    /*没有这句会爆出空*/
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-6'
+    compile 'com.github.gyymz1993:refreshlibrary:v1.0.0'
+    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
 }

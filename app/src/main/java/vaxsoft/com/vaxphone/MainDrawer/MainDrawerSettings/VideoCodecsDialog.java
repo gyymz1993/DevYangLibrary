@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
+import VaxVoIP.VaxUserAgentLib.VaxUserAgentLib;
 import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.VaxPhoneSIP;
 import vaxsoft.com.vaxphone.VaxStorage.Store.StoreSettings.StoreVideoCodecs;
@@ -61,14 +62,14 @@ public class VideoCodecsDialog extends DialogFragment
         if (m_aVideoCodecs == null)
             m_aVideoCodecs = GetCheckedItem();
 
-        if (nSelectedCodec == VaxPhoneSIP.VAX_CODEC_VP8)
-            m_aVideoCodecs[VaxPhoneSIP.VAX_CODEC_VP8] = bChecked;
+        if (nSelectedCodec == VaxUserAgentLib.VAX_CODEC_VP8)
+            m_aVideoCodecs[VaxUserAgentLib.VAX_CODEC_VP8] = bChecked;
 
-        else if (nSelectedCodec == VaxPhoneSIP.VAX_CODEC_H263)
-            m_aVideoCodecs[VaxPhoneSIP.VAX_CODEC_H263] = bChecked;
+        else if (nSelectedCodec == VaxUserAgentLib.VAX_CODEC_H263)
+            m_aVideoCodecs[VaxUserAgentLib.VAX_CODEC_H263] = bChecked;
 
-        else if (nSelectedCodec == VaxPhoneSIP.VAX_CODEC_H263P)
-            m_aVideoCodecs[VaxPhoneSIP.VAX_CODEC_H263P] = bChecked;
+        else if (nSelectedCodec == VaxUserAgentLib.VAX_CODEC_H263P)
+            m_aVideoCodecs[VaxUserAgentLib.VAX_CODEC_H263P] = bChecked;
     }
 
     private void OnClickOKButton()
@@ -79,7 +80,7 @@ public class VideoCodecsDialog extends DialogFragment
         StoreVideoCodecs objStoreCodecs = new StoreVideoCodecs();
         objStoreCodecs.SetVideoCodecs(m_aVideoCodecs);
 
-        for(int nCount = 0; nCount < VaxPhoneSIP.VAX_VIDEO_CODEC_TOTAL; nCount++)
+        for(int nCount = 0; nCount < VaxUserAgentLib.VAX_VIDEO_CODEC_TOTAL; nCount++)
         {
             int nCodecNo = nCount;
             boolean bEnabled = m_aVideoCodecs[nCount];
@@ -96,7 +97,7 @@ public class VideoCodecsDialog extends DialogFragment
 
     private boolean[] GetCheckedItem()
     {
-        boolean[] aVideoCodecs = new boolean[VaxPhoneSIP.VAX_VIDEO_CODEC_TOTAL];
+        boolean[] aVideoCodecs = new boolean[VaxUserAgentLib.VAX_VIDEO_CODEC_TOTAL];
 
         StoreVideoCodecs objStoreCodecs = new StoreVideoCodecs();
         objStoreCodecs.GetVideoCodecs(aVideoCodecs);
@@ -116,14 +117,14 @@ public class VideoCodecsDialog extends DialogFragment
 
     public static void ApplyVideoCodec()
     {
-        boolean[] aVideoCodecs = new boolean[VaxPhoneSIP.VAX_VIDEO_CODEC_TOTAL];
+        boolean[] aVideoCodecs = new boolean[VaxUserAgentLib.VAX_VIDEO_CODEC_TOTAL];
 
         StoreVideoCodecs objStoreCodecs = new StoreVideoCodecs();
         objStoreCodecs.GetVideoCodecs(aVideoCodecs);
 
         VaxPhoneSIP.m_objVaxVoIP.DeselectAllVideoCodec();
 
-        for(int nCount = 0; nCount < VaxPhoneSIP.VAX_VIDEO_CODEC_TOTAL; nCount++)
+        for(int nCount = 0; nCount < VaxUserAgentLib.VAX_VIDEO_CODEC_TOTAL; nCount++)
         {
             int nCodecNo = nCount;
             boolean bEnabled = aVideoCodecs[nCount];

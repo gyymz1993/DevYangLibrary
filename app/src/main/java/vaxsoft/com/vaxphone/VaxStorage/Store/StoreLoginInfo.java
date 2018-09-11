@@ -14,6 +14,8 @@ public class StoreLoginInfo
     private final String SERVER_IP = "VaxStoreLoginInfo_Server_IP";
     private final String SERVER_PORT = "VaxStoreLoginInfo_Server_Port";
     private final String SIP_REGISTRATION = "VaxStoreLoginInfo_Registration_SIP";
+    private final String LOGIN_STATUS = "VaxStoreLoginInfo_Login_Status";
+    private final String LICENCE_KEY = "VaxStoreLoginInfo_Licence_Key";
 
     private String USERNAME_DEFAULT_VALUE = "";
     private String DISPLAY_NAME_DEFAULT_VALUE = "";
@@ -23,6 +25,8 @@ public class StoreLoginInfo
     private String SERVER_IP_DEFAULT_VALUE = "";
     private String SERVER_PORT_DEFAULT_VALUE = "5060";
     private boolean SIP_REGISTRATION_DEFAULT_VALUE = true;
+    private boolean LOGIN_STATUS_DEFAULT_VALUE = false;
+    private String LICENCE_KEY_DEFAULT_VALUE = "TRIAL-LICENSE-KEY";
 
     //////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -83,4 +87,28 @@ public class StoreLoginInfo
 
     //////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void SetLoginStatus(boolean bOnline)
+    {
+        PreferenceUtil.WritePreferenceValue(LOGIN_STATUS, bOnline);
+    }
+
+    public boolean GetLoginStatus()
+    {
+        return PreferenceUtil.ReadPreferenceValue(LOGIN_STATUS, LOGIN_STATUS_DEFAULT_VALUE);
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void SetLicenceKey(String sKey)
+    {
+        PreferenceUtil.WritePreferenceValue(LICENCE_KEY, sKey);
+    }
+
+    public String GetLicenceKey()
+    {
+        return PreferenceUtil.ReadPreferenceValue(LICENCE_KEY, LICENCE_KEY_DEFAULT_VALUE);
+    }
+
 }

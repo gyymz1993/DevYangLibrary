@@ -84,31 +84,29 @@ public class Contacts
 
     public String GetContactDetailsByNumber(String sPhoneNo, StringBuilder sContactId)
     {
-        Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(sPhoneNo));
 
+        Cursor contactLookup = null;
         String sName = "";
-
-        ContentResolver contentResolver = VaxPhoneAPP.getAppContext().getContentResolver();
-        Cursor contactLookup = contentResolver.query(uri, new String[] {BaseColumns._ID, ContactsContract.PhoneLookup.DISPLAY_NAME }, null, null, null);
-
         try
         {
+            Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(sPhoneNo));
+            ContentResolver contentResolver = VaxPhoneAPP.getAppContext().getContentResolver();
+            contactLookup = contentResolver.query(uri, new String[] {BaseColumns._ID, ContactsContract.PhoneLookup.DISPLAY_NAME }, null, null, null);
             if (contactLookup != null && contactLookup.getCount() > 0)
             {
                 contactLookup.moveToNext();
                 sName = contactLookup.getString(contactLookup.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
                 sContactId.append(contactLookup.getString(contactLookup.getColumnIndex(BaseColumns._ID)));
             }
-        }
+        }catch (Exception e){
 
-        finally
+        }  finally
         {
             if (contactLookup != null)
             {
                 contactLookup.close();
             }
         }
-
         return sName;
     }
 }

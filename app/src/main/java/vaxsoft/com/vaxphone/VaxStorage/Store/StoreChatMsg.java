@@ -1,7 +1,5 @@
 package vaxsoft.com.vaxphone.VaxStorage.Store;
 
-import android.inputmethodservice.Keyboard;
-
 import java.util.ArrayList;
 
 import vaxsoft.com.vaxphone.VaxStorage.Database.DataSQL;

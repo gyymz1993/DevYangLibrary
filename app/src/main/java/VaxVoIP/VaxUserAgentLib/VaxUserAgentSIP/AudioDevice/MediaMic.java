@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 
 class MediaMic extends Thread
 {

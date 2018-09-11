@@ -8,15 +8,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.Chronometer;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.gystar.master.fragment.CallingFragment;
-import com.gystar.master.fragment.DialpadFragment;
+import com.gystar.master.MainUI.fragment.CallingFragment;
+import com.gystar.master.MainUI.fragment.DialpadFragment;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -44,7 +43,9 @@ public class CallActivity extends AppCompatActivity {
         instance = this;
         setContentView(R.layout.gy_activity_call_dialpad);
         tv_time_count = findViewById(R.id.tv_time_count);
-        BtnLogIn();
+        if (!VaxPhoneSIP.IsOnline()) {
+            BtnLogIn();
+        }
         //步骤一：添加一个FragmentTransaction的实例
         FragmentManager fragmentManager = getFragmentManager();
         //beginTransaction()
@@ -99,11 +100,15 @@ public class CallActivity extends AppCompatActivity {
 
 
     public static void onStartTimeCount() {
-        CallingFragment.mCallFragment.onStartTimeCount();
+        if (CallingFragment.mCallFragment != null) {
+            CallingFragment.mCallFragment.onStartTimeCount();
+        }
     }
 
     public static void onStopTimeCount() {
-        CallingFragment.mCallFragment.onStopTimeCount();
+        if (CallingFragment.mCallFragment != null) {
+            CallingFragment.mCallFragment.onStopTimeCount();
+        }
     }
 
 
@@ -116,7 +121,6 @@ public class CallActivity extends AppCompatActivity {
 
     private void onClickDialButton() {
         boolean bIsLineBusy = VaxPhoneSIP.m_objVaxVoIP.IsLineConnected();
-        //   OnClickBtnCall();
     }
 
     /**
@@ -140,6 +144,10 @@ public class CallActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
 
     private boolean Initialize() {
         StringBuilder Username = new StringBuilder();
@@ -159,8 +167,10 @@ public class CallActivity extends AppCompatActivity {
         String sServerIP = ServerIP.toString();
         int nServerPort = Integer.parseInt(ServerPort.toString());
         boolean bRegistrationSIP = RegistrationSIP.get();
-        if (!VaxPhoneSIP.m_objVaxVoIP.Initialize(sDisplayName, sUsername, sAuthLogin, sAuthPassword, sDomainRealm, sServerIP, nServerPort, bRegistrationSIP, this))
+
+        if (!VaxPhoneSIP.m_objVaxVoIP.Initialize(sDisplayName, sUsername, sAuthLogin, sAuthPassword, sDomainRealm, sServerIP, nServerPort, bRegistrationSIP)) {
             return false;
+        }
         if (!bRegistrationSIP) {
             onClickDialButton();
         }
@@ -169,8 +179,6 @@ public class CallActivity extends AppCompatActivity {
 
 
     private boolean UpdateLogInInfo() {
-        // String sAuthLogin = "106001";
-        // String sServerAddr = "120.79.114.71:5060";
         if (sAuthLogin.length() <= 0) {
             DialogUtil.ShowDialog(this, "Please enter Auth Login");
             return false;
@@ -203,22 +211,14 @@ public class CallActivity extends AppCompatActivity {
             DomainRealm.setLength(0);
             DomainRealm.append(sServerIP);
         }
-        // String sAuthPwd = "bbw@2018";
         VaxPhoneSIP.m_objVaxVoIP.SetLoginInfo(Username.toString(), DisplayName.toString(), sAuthLogin, sAuthPwd, DomainRealm.toString(), sServerIP, sServerPort, bRegistrationSIP);
         return true;
     }
 
 
-    public void OnDialpadClosed() {
-        CallingFragment.mCallFragment = null;
-        DialpadFragment.mDialpadFragment = null;
-        OnClickBtnCallEnd();
-    }
-
     @Override
     public void onDestroy() {
-        OnDialpadClosed();
-        Log.e("TAG","onDestroy");
+        OnClickBtnCallEnd();
         super.onDestroy();
     }
 

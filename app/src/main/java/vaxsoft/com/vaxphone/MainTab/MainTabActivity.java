@@ -1,31 +1,30 @@
 package vaxsoft.com.vaxphone.MainTab;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import vaxsoft.com.vaxphone.MainAPP.VaxPhoneAPP;
 import vaxsoft.com.vaxphone.MainDrawer.MainDrawerMenu;
 import vaxsoft.com.vaxphone.MainTab.CallTab.CallTabFragment;
 import vaxsoft.com.vaxphone.MainTab.ChatTab.ChatContactTabFragment;
-import vaxsoft.com.vaxphone.MainUtil.DialogUtil;
-import vaxsoft.com.vaxphone.MainUtil.IncomingCallDialog;
-import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.MainTab.RecentTab.RecentTabFragment;
+import vaxsoft.com.vaxphone.R;
+import vaxsoft.com.vaxphone.VaxPhoneSIP;
 
 public class MainTabActivity extends AppCompatActivity
 {
@@ -44,13 +43,14 @@ public class MainTabActivity extends AppCompatActivity
     private Fragment[] m_aFragTabs;
     private ActionBar mActionBar;
 
-    private IncomingCallDialog m_objIncomingCallDialog = null;
     private MainDrawerMenu m_objMainDrawerMenu = null;
 
     private static int m_nSelectedTabId = CALL_FRAGMENT_TAB_ID;
 
     @SuppressLint("StaticFieldLeak")
     private static MainTabActivity mMainTab = null;
+
+    int m_nSelectedTabIndex = -1;
 
     /////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////
@@ -60,6 +60,15 @@ public class MainTabActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vaxphone_tabbed);
+
+        Intent objIntent = getIntent();
+        if (objIntent != null)
+        {
+            Bundle objBundle = objIntent.getExtras();
+
+            if (objBundle != null)
+                m_nSelectedTabIndex = objBundle.getInt("SelectedTab", -1);
+        }
 
         mMainTab = this;
 
@@ -79,7 +88,10 @@ public class MainTabActivity extends AppCompatActivity
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         ActivateTabSelectedListener();
-        mViewPager.setCurrentItem(CALL_FRAGMENT_TAB_ID);
+
+        m_nSelectedTabIndex = ((m_nSelectedTabIndex == -1) ? CALL_FRAGMENT_TAB_ID : m_nSelectedTabIndex);
+        mViewPager.setCurrentItem(m_nSelectedTabIndex);
+
         mTabLayout.setupWithViewPager(mViewPager);
 
         AdjustTabLayout();
@@ -90,6 +102,11 @@ public class MainTabActivity extends AppCompatActivity
         mViewPager = findViewById(R.id.container);
         mTabLayout = findViewById(R.id.tabs);
         mToolbar = findViewById(R.id.toolbar);
+    }
+
+    static public Boolean IsAvailableUI()
+    {
+        return (mMainTab != null);
     }
 
     private void AdjustTabLayout()
@@ -111,8 +128,8 @@ public class MainTabActivity extends AppCompatActivity
 
                     TabIcon.setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
 
-                     if (nTabId == CALL_FRAGMENT_TAB_ID )
-                        TabIcon.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+                    if (nTabId == m_nSelectedTabIndex)
+                        UpdateTabIcon(true, objTab, nTabId);
                 }
             }
         });
@@ -173,10 +190,8 @@ public class MainTabActivity extends AppCompatActivity
                 int nPosition = tab.getPosition();
                 OnTabSelected(nPosition);
 
-                if (tab.getIcon() != null)
-                    tab.getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+                UpdateTabIcon(true, tab, nPosition);
             }
-
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab)
@@ -184,8 +199,7 @@ public class MainTabActivity extends AppCompatActivity
                 int nPosition = tab.getPosition();
                 OnTabUnSelected(nPosition);
 
-                if (tab.getIcon() != null)
-                   tab.getIcon().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
+                UpdateTabIcon(false, tab, nPosition);
             }
         });
     }
@@ -255,6 +269,52 @@ public class MainTabActivity extends AppCompatActivity
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
+    public void UpdateTabIcon(boolean bSelected, TabLayout.Tab tab, int nPosition)
+    {
+        View CustomView = tab.getCustomView();
+        if (CustomView != null)
+        {
+            if (nPosition == RECENT_FRAGMENT_TAB_ID)
+            {
+                ImageView ImageView = CustomView.findViewById(R.id.TabRecentIcon);
+
+                if (bSelected)
+                    ImageView.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+                else
+                    ImageView.setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
+            }
+
+            if (nPosition == CHAT_FRAGMENT_TAB_ID)
+            {
+                ImageView ImageView = CustomView.findViewById(R.id.TabChatIcon);
+
+                if (bSelected)
+                    ImageView.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+                else
+                    ImageView.setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
+            }
+        }
+        else
+        {
+            Drawable Icon = tab.getIcon();
+
+            if (Icon == null)
+                return;
+
+            int nColor;
+
+            if (bSelected)
+                nColor = Color.WHITE;
+            else
+                nColor = getResources().getColor(R.color.colorAccent);
+
+            Icon.setColorFilter(nColor, PorterDuff.Mode.SRC_IN);
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
     private void SetActionBarTitle(String sTitle)
     {
         if (mActionBar != null)
@@ -310,38 +370,6 @@ public class MainTabActivity extends AppCompatActivity
             }
             return 0;
         }
-    }
-
-    ///////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////
-
-    public static void PostIncomingCall(String sCallerName, String sCallerId)
-    {
-        if (mMainTab != null)
-            mMainTab.OnIncomingCall(sCallerName, sCallerId);
-    }
-
-    private void OnIncomingCall(String sCallerName, String sCallerId)
-    {
-        m_objIncomingCallDialog = new IncomingCallDialog(this, sCallerName, sCallerId);
-        m_objIncomingCallDialog.ShowDialog();
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    public static void PostIncomingCallEnded(String sCallId)
-    {
-        if (mMainTab != null)
-            mMainTab.OnIncomingCallEnded(sCallId);
-    }
-
-    private void OnIncomingCallEnded(String sCallId)
-    {
-        if (m_objIncomingCallDialog == null)
-            return;
-
-        m_objIncomingCallDialog.HideDialog();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -449,6 +477,8 @@ public class MainTabActivity extends AppCompatActivity
     protected void onDestroy()
     {
         mMainTab = null;
+        VaxPhoneSIP.RestartService();
+
         super.onDestroy();
     }
 }

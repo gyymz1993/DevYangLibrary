@@ -39,7 +39,6 @@ public class VaxUserAgentSIP extends VaxUserAgent
     public VaxUserAgentSIP(IVaxUserAgentSIP iVaxUserAgentSIP, Context objContext)
     {
         m_iVaxUserAgentSIP = iVaxUserAgentSIP;
-
         m_objAudioDevice = new AudioDevice(objContext);
         m_objSocketIP = new SocketIP();
         m_objVideoDevice = new VideoDevice(objContext);

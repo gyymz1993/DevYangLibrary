@@ -25,8 +25,6 @@ public class TunnelFragment extends Fragment
     private String m_sTunnelPort;
     private boolean m_bEnable;
 
-    //TODO TunnelFragment Check Value CryptCOMM bTunnelEnable Last Parameter
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -53,18 +51,18 @@ public class TunnelFragment extends Fragment
         UpdateUI();
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////
 
     public static void PostInitialized()
     {
         StoreCryptTunnel objStoreCryptTunnel = new StoreCryptTunnel();
 
-        String sTunnelIP = objStoreCryptTunnel.GetTunnelIP();
-        String sTunnelPort = objStoreCryptTunnel.GetTunnelPort();
-        boolean bTunnelEnable = objStoreCryptTunnel.GetTunnelEnable();
+        String sIP = objStoreCryptTunnel.GetTunnelIP();
+        String sPort = objStoreCryptTunnel.GetTunnelPort();
+        boolean bEnable = objStoreCryptTunnel.GetTunnelEnable();
 
-        VaxPhoneSIP.m_objVaxVoIP.CryptCOMM(bTunnelEnable, sTunnelIP, !sTunnelPort.equals("") ? Integer.parseInt(sTunnelPort) : 0);
+        VaxPhoneSIP.m_objVaxVoIP.CryptCOMM(bEnable, sIP, Integer.parseInt(sPort));
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////
@@ -157,7 +155,7 @@ public class TunnelFragment extends Fragment
                 StoreCryptTunnel objStoreCryptTunnel = new StoreCryptTunnel();
                 objStoreCryptTunnel.SetTunnelEnable(m_bEnable);
 
-                VaxPhoneSIP.m_objVaxVoIP.CryptCOMM(m_bEnable, m_sTunnelIP, !m_sTunnelPort.equals("") ? Integer.parseInt(m_sTunnelPort) : 0);
+                VaxPhoneSIP.m_objVaxVoIP.CryptCOMM(m_bEnable, m_sTunnelIP, !m_sTunnelPort.equals("") ? Integer.parseInt(m_sTunnelPort) : 8891);
             }
         });
     }

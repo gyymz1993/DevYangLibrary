@@ -1,7 +1,7 @@
 package vaxsoft.com.vaxphone.VaxStorage.Store.StoreSettings;
 
+import VaxVoIP.VaxUserAgentLib.VaxUserAgentLib;
 import vaxsoft.com.vaxphone.MainUtil.PreferenceUtil;
-import vaxsoft.com.vaxphone.VaxPhoneSIP;
 
 public class StoreVideoCodecs
 {
@@ -18,16 +18,16 @@ public class StoreVideoCodecs
 
     public void GetVideoCodecs(boolean[] aCodecs)
     {
-        aCodecs[VaxPhoneSIP.VAX_CODEC_VP8] = PreferenceUtil.ReadPreferenceValue(VIDEO_CODEC_VP8, VIDEO_CODEC_VP8_DEFAULT_VALUE);
-        aCodecs[VaxPhoneSIP.VAX_CODEC_H263] = PreferenceUtil.ReadPreferenceValue(VIDEO_CODEC_H263, VIDEO_CODEC_H263_DEFAULT_VALUE);
-        aCodecs[VaxPhoneSIP.VAX_CODEC_H263P] = PreferenceUtil.ReadPreferenceValue(VIDEO_CODEC_H263P, VIDEO_CODEC_H263P_DEFAULT_VALUE);
+        aCodecs[VaxUserAgentLib.VAX_CODEC_VP8] = PreferenceUtil.ReadPreferenceValue(VIDEO_CODEC_VP8, VIDEO_CODEC_VP8_DEFAULT_VALUE);
+        aCodecs[VaxUserAgentLib.VAX_CODEC_H263] = PreferenceUtil.ReadPreferenceValue(VIDEO_CODEC_H263, VIDEO_CODEC_H263_DEFAULT_VALUE);
+        aCodecs[VaxUserAgentLib.VAX_CODEC_H263P] = PreferenceUtil.ReadPreferenceValue(VIDEO_CODEC_H263P, VIDEO_CODEC_H263P_DEFAULT_VALUE);
     }
 
     public void SetVideoCodecs(boolean[] aCodecs)
     {
-        PreferenceUtil.WritePreferenceValue(VIDEO_CODEC_VP8, aCodecs[VaxPhoneSIP.VAX_CODEC_VP8]);
-        PreferenceUtil.WritePreferenceValue(VIDEO_CODEC_H263, aCodecs[VaxPhoneSIP.VAX_CODEC_H263]);
-        PreferenceUtil.WritePreferenceValue(VIDEO_CODEC_H263P, aCodecs[VaxPhoneSIP.VAX_CODEC_H263P]);
+        PreferenceUtil.WritePreferenceValue(VIDEO_CODEC_VP8, aCodecs[VaxUserAgentLib.VAX_CODEC_VP8]);
+        PreferenceUtil.WritePreferenceValue(VIDEO_CODEC_H263, aCodecs[VaxUserAgentLib.VAX_CODEC_H263]);
+        PreferenceUtil.WritePreferenceValue(VIDEO_CODEC_H263P, aCodecs[VaxUserAgentLib.VAX_CODEC_H263P]);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////

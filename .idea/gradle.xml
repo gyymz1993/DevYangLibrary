@@ -8,8 +8,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/BBWVaxPhone" />
+            <option value="$PROJECT_DIR$/DevYangLibrary" />
+            <option value="$PROJECT_DIR$/UILibrary" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/libPay" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

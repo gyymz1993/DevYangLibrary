@@ -1,8 +1,11 @@
 package vaxsoft.com.vaxphone.PhoneSIP.RingTone;
 
+import android.content.Context;
+import android.media.AudioManager;
+
+import vaxsoft.com.vaxphone.MainAPP.VaxPhoneAPP;
 import vaxsoft.com.vaxphone.PhoneSIP.AudioPlayer.AudioPlayer;
 import vaxsoft.com.vaxphone.R;
-import vaxsoft.com.vaxphone.VaxPhoneSIP;
 
 public class RingTone
 {
@@ -59,6 +62,10 @@ public class RingTone
 
     public void StartRingTone()
     {
+
+        AudioManager objAudioMgr = (AudioManager) VaxPhoneAPP.getAppContext().getSystemService(Context.AUDIO_SERVICE);
+        objAudioMgr.setMode(AudioManager.MODE_RINGTONE);
+
         m_objAudioPlayer.PlayStart(true);
     }
 

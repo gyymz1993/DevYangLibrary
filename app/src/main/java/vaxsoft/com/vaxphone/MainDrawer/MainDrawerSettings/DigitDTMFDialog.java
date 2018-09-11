@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
+import VaxVoIP.VaxUserAgentLib.VaxUserAgentLib;
 import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.VaxPhoneSIP;
 import vaxsoft.com.vaxphone.VaxStorage.Store.StoreSettings.StoreDigitDTMF;
@@ -14,7 +15,7 @@ import vaxsoft.com.vaxphone.VaxStorage.Store.StoreSettings.StoreDigitDTMF;
 public class DigitDTMFDialog extends DialogFragment
 {
     final CharSequence[] mTypeNameDTMF = {"Outband (RFC2833)", "SIP INFO", "Inband (Voice Based)"};
-    int m_nSelectedTypeDTMF = VaxPhoneSIP.VAX_DIGIT_DTMF_RFC2833;
+    int m_nSelectedTypeDTMF = VaxUserAgentLib.VAX_DIGIT_DTMF_RFC2833;
 
     @NonNull
     @Override
@@ -69,7 +70,7 @@ public class DigitDTMFDialog extends DialogFragment
         m_nSelectedTypeDTMF = objStore.GetDigitDTMF();
 
         if(m_nSelectedTypeDTMF == -1)
-            m_nSelectedTypeDTMF = VaxPhoneSIP.VAX_DIGIT_DTMF_RFC2833;
+            m_nSelectedTypeDTMF = VaxUserAgentLib.VAX_DIGIT_DTMF_RFC2833;
 
         return m_nSelectedTypeDTMF;
     }
@@ -83,7 +84,7 @@ public class DigitDTMFDialog extends DialogFragment
         int nSeletedTypeDTMF = objStoreDigitDTMF.GetDigitDTMF();
 
         if(nSeletedTypeDTMF == -1)
-            nSeletedTypeDTMF = VaxPhoneSIP.VAX_DIGIT_DTMF_RFC2833;
+            nSeletedTypeDTMF = VaxUserAgentLib.VAX_DIGIT_DTMF_RFC2833;
 
         VaxPhoneSIP.m_objVaxVoIP.ForceDigitDTMF(nSeletedTypeDTMF, true);
     }

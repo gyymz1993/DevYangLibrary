@@ -13,10 +13,10 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.CustomViews.RecyclerView.CustomRecyclerView;
 import vaxsoft.com.vaxphone.CustomViews.RecyclerView.ICustomRecyclerView;
 import vaxsoft.com.vaxphone.MainTab.MainTabActivity;
+import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.VaxPhoneSIP;
 
 public class ChatContactRecyclerView extends CustomRecyclerView implements ICustomRecyclerView
@@ -236,9 +236,7 @@ public class ChatContactRecyclerView extends CustomRecyclerView implements ICust
             String sName = objRowData.GetContactName();
 
             if(Objects.equals(sName, sContactName))
-            {
                 return nRowNo;
-            }
         }
 
         return -1;

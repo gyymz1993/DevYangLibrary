@@ -11,8 +11,8 @@ import android.widget.LinearLayout;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.MainTab.MainTabActivity;
+import vaxsoft.com.vaxphone.R;
 import vaxsoft.com.vaxphone.VaxPhoneSIP;
 
 public class CallIconsFragment extends DialpadFragment implements View.OnClickListener
