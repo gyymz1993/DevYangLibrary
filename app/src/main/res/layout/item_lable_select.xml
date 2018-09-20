@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_tv_city_name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    android:focusableInTouchMode="true"
+    android:gravity="center">
+
+    <com.gystar.master.CustomViews.CheckableTextView
+        android:id="@+id/id_tv_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:button="@null"
+        android:clickable="false"
+        android:focusable="false"
+        android:gravity="center"
+        android:text="手机海报"
+        android:textColor="#b5b5b5"
+        android:background="@drawable/lable_check_box_bg"
+        />
+
+
+</android.support.v7.widget.LinearLayoutCompat>

@@ -1,4 +1,4 @@
-package com.gystar.master.MainUI.main.TopUP;
+package com.gystar.master.MainUI.main.Home.TopUP;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,9 +9,12 @@ import android.widget.TextView;
 
 import com.andview.adapter.BaseRecyclerHolder;
 import com.andview.listener.OnItemClickListener;
+import com.gystar.master.Config.netApi.AppConfig;
+import com.gystar.master.MainUI.main.Home.OtherTopUP.OtherTopUPActivity;
 import com.gystar.master.base.BaseRefreshAdapter;
 import com.gystar.master.bean.TopBean;
 import com.utils.gyymz.mvp.base.MVPBaseActivity;
+import com.utils.gyymz.utils.SpUtils;
 import com.utils.gyymz.utils.T_;
 import com.utils.gyymz.utils.UIUtils;
 import com.utils.gyymz.wiget.NavigationBarView;
@@ -29,6 +32,16 @@ public class TopUPActivity extends MVPBaseActivity<TopPersenter> implements TopC
     RecyclerView idRecyvleview;
     @BindView(R.id.id_tv_buy)
     TextView tvBuy;
+
+    @BindView(R.id.id_tv_other_number)
+    TextView otherNumber;
+
+    @BindView(R.id.id_tv_client_number)
+    TextView tvClientNumber;
+    @BindView(R.id.id_tv_client_name)
+    TextView tvClientName;
+
+
     /**
      * 当前选择的充值包
      */
@@ -62,15 +75,26 @@ public class TopUPActivity extends MVPBaseActivity<TopPersenter> implements TopC
         tvBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currrentDataBean!=null){
-                    mPresenter.getBeginrecharge(TopUPActivity.this,currrentDataBean);
-                }else {
+                if (currrentDataBean != null) {
+                    mPresenter.getBeginrecharge(TopUPActivity.this, currrentDataBean);
+                } else {
                     T_.showCustomToast("请选择充值套餐");
                 }
 
             }
         });
-        showNavigationBarView().setText(NavigationBarView.NavigationViewType.CONTEXT_TV, "充值")
+
+        String phone = SpUtils.getInstance().getString(AppConfig.USER_PHONE);
+        String nikeName = SpUtils.getInstance().getString(AppConfig.USER_NIKE_NAME);
+        tvClientNumber.setText(phone);
+        tvClientName.setText(nikeName);
+        otherNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openActivity(OtherTopUPActivity.class);
+            }
+        });
+        showNavigationBarCanBack().setText(NavigationBarView.NavigationViewType.CONTEXT_TV, "充值")
                 .setText(NavigationBarView.NavigationViewType.RIGHT_TEXT, "历史");
         mPresenter.rechargeShow();
     }
@@ -79,6 +103,16 @@ public class TopUPActivity extends MVPBaseActivity<TopPersenter> implements TopC
     @Override
     public void getTopBeanList(List<TopBean.DataBean> data) {
         topUPItemAdapter.setListData(data);
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showNetWorkErrorView() {
+
     }
 
 
@@ -108,8 +142,7 @@ public class TopUPActivity extends MVPBaseActivity<TopPersenter> implements TopC
             } else {
                 thumbSelected_bg.setBackgroundResource(R.drawable.price_un_select_style);
             }
-            textViewUp.setText(var2.getDuration() + "小时" + UIUtils.getString(R.string.newLines)
-                    + var2.getPrice() + "元");
+            textViewUp.setText(var2.getDuration() + "小时" + UIUtils.getString(R.string.newLines) + var2.getPrice() + "元");
         }
     }
 

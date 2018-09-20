@@ -2,14 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/selected_row_transparent"
+    android:background="@color/gy_bg_color"
     android:orientation="vertical">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/selected_row_transparent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_weight="1"
+        android:background="@color/gy_bg_color"
         android:orientation="vertical">
 
 
@@ -17,10 +21,32 @@
             android:id="@+id/id_tv_phone_nember"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="25dp"
             android:gravity="center"
             android:text="13177008851"
             android:textColor="@color/white"
+            android:textSize="26sp"
+            android:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/id_tv_client_statu"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="正在通话"
+            android:textColor="@color/black"
+            android:textSize="26sp" />
+
+
+        <TextView
+            android:id="@+id/id_tv_client_name"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="张三"
+            android:textColor="@color/black"
             android:textSize="26sp" />
 
 
@@ -28,30 +54,109 @@
             android:id="@+id/tv_time_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:format="00:00:00"
             android:gravity="center"
             android:padding="5dp"
-            android:textColor="@color/colorbackground"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="normal" />
 
     </LinearLayout>
 
 
-    <LinearLayout
-        android:id="@+id/layout_end_call"
-        style="@style/LayoutForRoundButtonEndCall"
+    <RelativeLayout
+        android:id="@+id/id_up_call_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="30dp">
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        >
 
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/videocam1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_call_end" />
+        <LinearLayout
+            android:id="@+id/id_ly_mt"
+            android:layout_width="50dp"
+            android:layout_height="55dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/dialpad_action_button_state"
+            android:gravity="center">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="免提" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layout_end_call"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/call_end_button_state"
+            android:gravity="center">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/videocam1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_call_end" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/id_up_end_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+
+
+        <TextView
+            android:id="@+id/id_tv_label"
+            android:layout_width="match_parent"
+            android:layout_height="40dip"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/login_code_shape_unenabled"
+            android:enabled="true"
+            android:gravity="center"
+            android:text="记录"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/id_tv_back"
+            android:layout_width="match_parent"
+            android:layout_height="40dip"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/login_code_shape_enabled"
+            android:enabled="true"
+            android:gravity="center"
+            android:text="回首页"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
     </LinearLayout>
-
-
 </RelativeLayout>

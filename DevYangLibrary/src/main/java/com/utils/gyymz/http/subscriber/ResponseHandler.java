@@ -1,5 +1,7 @@
 package com.utils.gyymz.http.subscriber;
 
+import com.utils.gyymz.mvp.base.BaseView;
+
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.util.List;
@@ -15,9 +17,11 @@ import retrofit2.HttpException;
 public class ResponseHandler<T> {
 
     private CustomHandler<T> handler;
+    private BaseView mView;
 
-    public ResponseHandler(CustomHandler<T> handler) {
+    public ResponseHandler(CustomHandler<T> handler, BaseView view) {
         this.handler = handler;
+        this.mView = view;
     }
 
 
@@ -34,14 +38,17 @@ public class ResponseHandler<T> {
     }
 
     public void onError(Throwable e) {
-        resetLoadingStatus();
         e.printStackTrace();
-        handler.error(e);
+        if (!handler.error(e)) {
+            handleException(e);
+        }
+        if (mView!=null){
+            mView.showNetWorkErrorView();
+        }
         release();
     }
 
     public void onNext(T t) {
-        resetLoadingStatus();
         IBaseData data;
         if (t instanceof IBaseData) {
             data = (IBaseData) t;
@@ -55,11 +62,12 @@ public class ResponseHandler<T> {
         } else {
             handler.success(t);
         }
+        if (mView!=null){
+            mView.hideLoading();
+        }
         release();
     }
 
-    public void resetLoadingStatus() {
-    }
 
     public void release() {
         handler = null;
@@ -74,6 +82,11 @@ public class ResponseHandler<T> {
     }
 
     public void handleOperationError(String message) {
+        handler.requestError(message);
+    }
+
+
+    public void requestError(String message) {
         handler.requestError(message);
     }
 

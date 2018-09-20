@@ -38,4 +38,14 @@ public class FuliActivity extends MVPBaseActivity {
     protected MyCollectPresenter getDelegateClass() {
         return null;
     }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showNetWorkErrorView() {
+
+    }
 }

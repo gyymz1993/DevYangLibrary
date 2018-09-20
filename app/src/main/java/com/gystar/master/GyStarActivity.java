@@ -30,7 +30,6 @@ import vaxsoft.com.vaxphone.VaxPhoneSIP;
 public class GyStarActivity extends BaseWebMvpActivity {
 
     ModuleApi api = ApiFactory.getFactory().create(ModuleApi.class);
-
     @Override
     protected void showTitle(String string) {
 
@@ -61,7 +60,7 @@ public class GyStarActivity extends BaseWebMvpActivity {
     public void getAppBasicInfo() {
         api.getBeginrecharge("9", "1", "13177008851", "ymz", "0")
                 .compose(new ResponseTransformer<>())
-                .subscribe(new ResponseSubscriber<BeginrechargeBean>() {
+                .subscribe(new ResponseSubscriber<BeginrechargeBean>(null) {
                     @Override
                     public void success(BeginrechargeBean baseData) {
                         String payParams = baseData.getData().getPayParams();

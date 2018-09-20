@@ -17,6 +17,9 @@ import com.utils.gyymz.utils.T_;
 
 import java.util.List;
 
+import retrofit2.http.Query;
+import vaxsoft.com.vaxphone.MainAPP.VaxPhoneAPP;
+
 /**
  * MVPPlugin
  * 邮箱 784787081@qq.com
@@ -30,20 +33,41 @@ public class HomePresenter extends BasePresenterImpl<HomeContract.View> implemen
     }
 
     public void getHomeshow() {
-        api.getHomeshow("9")
+        api.getHomeshow(VaxPhoneAPP.getUserId())
                 .compose(new ResponseTransformer<>())
-                .subscribe(new ResponseSubscriber<HomeDataBean>() {
+                .subscribe(new ResponseSubscriber<HomeDataBean>(mvpView) {
                     @Override
                     public void success(HomeDataBean baseData) {
-                       baseData.getData();
-                       if (mvpView!=null){
-                           mvpView.getHomeData(baseData);
-                       }
+                        baseData.getData();
+                        if (mvpView != null) {
+                            mvpView.getHomeData(baseData);
+                        }
                     }
 
                     @Override
                     public void requestError(String exception) {
                         Log.e("TAG", exception);
+                    }
+                });
+
+    }
+
+    public void getTopPriceBuy(String userId, String customerId) {
+        api.getTopPriceBuy(userId, customerId)
+                .compose(new ResponseTransformer<>())
+                .subscribe(new ResponseSubscriber<DataBeanCallBack>(mvpView) {
+                    @Override
+                    public void success(DataBeanCallBack baseData) {
+                        T_.showToastReal(baseData.msg);
+                        if (mvpView != null) {
+                            mvpView.buyTopPriceBuy();
+                        }
+                    }
+
+                    @Override
+                    public void requestError(String exception) {
+                        Log.e("TAG", exception);
+                        T_.showToastReal(exception);
                     }
                 });
 

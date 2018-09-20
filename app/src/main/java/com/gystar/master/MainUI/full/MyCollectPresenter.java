@@ -17,12 +17,12 @@ import com.utils.gyymz.mvp.base.BasePresenterImpl;
 public class MyCollectPresenter extends BasePresenterImpl<MyCollectContract.View> implements MyCollectContract.Presenter {
 
     public ModuleApi api = ApiFactory.getFactory().create(ModuleApi.class);
-    private String TAG = "MyCollectPresenter";
+    private String TAG = "GyCallPresenter";
 
     @Override
     public void getAppBasicInfo() {
         httpRequest(TAG, api.getBeginrecharge("9", "1", "13177008851", "ymz", "0"),
-                new ResponseSubscriber<BeginrechargeBean>() {
+                new ResponseSubscriber<BeginrechargeBean>(mvpView) {
                     @Override
                     public void success(BeginrechargeBean baseData) {
                         String payParams = baseData.getData().getPayParams();
@@ -37,12 +37,12 @@ public class MyCollectPresenter extends BasePresenterImpl<MyCollectContract.View
                         Log.e("TAG", exception);
                     }
                 });
-       // cancelRequest(TAG);
+        // cancelRequest(TAG);
     }
 
     public void getAppBasicInfo1() {
         httpRequest(TAG, api.getBeginrecharge("9", "1", "13177008851", "ymz", "0"),
-                new ResponseSubscriber<BeginrechargeBean>() {
+                new ResponseSubscriber<BeginrechargeBean>(mvpView) {
                     @Override
                     public void success(BeginrechargeBean baseData) {
                         String payParams = baseData.getData().getPayParams();

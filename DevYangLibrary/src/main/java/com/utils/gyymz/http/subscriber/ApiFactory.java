@@ -2,6 +2,8 @@ package com.utils.gyymz.http.subscriber;
 
 import android.text.TextUtils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -22,6 +24,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 import com.utils.gyymz.http.callback.DataBeanCallBack;
+import com.utils.gyymz.utils.L_;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -202,7 +205,6 @@ public class ApiFactory {
         gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(double.class, Double.class, DOUBLE));
         gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(long.class, Long.class, LONG));
         gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(int.class, Integer.class, INT));
-
         gsonBuilder.registerTypeAdapter(Timestamp.class, new JsonDeserializer<Timestamp>() {
             @Override
             public Timestamp deserialize(JsonElement json, Type typeOfT,
@@ -223,9 +225,7 @@ public class ApiFactory {
         builder.baseUrl(baseUrl)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gsonBuilder.create()));
-
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
-
         clientBuilder.readTimeout(timeout, TimeUnit.SECONDS)
                 .writeTimeout(timeout, TimeUnit.SECONDS).connectTimeout(timeout, TimeUnit.SECONDS);
         clientBuilder.addInterceptor(new HttpLoggingInterceptor());
@@ -244,7 +244,6 @@ public class ApiFactory {
         });
 
         builder.client(clientBuilder.build());
-//
         return builder.build();
     }
 
@@ -252,15 +251,15 @@ public class ApiFactory {
     private Response deEncryptResponse(Response response) throws IOException {
         //服务器返回的加密数据
         String oldBody = response.body().string();
-        //Log.e("TAG", oldBody);
         //数据处理
         oldBody = oldBody.substring(oldBody.indexOf("(") + 1, oldBody.length() - 1);
-        //Log.e("TAG", oldBody);
         //解密后的真实数据
-        DataBeanCallBack baseData = new Gson().fromJson(oldBody, DataBeanCallBack.class);
-        String newBody = new Gson().toJson(baseData);
+        DataBeanCallBack baseData = JSONObject.parseObject(oldBody, DataBeanCallBack.class);
+        String newBody = JSONObject.toJSONString(baseData);
         //将真实数据返回给回调
         Response res = response.newBuilder().body(ResponseBody.create(null, newBody)).build();
+        //Response res = response.newBuilder().body(ResponseBody.create(response.body().contentType(), newBody)).build();
+        L_.e("TAG newBody" + res.toString() + ":" + newBody);
         return res;
 
     }

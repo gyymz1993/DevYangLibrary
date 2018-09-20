@@ -13,6 +13,7 @@ import com.utils.gyymz.BaseApplicationCompat;
 import com.utils.gyymz.comhttp.AppNetConfig;
 import com.utils.gyymz.http.subscriber.ApiFactory;
 import com.tencent.smtt.sdk.QbSdk;
+import com.utils.gyymz.utils.ActivityUtils;
 import com.utils.gyymz.utils.SpUtils;
 import com.utils.gyymz.utils.T_;
 
@@ -66,10 +67,25 @@ public class VaxPhoneAPP extends Application {
     }
 
 
+    public static String getPhoneNumber() {
+        String userId = SpUtils.getInstance().getString(AppConfig.USER_PHONE);
+        if (userId == null) {
+            try {
+                T_.showToastReal("你还没有登陆哟");
+                throw new NullPointerException("你还没有登陆哦");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return userId;
+    }
+
+
 
     private class SwitchBackgroundCallbacks implements Application.ActivityLifecycleCallbacks {
         @Override
         public void onActivityCreated(Activity activity, Bundle bundle) {
+            ActivityUtils.addActivity(activity);
         }
 
         @Override
@@ -95,6 +111,7 @@ public class VaxPhoneAPP extends Application {
 
         @Override
         public void onActivityDestroyed(Activity activity) {
+            ActivityUtils.removeActivity(activity);
         }
     }
 

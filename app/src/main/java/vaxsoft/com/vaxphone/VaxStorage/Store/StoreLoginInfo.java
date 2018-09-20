@@ -4,8 +4,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import vaxsoft.com.vaxphone.MainUtil.PreferenceUtil;
 
-public class StoreLoginInfo
-{
+public class StoreLoginInfo {
     private final String USERNAME = "VaxStoreLoginInfo_Username";
     private final String DISPLAY_NAME = "VaxStoreLoginInfo_DisplayName";
     private final String AUTH_LOGIN = "VaxStoreLoginInfo_AuthLogin";
@@ -32,13 +31,12 @@ public class StoreLoginInfo
     //////////////////////////////////////////////////////////////////////////////////////////////
 
     public void GetLoginInfo(StringBuilder sUsername, StringBuilder sDisplayName, StringBuilder sAuthLogin, StringBuilder sAuthPassword, StringBuilder sDoaminRealm,
-                             StringBuilder sServerIP, StringBuilder sServerPort, AtomicBoolean bRegistrationSIP)
-    {
+                             StringBuilder sServerIP, StringBuilder sServerPort, AtomicBoolean bRegistrationSIP) {
         if (sUsername != null)
             sUsername.append(PreferenceUtil.ReadPreferenceValue(USERNAME, USERNAME_DEFAULT_VALUE));
 
         if (sDisplayName != null)
-        sDisplayName.append(PreferenceUtil.ReadPreferenceValue(DISPLAY_NAME, DISPLAY_NAME_DEFAULT_VALUE));
+            sDisplayName.append(PreferenceUtil.ReadPreferenceValue(DISPLAY_NAME, DISPLAY_NAME_DEFAULT_VALUE));
 
         if (sAuthLogin != null)
             sAuthLogin.append(PreferenceUtil.ReadPreferenceValue(AUTH_LOGIN, AUTH_LOGIN_DEFAULT_VALUE));
@@ -59,10 +57,9 @@ public class StoreLoginInfo
             bRegistrationSIP.set(PreferenceUtil.ReadPreferenceValue(SIP_REGISTRATION, SIP_REGISTRATION_DEFAULT_VALUE));
     }
 
-    public void SetLoginInfo(String sUsername, String sDisplayName, String sAuthLogin, String sAuthPassword, String sDoaminRealm, String sServerIP, String sServerPort, boolean bRegistrationSIP)
-    {
+    public void SetLoginInfo(String sUsername, String sDisplayName, String sAuthLogin, String sAuthPassword, String sDoaminRealm, String sServerIP, String sServerPort, boolean bRegistrationSIP) {
         if (sUsername != null)
-             PreferenceUtil.WritePreferenceValue(USERNAME, sUsername);
+            PreferenceUtil.WritePreferenceValue(USERNAME, sUsername);
 
         if (sDisplayName != null)
             PreferenceUtil.WritePreferenceValue(DISPLAY_NAME, sDisplayName);
@@ -88,26 +85,22 @@ public class StoreLoginInfo
     //////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void SetLoginStatus(boolean bOnline)
-    {
+    public void SetLoginStatus(boolean bOnline) {
         PreferenceUtil.WritePreferenceValue(LOGIN_STATUS, bOnline);
     }
 
-    public boolean GetLoginStatus()
-    {
+    public boolean GetLoginStatus() {
         return PreferenceUtil.ReadPreferenceValue(LOGIN_STATUS, LOGIN_STATUS_DEFAULT_VALUE);
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void SetLicenceKey(String sKey)
-    {
+    public void SetLicenceKey(String sKey) {
         PreferenceUtil.WritePreferenceValue(LICENCE_KEY, sKey);
     }
 
-    public String GetLicenceKey()
-    {
+    public String GetLicenceKey() {
         return PreferenceUtil.ReadPreferenceValue(LICENCE_KEY, LICENCE_KEY_DEFAULT_VALUE);
     }
 

@@ -14,14 +14,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_margin="15dp"
+            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="25dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
 
             <LinearLayout
                 style="@style/layout_horizontal"
-                android:layout_marginLeft="15dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -38,12 +39,15 @@
                         android:id="@+id/id_tv_client_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="13177008851" />
+                        android:text="13177008851"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
 
                 <LinearLayout
                     style="@style/layout_vertical"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1">
 
                     <TextView
@@ -55,15 +59,20 @@
                         android:id="@+id/id_tv_client_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="gyymz1993" />
+                        android:text="gyymz1993"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
             </LinearLayout>
 
 
             <TextView
+                android:id="@+id/id_tv_other_number"
                 style="@style/layout_horizontal"
-                android:layout_weight="1"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="0.5"
                 android:drawableTop="@drawable/ic_contact_away"
                 android:gravity="center"
                 android:text="其他账号" />

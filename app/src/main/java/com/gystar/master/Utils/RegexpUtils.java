@@ -2,6 +2,10 @@ package com.gystar.master.Utils;
 
 import android.text.TextUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -207,23 +211,12 @@ public final class RegexpUtils {
     private RegexpUtils() {
     }
 
-    /**
-     * 验证手机号码 
-     *
-     * @param mobiles
-     * @return
-     */
+
 
     /**
      * 验证手机格式
      */
     public static boolean isMobile(String number) {
-    /*
-    移动：134、135、136、137、138、139、150、151、157(TD)、158、159、187、188
-    联通：130、131、132、152、155、156、185、186
-    电信：133、153、180、189、（1349卫通）
-    总结起来就是第一位必定为1，第二位必定为3或5或8，其他位置的可以为0-9
-    */
         String num = "[1]\\d{10}";
         if (TextUtils.isEmpty(number)) {
             return false;
@@ -242,7 +235,6 @@ public final class RegexpUtils {
     public static final boolean isBankCard(String cardNo) {
         Pattern p = compile("^\\d{16,19}$|^\\d{6}[- ]\\d{10,13}$|^\\d{4}[- ]\\d{4}[- ]\\d{4}[- ]\\d{4,7}$");
         Matcher m = p.matcher(cardNo);
-
         return m.matches();
     }
 
@@ -258,4 +250,60 @@ public final class RegexpUtils {
         Pattern p = compile(regIdCard);
         return p.matcher(idCard).matches();
     }
+
+
+    public static final String getIdString(List<Integer> ids) {
+        if (ids == null) throw new NullPointerException("数组为空");
+        StringBuilder sb = new StringBuilder(ids.size() * 3); // StringBuilder(arr.length*3)性能比StringBuilder()高
+        // 写法三
+        int offset = ids.size() - 1;
+        for (int i = 0; i < offset; i++) {
+            sb.append(ids.get(i)).append(",");
+        }
+        sb.append(ids.get(offset));
+        return sb.toString();
+    }
+
+
+
+    /**
+     * 将HH:mm:ss时间格式转换成分钟数
+     * @param time
+     * @return 不足一分钟算一分钟
+     */
+    public static int getMinutesTime(String time){
+        SimpleDateFormat sdf= new  SimpleDateFormat("HH:mm:ss");
+
+        try {
+            Date start = sdf.parse(time);
+            int hours = start.getHours();
+            int minutes = start.getMinutes();
+            int seconds = start.getSeconds();
+            if (hours!=0){
+                int hM = hours * 60;
+                if(seconds!=0){
+                    int lastTime=hM+minutes+1;
+                    return lastTime;
+                }else
+                {
+                    int lastTime=hM+minutes;
+                    return lastTime;
+                }
+            }else{
+                if(seconds!=0){
+                    int lastTime=minutes+1;
+                    return lastTime;
+                }else
+                {
+                    int lastTime=minutes;
+                    return lastTime;
+                }
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
 }  

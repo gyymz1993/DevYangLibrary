@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.gystar.master.GyCallActivity;
+import com.gystar.master.MainUI.Call.GyCallActivity;
 import com.gystar.master.GyStarActivity;
 import com.gystar.master.bean.BeginrechargeBean;
 import com.gystar.master.Config.netApi.ModuleApi;
@@ -36,7 +36,7 @@ public class CommWebJsContrl {
             @Override
             public void run() {
                 // Intent intent=new Intent(appCompatActivity,CallActivity.class);
-                Intent launchIntent = GyCallActivity.getLaunchIntent(appCompatActivity, number);
+                Intent launchIntent = GyCallActivity.getLaunchIntent(appCompatActivity, number,"***");
                 appCompatActivity.startActivity(launchIntent);
                 Log.e("TAG", "lianxi");
             }
@@ -52,7 +52,7 @@ public class CommWebJsContrl {
             @Override
             public void run() {
                 // Intent intent=new Intent(appCompatActivity,CallActivity.class);
-                Intent launchIntent = GyCallActivity.getLaunchIntent(appCompatActivity, result);
+                Intent launchIntent = GyCallActivity.getLaunchIntent(appCompatActivity, result,"***");
                 appCompatActivity.startActivity(launchIntent);
                 Log.e("TAG", "lianxi");
             }
@@ -74,7 +74,7 @@ public class CommWebJsContrl {
 
     public void startBeginrecharge(String user_id, String recid, String recharge_phone, String recharge_name, String state) {
         api.getBeginrecharge(user_id, recid, recharge_phone, recharge_name, state).compose(new ResponseTransformer<>())
-                .subscribe(new ResponseSubscriber<BeginrechargeBean>() {
+                .subscribe(new ResponseSubscriber<BeginrechargeBean>(null) {
                     @Override
                     public void success(BeginrechargeBean baseData) {
                         String payParams = baseData.getData().getPayParams();

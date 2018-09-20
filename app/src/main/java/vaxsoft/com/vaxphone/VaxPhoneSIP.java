@@ -10,6 +10,9 @@ import android.util.Log;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.gystar.master.MainUI.Call.GyCallActivity;
+import com.utils.gyymz.utils.L_;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -50,24 +53,23 @@ import vaxsoft.com.vaxphone.VaxStorage.Store.StoreChatMsg;
 import vaxsoft.com.vaxphone.VaxStorage.Store.StoreLoginInfo;
 import vaxsoft.com.vaxphone.VaxStorage.Store.StoreRecent;
 
-public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
-{
-    public static final int VAX_RING_TONE_GROOVY        = 0;
-    public static final int VAX_RING_TONE_DIGITAL_RAIN  = 1;
-    public static final int VAX_RING_TONE_MAGICAL       = 2;
-    public static final int VAX_RING_TONE_DEJA_VU       = 3;
-    public static final int VAX_RING_TONE_OFFICE_PHONE  = 4;
+public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib {
+    public static final int VAX_RING_TONE_GROOVY = 0;
+    public static final int VAX_RING_TONE_DIGITAL_RAIN = 1;
+    public static final int VAX_RING_TONE_MAGICAL = 2;
+    public static final int VAX_RING_TONE_DEJA_VU = 3;
+    public static final int VAX_RING_TONE_OFFICE_PHONE = 4;
 
-    public static final int VAX_VOICE_PITCH_GRANDPA_DRUNK    =  4;
-    public static final int VAX_VOICE_PITCH_TEEN_BOY         =  8;
+    public static final int VAX_VOICE_PITCH_GRANDPA_DRUNK = 4;
+    public static final int VAX_VOICE_PITCH_TEEN_BOY = 8;
     public static final int VAX_VOICE_PITCH_HOUSE_HOLD_REBOT = 12;
-    public static final int VAX_VOICE_PITCH_HELIUM_INHALED   = 16;
-    public static final int VAX_VOICE_PITCH_CHIPMUNK         = 20;
+    public static final int VAX_VOICE_PITCH_HELIUM_INHALED = 16;
+    public static final int VAX_VOICE_PITCH_CHIPMUNK = 20;
 
     public static VaxPhoneSIP m_objVaxVoIP = null;
     VaxUserAgentLib mVaxAgentLib;
 
-   private String m_sIncomingCallId = "";
+    private String m_sIncomingCallId = "";
     private String m_sLogFile = "";
 
     private boolean m_bVideoEnabled = true;
@@ -93,8 +95,7 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////
 
-    public VaxPhoneSIP()
-    {
+    public VaxPhoneSIP() {
         Log.e("Vax-Service", "VaxPhoneSIP()");
 
         mVaxAgentLib = new VaxUserAgentLib(VaxPhoneAPP.getAppContext(), this);
@@ -114,38 +115,33 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     ////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////
 
-    protected void OnServiceStarted()
-    {
+    protected void OnServiceStarted() {
         Initialize();
     }
 
-    protected void OnServiceDestroy()
-    {
+    protected void OnServiceDestroy() {
         //UnInitialize();
     }
 
-    protected void OnServiceLowMemory()
-    {
+    protected void OnServiceLowMemory() {
         //UnInitialize();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////
 
-    public boolean SetLicenceKey(String sKey, Context objContextShowMsg)
-    {
-        if(sKey.equals("TRIAL-LICENSE-KEY") || sKey.isEmpty())
+    public boolean SetLicenceKey(String sKey, Context objContextShowMsg) {
+        if (sKey.equals("TRIAL-LICENSE-KEY") || sKey.isEmpty())
             ShowMsg(objContextShowMsg, "VaxVoIP SDK is free to use for 30 days.\n\nIf you want to continue using it after the trial period, you must pay the License fee.\n\nThank you for using VaxVoIP SDK!\n\nWeb: www.vaxvoip.com\nEmail: info@vaxvoip.com");
 
-        if(!mVaxAgentLib.SetLicenceKey(sKey))
+        if (!mVaxAgentLib.SetLicenceKey(sKey))
             return false;
 
         new StoreLoginInfo().SetLicenceKey(sKey);
         return true;
     }
 
-    public void Initialize()
-    {
+    public void Initialize() {
         if (!VaxPhoneSIP.IsOnline())
             return;
 
@@ -175,19 +171,17 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
         Initialize(sDisplayName, sUsername, sAuthLogin, sAuthPassword, sDomainRealm, sServerIP, nServerPort, bRegistrationSIP);
     }
 
-    public boolean Initialize(String sDisplayName, String sUserName, String sAuthLogin, String sAuthPwd, String sDomainRealm, String sServerAddr, int nServerPort, boolean bRegistrationSIP)
-    {
+    public boolean Initialize(String sDisplayName, String sUserName, String sAuthLogin, String sAuthPwd, String sDomainRealm, String sServerAddr, int nServerPort, boolean bRegistrationSIP) {
         int nListenPortSIP = -1;
 
-        if(!NetworkFragment.IsRandomPortSIP())
+        if (!NetworkFragment.IsRandomPortSIP())
             nListenPortSIP = NetworkFragment.GetNetworkPortSIP();
 
-        if(!mVaxAgentLib.Initialize("", nListenPortSIP, sDisplayName, sUserName, sAuthLogin, sAuthPwd, sDomainRealm, sServerAddr, nServerPort, "", -1, true))
+        if (!mVaxAgentLib.Initialize("", nListenPortSIP, sDisplayName, sUserName, sAuthLogin, sAuthPwd, sDomainRealm, sServerAddr, nServerPort, "", -1, true))
             return false;
 
-        if(bRegistrationSIP)
-        {
-            if(!mVaxAgentLib.RegisterToProxy(1800))
+        if (bRegistrationSIP) {
+            if (!mVaxAgentLib.RegisterToProxy(1800))
                 return false;
         }
 
@@ -199,16 +193,14 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
         return true;
     }
 
-    public void UnInitialize()
-    {
+    public void UnInitialize() {
         m_bVideoCaptureErrorShown = false;
 
         new StoreLoginInfo().SetLoginStatus(false);
         mVaxAgentLib.UnInitialize();
     }
 
-    public boolean IsVideoStreamStarted()
-    {
+    public boolean IsVideoStreamStarted() {
         return m_bVideoStreamStarted;
     }
 
@@ -216,14 +208,12 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     ///////////////////////////////////////////////////////////////////////////////////////
 
     public static void GetLoginInfo(StringBuilder sUsername, StringBuilder sDisplayName, StringBuilder sAuthLogin, StringBuilder sAuthPassword, StringBuilder sDoaminRealm,
-                             StringBuilder sServerIP, StringBuilder sServerPort, AtomicBoolean bRegistrationSIP)
-    {
+                                    StringBuilder sServerIP, StringBuilder sServerPort, AtomicBoolean bRegistrationSIP) {
         StoreLoginInfo objStore = new StoreLoginInfo();
         objStore.GetLoginInfo(sUsername, sDisplayName, sAuthLogin, sAuthPassword, sDoaminRealm, sServerIP, sServerPort, bRegistrationSIP);
     }
 
-    public static void SetLoginInfo(String sUsername, String sDisplayName, String sAuthLogin, String sAuthPassword, String sDoaminRealm, String sServerIP, String sServerPort, boolean bRegistrationSIP)
-    {
+    public static void SetLoginInfo(String sUsername, String sDisplayName, String sAuthLogin, String sAuthPassword, String sDoaminRealm, String sServerIP, String sServerPort, boolean bRegistrationSIP) {
         StoreLoginInfo objStore = new StoreLoginInfo();
         objStore.SetLoginInfo(sUsername, sDisplayName, sAuthLogin, sAuthPassword, sDoaminRealm, sServerIP, sServerPort, bRegistrationSIP);
     }
@@ -231,19 +221,16 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////
 
-    public int GetChatContactCount()
-    {
+    public int GetChatContactCount() {
         StoreChatContact objStore = new StoreChatContact();
         return objStore.GetChatContactCount();
     }
 
-    public void LoadChatContactAll()
-    {
+    public void LoadChatContactAll() {
         StoreChatContact objStore = new StoreChatContact();
         ArrayList aContactDataList = objStore.GetChatContactAll();
 
-        for (int nIndex = 0; nIndex < aContactDataList.size(); nIndex++)
-        {
+        for (int nIndex = 0; nIndex < aContactDataList.size(); nIndex++) {
             ArrayList aSubList = (ArrayList) aContactDataList.get(nIndex);
 
             String sContactName = (String) aSubList.get(1);
@@ -256,9 +243,8 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
         }
     }
 
-    public boolean ChatAddContact(String sUserName, boolean bPresence)
-    {
-        if(!mVaxAgentLib.ChatAddContact(sUserName, bPresence))
+    public boolean ChatAddContact(String sUserName, boolean bPresence) {
+        if (!mVaxAgentLib.ChatAddContact(sUserName, bPresence))
             return false;
 
         StoreChatContact objStore = new StoreChatContact();
@@ -273,19 +259,16 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
 
-    public boolean ChatSubscribeContactAll()
-    {
+    public boolean ChatSubscribeContactAll() {
         return mVaxAgentLib.ChatSubscribeContactAll();
     }
 
-    public boolean ChatSetMyStatus(int nStatusId)
-    {
+    public boolean ChatSetMyStatus(int nStatusId) {
         return mVaxAgentLib.ChatSetMyStatus(nStatusId);
     }
 
-    public boolean ChatSendMessageText(String sUserName, String sMsgText)
-    {
-        if(!mVaxAgentLib.ChatSendMessageText(sUserName, sMsgText, 0, 0))
+    public boolean ChatSendMessageText(String sUserName, String sMsgText) {
+        if (!mVaxAgentLib.ChatSendMessageText(sUserName, sMsgText, 0, 0))
             return false;
 
         StoreChatMsg objStore = new StoreChatMsg();
@@ -296,9 +279,8 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
         return true;
     }
 
-    public boolean ChatRemoveContact(String sUserName)
-    {
-        if(!mVaxAgentLib.ChatRemoveContact(sUserName))
+    public boolean ChatRemoveContact(String sUserName) {
+        if (!mVaxAgentLib.ChatRemoveContact(sUserName))
             return false;
 
         StoreChatContact objContactStore = new StoreChatContact();
@@ -315,14 +297,12 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////
 
-    public int GetCallHistoryCount()
-    {
+    public int GetCallHistoryCount() {
         StoreRecent objStore = new StoreRecent();
         return objStore.GetCallCount();
     }
 
-    public void RemoveCallRecord(int nId)
-    {
+    public void RemoveCallRecord(int nId) {
         StoreRecent objStore = new StoreRecent();
         objStore.RemoveCallRecord(nId);
     }
@@ -330,32 +310,28 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////
 
-    public void ApplyVideoQuality()
-    {
-        if(!m_bVideoDeviceCaptured)
+    public void ApplyVideoQuality() {
+        if (!m_bVideoDeviceCaptured)
             return;
 
         CloseVideoDevice();
         OpenVideoDevice();
     }
 
-    public boolean PlayDTMF(String sDigit)
-    {
-       m_objPlayDTMF.PlayTone(sDigit);
-       return mVaxAgentLib.DigitDTMF(0, sDigit);
+    public boolean PlayDTMF(String sDigit) {
+        m_objPlayDTMF.PlayTone(sDigit);
+        return mVaxAgentLib.DigitDTMF(0, sDigit);
     }
 
-    public void SetRingtone(int nRingtone)
-    {
+    public void SetRingtone(int nRingtone) {
         m_objRingTone.SetRingTone(nRingtone);
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////
 
-    public boolean OpenVideoDevice()
-    {
-        if(m_bVideoDeviceCaptured == true)
+    public boolean OpenVideoDevice() {
+        if (m_bVideoDeviceCaptured == true)
             return true;
 
         CloseVideoDevice();
@@ -364,11 +340,10 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
 
         int nDeviceId = 0;
 
-        if(m_bFrontVideoCameraCaptured)
+        if (m_bFrontVideoCameraCaptured)
             nDeviceId = 1;
 
-        if(!mVaxAgentLib.OpenVideoDev(nDeviceId, nQuality))
-        {
+        if (!mVaxAgentLib.OpenVideoDev(nDeviceId, nQuality)) {
             return false;
         }
 
@@ -376,15 +351,13 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
         return true;
     }
 
-    public void CloseVideoDevice()
-    {
+    public void CloseVideoDevice() {
         m_bVideoDeviceCaptured = false;
         mVaxAgentLib.CloseVideoDev();
     }
 
-    public void SwitchVideoDevice()
-    {
-        if(!m_bVideoDeviceCaptured)
+    public void SwitchVideoDevice() {
+        if (!m_bVideoDeviceCaptured)
             return;
 
         m_bFrontVideoCameraCaptured = !m_bFrontVideoCameraCaptured;
@@ -393,8 +366,7 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
         OpenVideoDevice();
     }
 
-    public void ApplyVideoBitrate(int nQuality)
-    {
+    public void ApplyVideoBitrate(int nQuality) {
         mVaxAgentLib.VideoCodecBitRate(VaxUserAgentLib.VAX_CODEC_VP8, nQuality);
         mVaxAgentLib.VideoCodecBitRate(VaxUserAgentLib.VAX_CODEC_H263P, nQuality);
         mVaxAgentLib.VideoCodecBitRate(VaxUserAgentLib.VAX_CODEC_H263, nQuality);
@@ -403,28 +375,24 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     ////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////
 
-    public boolean IsMuteMic()
-    {
+    public boolean IsMuteMic() {
         return m_bMuteMic;
     }
 
-    public boolean MuteMic(boolean bMute)
-    {
-        if(!mVaxAgentLib.MuteMic(bMute))
-        return false;
+    public boolean MuteMic(boolean bMute) {
+        if (!mVaxAgentLib.MuteMic(bMute))
+            return false;
 
         m_bMuteMic = bMute;
         return true;
     }
 
-    public boolean IsMuteSpk()
-    {
+    public boolean IsMuteSpk() {
         return m_bMuteSpk;
     }
 
-    public boolean MuteSpk(boolean bMute)
-    {
-        if(!mVaxAgentLib.MuteSpk(bMute))
+    public boolean MuteSpk(boolean bMute) {
+        if (!mVaxAgentLib.MuteSpk(bMute))
             return false;
 
         m_bMuteSpk = bMute;
@@ -434,51 +402,42 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     ////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////
 
-    public boolean IsLineBusy()
-    {
+    public boolean IsLineBusy() {
         return mVaxAgentLib.IsLineBusy(0);
     }
 
-    public boolean IsLineConnected()
-    {
+    public boolean IsLineConnected() {
         return mVaxAgentLib.IsLineConnected(0);
     }
 
-    public boolean IsLineHold()
-    {
+    public boolean IsLineHold() {
         return mVaxAgentLib.IsLineHold(0);
     }
 
-    public static boolean IsOnline()
-    {
+    public static boolean IsOnline() {
         return new StoreLoginInfo().GetLoginStatus();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////
 
-    public boolean HoldLine()
-    {
+    public boolean HoldLine() {
         return mVaxAgentLib.HoldLine(0);
     }
 
-    public boolean UnHoldLine()
-    {
+    public boolean UnHoldLine() {
         return mVaxAgentLib.UnHoldLine(0);
     }
 
     //////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////
 
-    public boolean IsVideoEnabled()
-    {
+    public boolean IsVideoEnabled() {
         return m_bVideoEnabled;
     }
 
-    public boolean EnableVideo(boolean bEnable)
-    {
-        if(!mVaxAgentLib.EnableVideo(0, bEnable, bEnable))
-        {
+    public boolean EnableVideo(boolean bEnable) {
+        if (!mVaxAgentLib.EnableVideo(0, bEnable, bEnable)) {
             return false;
         }
 
@@ -489,15 +448,13 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////
 
-    private boolean OpenLine()
-    {
+    private boolean OpenLine() {
         mVaxAgentLib.CloseLine(0);
 
         int nLocalPortAudioRTP = -1;
         int nLocalPortVideoRTP = -1;
 
-        if (!NetworkFragment.IsRandomPortRTP())
-        {
+        if (!NetworkFragment.IsRandomPortRTP()) {
             nLocalPortAudioRTP = NetworkFragment.GetNetworkPortRTP();
             nLocalPortVideoRTP = nLocalPortAudioRTP + 2;
         }
@@ -505,16 +462,14 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
         return mVaxAgentLib.OpenLine(0, "", nLocalPortAudioRTP, nLocalPortVideoRTP);
     }
 
-    public boolean DialCall(String sDialNo)
-    {
-        if(!OpenLine())
+    public boolean DialCall(String sDialNo) {
+        if (!OpenLine())
             return false;
 
         return mVaxAgentLib.DialCall(0, "", "", sDialNo, -1, -1);
     }
 
-    public boolean DisconnectCall()
-    {
+    public boolean DisconnectCall() {
         if (!IsLineBusy())
             return false;
 
@@ -529,34 +484,27 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     //////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////
 
-    public void DiagnosticLog(boolean bEnable)
-    {
-        if(!bEnable)
-        {
+    public void DiagnosticLog(boolean bEnable) {
+        if (!bEnable) {
             m_sLogFile = "";
             return;
         }
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
-        {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             boolean bCreated = true;
 
             String sPath = Environment.getExternalStorageDirectory() + "/Android/data/" + VaxPhoneAPP.getAppContext().getPackageName();
 
             File objPkgDirectory = new File(sPath);
 
-            if (!objPkgDirectory.exists())
-            {
+            if (!objPkgDirectory.exists()) {
                 bCreated = objPkgDirectory.mkdirs();
             }
 
-            if (bCreated)
-            {
+            if (bCreated) {
                 File objFile = new File(sPath, "VaxLog.txt");
                 m_sLogFile = objFile.getPath();
-            }
-            else
-            {
+            } else {
                 m_sLogFile = "";
             }
 
@@ -573,31 +521,27 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     //////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////
 
-    public boolean AutoGainSpk(boolean bEnable)
-    {
+    public boolean AutoGainSpk(boolean bEnable) {
         return mVaxAgentLib.AutoGainSpk(bEnable, 20);
     }
 
-    public boolean AutoGainMic(boolean bEnable)
-    {
-        return mVaxAgentLib.AutoGainMic(bEnable,20);
+    public boolean AutoGainMic(boolean bEnable) {
+        return mVaxAgentLib.AutoGainMic(bEnable, 20);
     }
 
-    public boolean SetVolumeBoostSpk(boolean bEnable)
-    {
+    public boolean SetVolumeBoostSpk(boolean bEnable) {
         int nBoostVol = 0;
 
-        if(bEnable)
+        if (bEnable)
             nBoostVol = 20;
 
         return mVaxAgentLib.SetVolumeSpk(nBoostVol);
     }
 
-    public boolean SetVolumeBoostMic(boolean bEnable)
-    {
+    public boolean SetVolumeBoostMic(boolean bEnable) {
         int nBoostVol = 0;
 
-        if(bEnable)
+        if (bEnable)
             nBoostVol = 20;
 
         return mVaxAgentLib.SetVolumeMic(nBoostVol);
@@ -606,20 +550,17 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     //////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////
 
-    public boolean IsVoiceChangerEnabled()
-    {
+    public boolean IsVoiceChangerEnabled() {
         return m_bVoiceChangerEnabled;
     }
 
-    public boolean VoiceChanger(boolean bEnable)
-    {
-        if(!bEnable)
-        {
+    public boolean VoiceChanger(boolean bEnable) {
+        if (!bEnable) {
             m_bVoiceChangerEnabled = false;
             return mVaxAgentLib.VoiceChanger(-1);
         }
 
-        if(!mVaxAgentLib.VoiceChanger(VoiceChangerDialog.GetSelectedPitchNo()))
+        if (!mVaxAgentLib.VoiceChanger(VoiceChangerDialog.GetSelectedPitchNo()))
             return false;
 
         m_bVoiceChangerEnabled = true;
@@ -629,102 +570,84 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     //////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////
 
-    public boolean ForceDigitDTMF(int nTypeId, boolean bEnable)
-    {
+    public boolean ForceDigitDTMF(int nTypeId, boolean bEnable) {
         return mVaxAgentLib.ForceDigitDTMF(0, nTypeId, bEnable);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////
 
-    public void RejectCall()
-    {
+    public void RejectCall() {
         mVaxAgentLib.RejectCall(m_sIncomingCallId);
     }
 
-    public void AcceptCall()
-    {
-        if(!OpenLine())
+    public void AcceptCall() {
+        if (!OpenLine())
             return;
 
-        mVaxAgentLib.AcceptCall(0, m_sIncomingCallId, -1,-1);
+        mVaxAgentLib.AcceptCall(0, m_sIncomingCallId, -1, -1);
     }
 
-    public void MuteRingTone()
-    {
+    public void MuteRingTone() {
         m_objRingTone.MuteRingTone();
     }
 
-    public boolean NetworkReachability(boolean bEnable)
-    {
+    public boolean NetworkReachability(boolean bEnable) {
         return mVaxAgentLib.NetworkReachability(bEnable);
     }
 
-    public boolean DialRingEnable(String sFileName)
-    {
+    public boolean DialRingEnable(String sFileName) {
         return mVaxAgentLib.DialRingEnable(sFileName);
     }
 
-    public boolean BusyRingEnable(String sFileName)
-    {
+    public boolean BusyRingEnable(String sFileName) {
         return mVaxAgentLib.BusyRingEnable(sFileName);
     }
 
-    public boolean EchoCancellation(boolean bEnable)
-    {
+    public boolean EchoCancellation(boolean bEnable) {
         return mVaxAgentLib.EchoCancellation(bEnable);
     }
 
-    public boolean SelectVoiceCodec(int nCodecNo)
-    {
+    public boolean SelectVoiceCodec(int nCodecNo) {
         return mVaxAgentLib.SelectVoiceCodec(nCodecNo);
     }
 
-    public boolean SelectVideoCodec(int nCodecNo)
-    {
+    public boolean SelectVideoCodec(int nCodecNo) {
         return mVaxAgentLib.SelectVideoCodec(nCodecNo);
     }
 
-    public void DeselectAllVideoCodec()
-    {
+    public void DeselectAllVideoCodec() {
         mVaxAgentLib.DeselectAllVideoCodec();
     }
 
-    public void DeselectAllVoiceCodec()
-    {
+    public void DeselectAllVoiceCodec() {
         mVaxAgentLib.DeselectAllVoiceCodec();
     }
 
-    public boolean DeselectVoiceCodec(int nCodecNo)
-    {
+    public boolean DeselectVoiceCodec(int nCodecNo) {
         return mVaxAgentLib.DeselectVoiceCodec(nCodecNo);
     }
 
-    public boolean DeselectVideoCodec(int nCodecNo)
-    {
+    public boolean DeselectVideoCodec(int nCodecNo) {
         return mVaxAgentLib.DeselectVideoCodec(nCodecNo);
     }
 
-    public boolean CryptCOMM(boolean bEnable, String sRemoteIP, int nRemotePort)
-    {
+    public boolean CryptCOMM(boolean bEnable, String sRemoteIP, int nRemotePort) {
         return mVaxAgentLib.CryptCOMM(bEnable, sRemoteIP, nRemotePort);
     }
 
-    public boolean SpeakerPhone(boolean bEnable)
-    {
+    public boolean SpeakerPhone(boolean bEnable) {
         return mVaxAgentLib.SpeakerPhone(bEnable);
     }
 
-    public boolean IsSpeakerPhone()
-    {
+    public boolean IsSpeakerPhone() {
         return mVaxAgentLib.IsSpeakerPhone();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////
 
-    public void OnInitialized()
-    {
+    public void OnInitialized() {
         OnVaxStatusMsg("Account", "Account is online");
 
         m_objDialRing.Enable();
@@ -745,9 +668,8 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
 
         CallTabFragment.PostInitialized();
     }
-    
-    public void OnUnInitialized()
-    {
+
+    public void OnUnInitialized() {
         CloseVideoDevice();
         OnVaxStatusMsg("Account", "Account is offline");
     }
@@ -755,155 +677,144 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     //////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////
 
-    public void OnConnectingToRegister()
-    {
+    public void OnConnectingToRegister() {
         OnVaxStatusMsg("Register", "Trying to connect");
     }
 
-    public void OnTryingToRegister()
-    {
+    public void OnTryingToRegister() {
         OnVaxStatusMsg("Register", "Registering Account");
     }
 
-    public void OnFailToRegister(int nStatusCode, String sReasonPhrase)
-    {
+    public void OnFailToRegister(int nStatusCode, String sReasonPhrase) {
         OnVaxStatusMsg("Register", sReasonPhrase);
     }
 
-    public void OnSuccessToRegister()
-    {
+    public void OnSuccessToRegister() {
         OnVaxStatusMsg("Register", "Account Registered");
         AccountLoginActivity.PostSuccessToRegister();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////
-    
-    public void OnConnectingToReRegister()
-    {
+
+    public void OnConnectingToReRegister() {
 
     }
 
-    public void OnTryingToReRegister()
-    {
+    public void OnTryingToReRegister() {
 
     }
 
-    public void OnFailToReRegister(int nStatusCode, String sReasonPhrase)
-    {
+    public void OnFailToReRegister(int nStatusCode, String sReasonPhrase) {
         OnVaxStatusMsg("Re-Register", sReasonPhrase);
     }
 
-    public void OnSuccessToReRegister()
-    {
+    public void OnSuccessToReRegister() {
 
     }
 
-    public void OnTryingToUnRegister()
-    {
+    public void OnTryingToUnRegister() {
         OnVaxStatusMsg("Unregister", "Un-Registering Account");
     }
-    
-    public void OnFailToUnRegister()
-    {
+
+    public void OnFailToUnRegister() {
         OnVaxStatusMsg("Unregister", "Un-Register: Failed");
     }
-    
-    public void OnSuccessToUnRegister()
-    {
+
+    public void OnSuccessToUnRegister() {
         OnVaxStatusMsg("Unregister", "Account Un-Registered");
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////
 
-    public void OnTryingToRegisterREC()
-    {
-
-    }
-    
-    public void OnFailToRegisterREC(int nStatusCode, String sReasonPhrase)
-    {
-
-    }
-    
-    public void OnSuccessToRegisterREC()
-    {
-
-    }
-    
-    public void OnTryingToReRegisterREC()
-    {
-
-    }
-    
-    public void OnFailToReRegisterREC(int nStatusCode, String sReasonPhrase)
-    {
+    public void OnTryingToRegisterREC() {
 
     }
 
-    public void OnSuccessToReRegisterREC()
-    {
-
-    }
-    
-    public void OnTryingToUnRegisterREC()
-    {
+    public void OnFailToRegisterREC(int nStatusCode, String sReasonPhrase) {
 
     }
 
-    public void OnFailToUnRegisterREC()
-    {
+    public void OnSuccessToRegisterREC() {
 
     }
-    
-    public void OnSuccessToUnRegisterREC()
-    {
+
+    public void OnTryingToReRegisterREC() {
+
+    }
+
+    public void OnFailToReRegisterREC(int nStatusCode, String sReasonPhrase) {
+
+    }
+
+    public void OnSuccessToReRegisterREC() {
+
+    }
+
+    public void OnTryingToUnRegisterREC() {
+
+    }
+
+    public void OnFailToUnRegisterREC() {
+
+    }
+
+    public void OnSuccessToUnRegisterREC() {
 
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////
 
-    public void OnDialCallStarted(int nLineNo, String sCallerName, String sCallerId, String sDialNo)
-    {
+    public void OnDialCallStarted(int nLineNo, String sCallerName, String sCallerId, String sDialNo) {
         OnVaxStatusMsg("Call", "Connecting");
         CallTabFragment.PostDialCallStarted();
     }
 
-    public void OnDialingCall(int nLineNo, int nStatusCode, String sReasonPhrase)
-    {
+    public void OnDialingCall(int nLineNo, int nStatusCode, String sReasonPhrase) {
         OnVaxStatusMsg("Call", "Dialing");
     }
 
-    public void OnDialCallFailed(int nLineNo, int nStatusCode, String sReasonPhrase, String sContact)
-    {
+    public void OnDialCallFailed(int nLineNo, int nStatusCode, String sReasonPhrase, String sContact) {
         OnVaxStatusMsg("Call", sReasonPhrase);
+        if (GyCallActivity.instance != null) {
+            GyCallActivity.instance.onStopTimeCount();
+        }
         CallTabFragment.PostDialCallFailed(nStatusCode, sReasonPhrase);
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void OnConnectedCall(int nLineNo, String sToRTPIP, int nToRTPPort)
-    {
+    public void OnConnectedCall(int nLineNo, String sToRTPIP, int nToRTPPort) {
         OnVaxStatusMsg("Call", "Connected");
-        CallTabFragment.PostConnectedCall();
 
+        L_.e("TAG", "用户接听操作 OnConnectedCall");
+        if (GyCallActivity.instance != null) {
+            GyCallActivity.instance.onStartTimeCount();
+        }
+
+        CallTabFragment.PostConnectedCall();
         m_objProximitySensor.SetProximityMonitoringEnabled(true);
         mVaxPhoneNotify.StartCallNotification(MainTabActivity.class, m_sCallerName, m_sCallerId);
     }
 
-    public void OnHungupCall(int nLineNo)
-    {
+    public void OnHungupCall(int nLineNo) {
+        L_.e("TAG", "用户挂断操作 被叫方挂断 OnHungupCall");
+        if (GyCallActivity.instance != null) {
+            GyCallActivity.instance.onStopTimeCount();
+        }
         OnVaxStatusMsg("Call", "Hungup");
         OnDisconnectedCall();
     }
 
-    private void OnDisconnectedCall()
-    {
+    private void OnDisconnectedCall() {
+        L_.e("TAG", "用户操作 主叫方挂断  OnDisconnectedCall");
+        if (GyCallActivity.instance != null) {
+            GyCallActivity.instance.onStopTimeCount();
+        }
         CallTabFragment.PostDisconnectedCall();
-
         m_objProximitySensor.SetProximityMonitoringEnabled(false);
         mVaxPhoneNotify.StopCallNotification(true);
     }
@@ -911,8 +822,7 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     /////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////
 
-    public void OnIncomingCallStarted(String sCallId, String sCallerName, String sCallerId, String sDialNo, String sFromURI, String sToURI)
-    {
+    public void OnIncomingCallStarted(String sCallId, String sCallerName, String sCallerId, String sDialNo, String sFromURI, String sToURI) {
         m_sIncomingCallId = sCallId;
 
         StringBuilder sResultCallerName = new StringBuilder();
@@ -936,8 +846,7 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
         m_sCallerId = sCallerId;
     }
 
-    public void OnIncomingCallEnded(String sCallId)
-    {
+    public void OnIncomingCallEnded(String sCallId) {
         if (IncomingCallActivity.mIncomingCallActivity == null)
             return;
 
@@ -947,70 +856,58 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     /////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void OnTransferCallAccepted(int nLineNo)
-    {
+    public void OnTransferCallAccepted(int nLineNo) {
         OnVaxStatusMsg("Transfer", "Accepted");
     }
 
-    public void OnTransferCallFailed(int nLineNo, int nStatusCode, String sReasonPhrase)
-    {
+    public void OnTransferCallFailed(int nLineNo, int nStatusCode, String sReasonPhrase) {
         OnVaxStatusMsg("Transfer", sReasonPhrase);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void OnPlayWaveDone(int nLineNo)
-    {
+    public void OnPlayWaveDone(int nLineNo) {
 
     }
 
-    public void OnDigitDTMF(int nLineNo, String sDigit)
-    {
+    public void OnDigitDTMF(int nLineNo, String sDigit) {
 
     }
 
-    public void OnMsgNOTIFY(String sMsg)
-    {
+    public void OnMsgNOTIFY(String sMsg) {
 
     }
 
-    public void OnVoiceMailMsg(boolean bIsMsgWaiting, int nNewMsgCount, int nOldMsgCount, int nNewUrgentMsgCount, int nOldUrgentMsgCount, String sMsgAccount)
-    {
+    public void OnVoiceMailMsg(boolean bIsMsgWaiting, int nNewMsgCount, int nOldMsgCount, int nNewUrgentMsgCount, int nOldUrgentMsgCount, String sMsgAccount) {
 
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void OnRingToneStarted(String sCallId)
-    {
+    public void OnRingToneStarted(String sCallId) {
         m_objRingTone.StartRingTone();
     }
 
-    public void OnRingToneEnded(String sCallId)
-    {
+    public void OnRingToneEnded(String sCallId) {
         m_objRingTone.StopRingTone();
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////
 
-    private void WriteToLogFile(String sText)
-    {
-        if(m_sLogFile.length() == 0)
+    private void WriteToLogFile(String sText) {
+        if (m_sLogFile.length() == 0)
             return;
 
         FileWriter objFileWriter;
-        try
-        {
+        try {
             objFileWriter = new FileWriter(m_sLogFile, true);
             objFileWriter.write(sText);
             objFileWriter.flush();
             objFileWriter.close();
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
         }
     }
@@ -1018,22 +915,20 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     /////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void OnIncomingDiagnostic(String sMsgSIP, String sFromIP, int nFromPort)
-    {
-        if(m_sLogFile.equals(""))
+    public void OnIncomingDiagnostic(String sMsgSIP, String sFromIP, int nFromPort) {
+        if (m_sLogFile.equals(""))
             return;
 
-        String sLogPacket = "Received: " + sFromIP + " \n " +  nFromPort + " \n " +  sMsgSIP;
+        String sLogPacket = "Received: " + sFromIP + " \n " + nFromPort + " \n " + sMsgSIP;
 
         this.WriteToLogFile(sLogPacket);
     }
 
-    public void OnOutgoingDiagnostic(String sMsgSIP, String sToIP, int nToPort)
-    {
-        if(m_sLogFile.equals(""))
+    public void OnOutgoingDiagnostic(String sMsgSIP, String sToIP, int nToPort) {
+        if (m_sLogFile.equals(""))
             return;
 
-        String sLogPacket = "Sent: " + sToIP + " \n " +  nToPort + " \n " +  sMsgSIP;
+        String sLogPacket = "Sent: " + sToIP + " \n " + nToPort + " \n " + sMsgSIP;
 
         this.WriteToLogFile(sLogPacket);
     }
@@ -1041,138 +936,115 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     //////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////
 
-    public void OnAudioSessionLost(int nLineNo)
-    {
+    public void OnAudioSessionLost(int nLineNo) {
 
     }
 
-    public void OnSuccessToHold(int nLineNo)
-    {
+    public void OnSuccessToHold(int nLineNo) {
         OnVaxStatusMsg("Hold", "Successful");
     }
 
-    public void OnTryingToHold(int nLineNo)
-    {
+    public void OnTryingToHold(int nLineNo) {
         OnVaxStatusMsg("Hold", "Trying");
     }
 
-    public void OnFailToHold(int nLineNo)
-    {
+    public void OnFailToHold(int nLineNo) {
         OnVaxStatusMsg("Hold", "Failed");
     }
 
-    public void OnSuccessToUnHold(int nLineNo)
-    {
+    public void OnSuccessToUnHold(int nLineNo) {
         OnVaxStatusMsg("Unhold", "Successful");
     }
 
-    public void OnTryingToUnHold()
-    {
+    public void OnTryingToUnHold() {
         OnVaxStatusMsg("Unhold", "Trying");
     }
 
-    
-    public void OnFailToUnHold(int nLineNo)
-    {
+
+    public void OnFailToUnHold(int nLineNo) {
         OnVaxStatusMsg("Unhold", "Failed");
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void OnChatContactStatus(String sUserName, int nStatusId)
-    {
+    public void OnChatContactStatus(String sUserName, int nStatusId) {
         ChatContactRecyclerView.PostChatContactStatus(sUserName, nStatusId);
     }
 
-    public void OnChatSendMsgTextSuccess(String sUserName, String sMsgText, int nUserValue32bit)
-    {
+    public void OnChatSendMsgTextSuccess(String sUserName, String sMsgText, int nUserValue32bit) {
 
     }
 
-    public void OnChatSendMsgTextFail(String sUserName, int nStatusCode, String sReasonPhrase, String sMsgText, int nUserValue32bit)
-    {
+    public void OnChatSendMsgTextFail(String sUserName, int nStatusCode, String sReasonPhrase, String sMsgText, int nUserValue32bit) {
 
     }
 
-    public void OnChatSendMsgTypingSuccess(String sUserName, int nUserValue32bit)
-    {
+    public void OnChatSendMsgTypingSuccess(String sUserName, int nUserValue32bit) {
 
     }
 
-    public void OnChatSendMsgTypingFail(String sUserName, int nStatusCode, String sReasonPhrase, int nUserValue32bit)
-    {
+    public void OnChatSendMsgTypingFail(String sUserName, int nStatusCode, String sReasonPhrase, int nUserValue32bit) {
 
     }
 
-    public void OnChatRecvMsgText(String sUserName, String sMsgText, boolean bIsChatContact)
-    {
+    public void OnChatRecvMsgText(String sUserName, String sMsgText, boolean bIsChatContact) {
         if (!bIsChatContact)
             ChatAddContact(sUserName, false);
 
         StoreChatMsg objStore = new StoreChatMsg();
         objStore.AddChatMsg(sUserName, sMsgText, false);
 
-        if(!MainTabActivity.IsAvailableUI())
+        if (!MainTabActivity.IsAvailableUI())
             mVaxPhoneNotify.StartMsgNotification(sUserName, sMsgText, MainTabActivity.class);
 
         ChatContactRecyclerView.PostChatMessageText(sUserName, bIsChatContact, sMsgText, false);
     }
 
-    public void OnChatRecvMsgTypingStart(String sUserName)
-    {
+    public void OnChatRecvMsgTypingStart(String sUserName) {
 
     }
 
-    public void OnChatRecvMsgTypingStop(String sUserName)
-    {
+    public void OnChatRecvMsgTypingStop(String sUserName) {
 
     }
 
-    public void OnVoiceStreamPCM(int nLineNo, byte[] pDataPCM, int nSizePCM)
-    {
+    public void OnVoiceStreamPCM(int nLineNo, byte[] pDataPCM, int nSizePCM) {
 
     }
 
-    
-    public void OnDetectedAMD(int nLineNo, boolean bIsHuman)
-    {
+
+    public void OnDetectedAMD(int nLineNo, boolean bIsHuman) {
 
     }
 
-    public void OnHoldCall(int nLineNo)
-    {
+    public void OnHoldCall(int nLineNo) {
 
     }
 
-    public void OnUnHoldCall(int nLineNo)
-    {
+    public void OnUnHoldCall(int nLineNo) {
 
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void OnVideoDeviceFrameRGB(int nDeviceId, byte[] pFrameRGB, int nFrameSize, int nFrameWidth, int nFrameHeight)
-    {
+    public void OnVideoDeviceFrameRGB(int nDeviceId, byte[] pFrameRGB, int nFrameSize, int nFrameWidth, int nFrameHeight) {
         CallTabFragment.PostVideoDeviceFrameRGB(nDeviceId, pFrameRGB, nFrameSize, nFrameWidth, nFrameHeight);
     }
 
-    
-    public void OnVideoRemoteFrameRGB(int nLineNo, byte[] pFrameRGB, int nFrameSize, int nFrameWidth, int nFrameHeight)
-    {
+
+    public void OnVideoRemoteFrameRGB(int nLineNo, byte[] pFrameRGB, int nFrameSize, int nFrameWidth, int nFrameHeight) {
         CallTabFragment.PostOnVideoRemoteFrameRGB(nLineNo, pFrameRGB, nFrameSize, nFrameWidth, nFrameHeight);
     }
 
-    
-    public void OnVideoRemoteStarted(int nLineNo)
-    {
+
+    public void OnVideoRemoteStarted(int nLineNo) {
         m_bVideoStreamStarted = true;
         CallTabFragment.OnVideoRemoteStarted(nLineNo);
     }
 
-    public void OnVideoRemoteEnded(int nLineNo)
-    {
+    public void OnVideoRemoteEnded(int nLineNo) {
         m_bVideoStreamStarted = false;
         CallTabFragment.OnVideoRemoteEnded(nLineNo);
     }
@@ -1180,36 +1052,30 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     /////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void OnServerConnectingREC(int nLineNo, int nStatusCode, String sReasonPhrase)
-    {
+    public void OnServerConnectingREC(int nLineNo, int nStatusCode, String sReasonPhrase) {
 
     }
 
-    public void OnServerConnectedREC(int nLineNo)
-    {
+    public void OnServerConnectedREC(int nLineNo) {
 
     }
 
-    public void OnServerFailedREC(int nLineNo, int nStatusCode, String sReasonPhrase)
-    {
+    public void OnServerFailedREC(int nLineNo, int nStatusCode, String sReasonPhrase) {
 
     }
 
-    public void OnServerHungupREC(int nLineNo)
-    {
+    public void OnServerHungupREC(int nLineNo) {
 
     }
 
-    public void OnAddCallHistory(boolean bOutboundCallType, String sCallerName, String sCallerId, String sDialNo, long nStartTime, long nEndTime, long nDuration, long nDayNo, int nHistoryTypeId)
-    {
+    public void OnAddCallHistory(boolean bOutboundCallType, String sCallerName, String sCallerId, String sDialNo, long nStartTime, long nEndTime, long nDuration, long nDayNo, int nHistoryTypeId) {
         StringBuilder sResultName = new StringBuilder();
         StringBuilder sResultPhoneNo = new StringBuilder();
         StringBuilder sResultContactId = new StringBuilder();
 
         if (bOutboundCallType)
             CallInfo.PrepareCallInfo(sCallerName, sDialNo, sResultName, sResultPhoneNo, sResultContactId);
-        else
-        {
+        else {
             CallInfo.PrepareCallInfo(sCallerName, sCallerId, sResultName, sResultPhoneNo, sResultContactId);
         }
 
@@ -1219,16 +1085,12 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
         RecentRecyclerView.PostAddCallHistory(nRecordId, bOutboundCallType, sResultName.toString(), sResultPhoneNo.toString(), nStartTime, nEndTime, nDuration, nDayNo, nHistoryTypeId);
     }
 
-    public void OnNetworkReachability(boolean bAvailable)
-    {
+    public void OnNetworkReachability(boolean bAvailable) {
         String sMsg;
 
-        if (bAvailable)
-        {
+        if (bAvailable) {
             sMsg = "Network is available";
-        }
-        else
-        {
+        } else {
             sMsg = "Network is not available";
         }
 
@@ -1238,41 +1100,34 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     ////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void OnAudioDeviceMicVU(int nLevelVU)
-    {
+    public void OnAudioDeviceMicVU(int nLevelVU) {
 
     }
 
-    
-    public void OnAudioDeviceSpkVU(int nLevelVU)
-    {
+
+    public void OnAudioDeviceSpkVU(int nLevelVU) {
     }
 
     @Override
-    public void OnBusyLampSubscribeSuccess(String sUserName)
-    {
+    public void OnBusyLampSubscribeSuccess(String sUserName) {
 
     }
 
     @Override
-    public void OnBusyLampSubscribeFailed(String sUserName, int nStatusCode, String sReasonPhrase)
-    {
+    public void OnBusyLampSubscribeFailed(String sUserName, int nStatusCode, String sReasonPhrase) {
 
     }
 
     @Override
-    public void OnBusyLampContactStatus(String sUserName, int nStatusId)
-    {
+    public void OnBusyLampContactStatus(String sUserName, int nStatusId) {
 
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void OnVaxErrorMsg(String sFuncName, String sErrorMsg, int nErrorCode)
-    {
-        if (sFuncName.equals("OpenVideoDev"))
-        {
+    public void OnVaxErrorMsg(String sFuncName, String sErrorMsg, int nErrorCode) {
+        if (sFuncName.equals("OpenVideoDev")) {
             if (m_bVideoCaptureErrorShown)
                 return;
 
@@ -1284,18 +1139,15 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
         DialpadFragment.PostStatusText(sErrorMsg);
     }
 
-    private void OnVaxStatusMsg(String sFuncType, String sMsg)
-    {
-        if(sFuncType.equals("Account") || sFuncType.equals("Network"))
-        {
+    private void OnVaxStatusMsg(String sFuncType, String sMsg) {
+        if (sFuncType.equals("Account") || sFuncType.equals("Network")) {
             AccountLoginActivity.PostStatusText(sMsg);
             CallTabFragment.PostStatusText(sMsg);
             DialpadFragment.PostStatusText(sMsg);
             return;
         }
 
-        if(sFuncType.equals("Register") || sFuncType.equals("Re-Register") || sFuncType.equals("Unregister"))
-        {
+        if (sFuncType.equals("Register") || sFuncType.equals("Re-Register") || sFuncType.equals("Unregister")) {
             AccountLoginActivity.PostStatusText(sMsg);
         }
 
@@ -1308,19 +1160,16 @@ public class VaxPhoneSIP extends VaxPhoneService implements IVaxUserAgentLib
     ///////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////
 
-    private void ShowMsg(Context context, String sMsg)
-    {
+    private void ShowMsg(Context context, String sMsg) {
         AlertDialog.Builder alertDialogBuilder;
         AlertDialog objAlertDialog;
 
         alertDialogBuilder = new AlertDialog.Builder(context);
         alertDialogBuilder.setMessage(sMsg)
                 .setCancelable(false)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener()
-                {
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
+                    public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
                 });

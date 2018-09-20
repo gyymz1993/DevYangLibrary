@@ -1,6 +1,8 @@
 package com.utils.gyymz.http.subscriber;
 
 
+import com.utils.gyymz.mvp.base.BaseView;
+
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -19,11 +21,12 @@ import io.reactivex.disposables.Disposable;
 public abstract class ResponseSubscriber<T> implements Observer<T>,
         ResponseHandler.CustomHandler<T> {
 
-    private ResponseHandler<T> handler;
+    protected ResponseHandler<T> handler;
     protected Disposable disposable;
 
-    public ResponseSubscriber() {
-        handler = new ResponseHandler<>(this);
+
+    public ResponseSubscriber(BaseView view) {
+        handler = new ResponseHandler<>(this,view);
     }
 
     /**
@@ -56,6 +59,7 @@ public abstract class ResponseSubscriber<T> implements Observer<T>,
     @Override
     public void onError(Throwable e) {
         cancelRequest();
+        handler.requestError(e.getMessage());
         handler.onError(e);
         handler = null;
     }

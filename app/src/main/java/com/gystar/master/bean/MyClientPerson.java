@@ -2,11 +2,12 @@ package com.gystar.master.bean;
 
 import com.utils.gyymz.http.callback.DataBeanCallBack;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class MyClientPerson extends DataBeanCallBack<MyClientPerson.DataBean> {
 
-    public static class DataBean {
+    public static class DataBean implements Serializable{
         /**
          * conditions : null
          * currPage : 1
@@ -81,7 +82,7 @@ public class MyClientPerson extends DataBeanCallBack<MyClientPerson.DataBean> {
             this.page = page;
         }
 
-        public static class PageBean {
+        public static class PageBean implements Serializable{
             /**
              * id : 57
              * can_call_time :
@@ -93,6 +94,13 @@ public class MyClientPerson extends DataBeanCallBack<MyClientPerson.DataBean> {
              * name : 魏胜滨
              */
 
+            private boolean showBuy;
+            private String remark;
+            private String order_time;
+            private String work_status;
+
+
+            /*--------------*/
             private int id;
             private String can_call_time;
             private String phone;
@@ -101,6 +109,16 @@ public class MyClientPerson extends DataBeanCallBack<MyClientPerson.DataBean> {
             private String shelf_time;
             private String area_name;
             private String name;
+
+            private boolean isChecked;
+
+            public boolean isChecked() {
+                return isChecked;
+            }
+
+            public void setChecked(boolean checked) {
+                isChecked = checked;
+            }
 
             public int getId() {
                 return id;
@@ -164,6 +182,39 @@ public class MyClientPerson extends DataBeanCallBack<MyClientPerson.DataBean> {
 
             public void setName(String name) {
                 this.name = name;
+            }
+
+            public String getRemark() {
+                return remark;
+            }
+
+            public void setRemark(String remark) {
+                this.remark = remark;
+            }
+
+            public String getOrder_time() {
+                return order_time;
+            }
+
+            public void setOrder_time(String order_time) {
+                this.order_time = order_time;
+            }
+
+            public String getWork_status() {
+                return work_status;
+            }
+
+            public void setWork_status(String work_status) {
+                this.work_status = work_status;
+            }
+
+
+            public boolean isShowBuy() {
+                return showBuy;
+            }
+
+            public void setShowBuy(boolean showBuy) {
+                this.showBuy = showBuy;
             }
         }
     }

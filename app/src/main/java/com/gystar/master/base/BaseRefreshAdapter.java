@@ -28,6 +28,7 @@ public abstract class BaseRefreshAdapter<T> extends BaseRecyclerAdapter<BaseRecy
         this.setListData(this.mDatas);
     }
 
+
     protected abstract void convert(BaseRecyclerHolder var1, T var2, int var3);
 
     @Override

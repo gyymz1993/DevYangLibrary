@@ -1,7 +1,11 @@
 package com.utils.gyymz.mvp.base;
 
 
+import android.view.View;
+
+import com.lsjr.net.R;
 import com.utils.gyymz.base.BaseAppCompatActivity;
+import com.utils.gyymz.wiget.NavigationBarView;
 
 import java.lang.reflect.ParameterizedType;
 
@@ -42,5 +46,16 @@ public abstract class MVPBaseActivity<P extends BasePresenter> extends BaseAppCo
 
     }
 
+
+    protected NavigationBarView showNavigationBarCanBack() {
+        showNavigationBarView().setBackgroundRes(NavigationBarView.NavigationViewType.LEFT_IV, R.drawable.return_icon)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onBackPressed();
+                    }
+                });
+        return getNavigationBarView();
+    }
 
 }

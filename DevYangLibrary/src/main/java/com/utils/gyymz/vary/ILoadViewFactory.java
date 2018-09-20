@@ -26,8 +26,6 @@ import android.view.View.OnClickListener;
  */
 public interface ILoadViewFactory {
 
-	ILoadView madeLoadMoreView();
-
 	ILoadView madeLoadView();
 
 	/**
@@ -56,7 +54,7 @@ public interface ILoadViewFactory {
 		 * 显示加载失败
 		 * @param e 
 		 */
-		void showFail(Exception e);
+		void showFail(String e);
 
 		/**
 		 * 显示空数据布局
@@ -67,13 +65,19 @@ public interface ILoadViewFactory {
 		 * 有数据的时候，toast提示失败
 		 * @param e 
 		 */
-		void tipFail(Exception e);
+		void tipFail(String e);
 
 		/**
 		 * 显示原先的布局
 		 */
 		void restore();
 
+
+		/**
+		 * 设置图片
+		 * @param imageResourceId
+		 */
+		void showEmptSrc(int imageResourceId);
 	}
 
 	/**

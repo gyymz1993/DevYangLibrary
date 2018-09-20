@@ -4,16 +4,21 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.andview.adapter.BaseRecyclerHolder;
 import com.andview.listener.OnItemClickListener;
+import com.gystar.master.Config.netApi.AppConfig;
 import com.gystar.master.MainUI.main.MainTabActivity;
 import com.gystar.master.base.BaseRefreshAdapter;
 import com.gystar.master.bean.CityListBean;
 import com.utils.gyymz.mvp.base.MVPLazyFragment;
+import com.utils.gyymz.utils.SpUtils;
+import com.utils.gyymz.utils.T_;
 import com.utils.gyymz.utils.UIUtils;
 
 import java.util.ArrayList;
@@ -45,6 +50,12 @@ public class CitySelectFragment extends MVPLazyFragment<CitySelectPersenter> imp
     TextView tvNainxian;
     @BindView(R.id.id_tv_user_next)
     TextView tvUserNext;
+
+    @BindView(R.id.ed_user_name)
+    EditText edUserName;
+
+
+    private CityListBean.DataBean currentCity;
 
 
     private List<CityListBean.DataBean> data = new ArrayList<>();
@@ -87,10 +98,20 @@ public class CitySelectFragment extends MVPLazyFragment<CitySelectPersenter> imp
         tvUserNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openActivity(MainTabActivity.class);
-                getHoldingActivity().finish();
+               String phome = SpUtils.getInstance().getString(AppConfig.USER_PHONE);
+
+               if (TextUtils.isEmpty(edUserName.getText().toString())){
+                   T_.showCustomToast("请填写用户名");
+               }else {
+                   mPresenter.getAddusermessage(phome, currentCity.getId() + "",
+                           edUserName.getText().toString(), "1");
+               }
+
+             //  openActivity(MainTabActivity.class);
+              // getHoldingActivity().finish();
             }
         });
+
     }
 
     @Override
@@ -112,6 +133,12 @@ public class CitySelectFragment extends MVPLazyFragment<CitySelectPersenter> imp
     @Override
     public void setCityData(List<CityListBean.DataBean> data) {
         citySelectItemAdapter.setListData(data);
+    }
+
+    @Override
+    public void regesterSuccess() {
+        openActivity(MainTabActivity.class);
+        getHoldingActivity().finish();
     }
 
     public void initRv() {
@@ -153,9 +180,20 @@ public class CitySelectFragment extends MVPLazyFragment<CitySelectPersenter> imp
         rvUserView.setAdapter(citySelectItemAdapter);
     }
 
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showNetWorkErrorView() {
+
+    }
+
 
     public class CitySelectItemAdapter extends BaseRefreshAdapter<CityListBean.DataBean> {
         private int selected = 0;
+        List<Integer> selects=new ArrayList<>();
 
         public void setSelect(int position) {
             if (selected == position)
@@ -172,6 +210,7 @@ public class CitySelectFragment extends MVPLazyFragment<CitySelectPersenter> imp
         protected void convert(BaseRecyclerHolder viewHolder, CityListBean.DataBean var2, int position) {
             TextView cityName = viewHolder.getView(R.id.id_tv_city_name);
             if (position == selected) {
+                currentCity = var2;
                 cityName.setBackgroundResource(R.drawable.city_selector);
                 cityName.setTextColor(UIUtils.getColor(R.color.gytheme));
                 selectCity.setText(var2.getName());

@@ -102,13 +102,37 @@
                     android:textColor="@color/white" />
             </LinearLayout>
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="登录即同意"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/id_user_greement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="《光银网注册/登录用户协议》"
+                    android:textColor="@color/indicatorcolor"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/id_tv_confir"
                 android:layout_width="match_parent"
                 android:layout_height="35dip"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="55dp"
+                android:layout_marginTop="35dp"
                 android:background="@drawable/login_code_shape"
                 android:enabled="true"
                 android:gravity="center"

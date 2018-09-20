@@ -35,9 +35,9 @@ public class MeiziListView extends LifeRecyclerView<MyCollectPresenter> implemen
                 StaggeredGridLayoutManager.VERTICAL);
         setLayoutManager(mGridViewLayoutManager);
         mPresenter.getAppBasicInfo1();
-       // mPresenter.cancelRequest("MyCollectPresenter");
+       // mPresenter.cancelRequest("GyCallPresenter");
        // mPresenter.getAppBasicInfo();
-       // mPresenter.cancelRequest("MyCollectPresenter");
+       // mPresenter.cancelRequest("GyCallPresenter");
 
     }
 
@@ -51,5 +51,15 @@ public class MeiziListView extends LifeRecyclerView<MyCollectPresenter> implemen
     @Override
     public void getDataSucceed(String payParams) {
         T_.showCustomToast(payParams);
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showNetWorkErrorView() {
+
     }
 }

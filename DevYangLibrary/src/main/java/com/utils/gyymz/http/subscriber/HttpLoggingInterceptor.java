@@ -1,6 +1,6 @@
 package com.utils.gyymz.http.subscriber;
 
-import android.util.Log;
+import com.utils.gyymz.utils.L_;
 
 import java.io.IOException;
 
@@ -28,18 +28,18 @@ public class HttpLoggingInterceptor implements Interceptor {
         if (request.body() != null)
             request.body().writeTo(buffer);
 
-        Log.e(TAG, String.format("Sending request %s on %s%n%sRequest Params: %s",
+        L_.e(TAG, String.format("Sending request %s on %s%n%sRequest Params: %s",
                 request.url(), chain.connection(), request.headers(), buffer.clone().readUtf8()));
         buffer.close();
 
         Response response = chain.proceed(request);
-        Log.e(TAG, response.toString());
+        L_.e(TAG, response.toString());
         long t2 = System.nanoTime();
 
         BufferedSource source = response.body().source();
         source.request(Long.MAX_VALUE);
         buffer = source.buffer().clone();
-        Log.e(TAG, String.format("Received response for %s in %.1fms%n%sResponse Json: %s",
+        L_.e(TAG, String.format("Received response for %s in %.1fms%n%sResponse Json: %s",
                 response.request().url(), (t2 - t1) / 1e6d, response.headers(),
                 buffer.readUtf8()));
         buffer.close();

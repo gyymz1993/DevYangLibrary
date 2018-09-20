@@ -2,10 +2,7 @@ package com.gystar.master.MainUI.main.TabFrag;
 
 import com.gystar.master.bean.MyClientPerson;
 import com.utils.gyymz.mvp.base.BasePresenter;
-import com.utils.gyymz.mvp.base.BaseView;
 import com.utils.gyymz.pagination.BasePaginationView;
-
-import java.util.List;
 
 /**
  * MVPPlugin
@@ -17,6 +14,15 @@ public class MeContract {
         void getClientList(MyClientPerson  myClientPerson, boolean reload);
 
         void noMoreData();
+
+        void hasNoData();
+
+
+        void loadFaild(String error);
+
+
+
+        void buyTopPriceBuy();
     }
 
     interface Presenter extends BasePresenter<View> {

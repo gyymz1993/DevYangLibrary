@@ -1,7 +1,6 @@
-package com.gystar.master.MainUI.main.TopUP;
+package com.gystar.master.MainUI.main.Home.TopUP;
 
 import com.gystar.master.bean.TopBean;
-import com.utils.gyymz.http.callback.DataBeanCallBack;
 import com.utils.gyymz.mvp.base.BasePresenter;
 import com.utils.gyymz.mvp.base.BaseView;
 

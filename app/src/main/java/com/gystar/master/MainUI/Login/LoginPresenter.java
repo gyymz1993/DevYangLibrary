@@ -28,18 +28,22 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
 
     public void doCodeLogin(String number, String code) {
         api.getLoginVerfy(number, code).compose(new ResponseTransformer<>())
-                .subscribe(new ResponseSubscriber<UserBean>() {
+                .subscribe(new ResponseSubscriber<UserBean>(mvpView) {
                     @Override
                     public void success(UserBean baseData) {
                         L_.e(baseData.toString());
                         if (mvpView != null) {
-                             mvpView.doLogin(baseData);
+                            mvpView.doLogin(baseData);
                         }
                     }
 
                     @Override
                     public void requestError(String exception) {
                         Log.e("TAG", exception);
+                        T_.showToastReal(exception);
+                        if (mvpView != null) {
+                            mvpView.hideLoading();
+                        }
                     }
                 });
     }
@@ -47,10 +51,11 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
     public void getCode(String phoneNumber) {
         api.getLoginSMS(phoneNumber)
                 .compose(new ResponseTransformer<>())
-                .subscribe(new ResponseSubscriber<DataBeanCallBack>() {
+                .subscribe(new ResponseSubscriber<DataBeanCallBack>(mvpView) {
                     @Override
                     public void success(DataBeanCallBack baseData) {
                         if (mvpView != null) {
+                            T_.showCustomToast("获取验证码成功");
                             mvpView.getCode();
                         }
                     }
@@ -58,12 +63,16 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                     @Override
                     public void requestError(String exception) {
                         Log.e("TAG", exception);
+                        T_.showToastReal(exception);
+                        if (mvpView != null) {
+                            mvpView.hideLoading();
+                        }
                     }
                 });
 
     }
 
-    private void commHttp(String number, String code){
+    private void commHttp(String number, String code) {
         HashMap<String, String> stringStringHashMap = new HashMap<>();
         stringStringHashMap.put("phone", number);
         stringStringHashMap.put("smscode", code);

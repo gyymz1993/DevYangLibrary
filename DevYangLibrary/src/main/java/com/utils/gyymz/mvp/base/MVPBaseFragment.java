@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.lsjr.net.R;
 import com.utils.gyymz.base.BaseAppCompatFragment;
+import com.utils.gyymz.wiget.NavigationBarView;
 
 
 /**
@@ -62,4 +64,14 @@ public abstract class MVPBaseFragment<P extends BasePresenterImpl> extends BaseA
     }
 
     protected abstract P getDelegateClass();
+
+
+    protected void showNavigationBarBack() {
+        getNavigationBarView().setBackgroundRes(NavigationBarView.NavigationViewType.LEFT_IV, R.drawable.return_icon)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                });
+    }
 }

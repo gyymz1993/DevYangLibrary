@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/GrayColor">
+    android:background="@color/gy_bg_color">
 
     <!--
     2、当NestedScrollView嵌套RecycleView布局由Fragment管理，Fragment切换时会自动滑动到ReycleView的顶部。
@@ -14,7 +14,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/GrayColor"
+        android:background="@color/gy_bg_color"
         android:descendantFocusability="blocksDescendants"
         android:orientation="vertical">
 
@@ -48,6 +48,20 @@
                     android:text="靠谱的信贷助手"
                     android:textColor="@color/white"
                     android:textSize="20dp" />
+
+
+                <TextView
+                    android:id="@+id/id_tv_tops"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="30dp"
+                    android:drawableLeft="@drawable/home_head_logo"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="30dp" />
+
+
             </RelativeLayout>
 
             <LinearLayout
@@ -72,21 +86,21 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/id_tv_client_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="给你脸你就拿着"
                             android:textColor="@color/black"
                             android:textSize="16dp" />
 
-                        <TextView
+                        <ImageView
+                            android:id="@+id/id_ig_setting"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
-                            android:text="充值  >"
+                            android:src="@drawable/ic_contact"
                             android:textColor="@color/gytheme"
-                            android:textSize="16dp"
-                            android:visibility="gone" />
+                            android:textSize="16dp" />
                     </RelativeLayout>
 
 
@@ -97,10 +111,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/id_tv_up_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="剩余通话时长:100 min"
                             android:textColor="@color/black"
                             android:textSize="14dp" />
 

@@ -21,6 +21,7 @@ import com.utils.gyymz.statusbar.StatusBarCompat;
 import com.utils.gyymz.utils.UIUtils;
 import com.utils.gyymz.vary.ILoadViewFactory;
 import com.utils.gyymz.vary.MyLoadViewFactory;
+import com.utils.gyymz.wiget.LoadingDialog;
 import com.utils.gyymz.wiget.NavigationBarView;
 
 import butterknife.ButterKnife;
@@ -37,12 +38,14 @@ public abstract class BaseAppCompatActivity extends RxActivity {
     private ILoadViewFactory loadViewFactory;
     private NavigationBarView navigationBarView;
     private Unbinder unbinder;
+    private LoadingDialog progressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         unbinder = ButterKnife.bind(this);
+        progressDialog = new LoadingDialog(this);
         initPresenter();
         afterCreate(savedInstanceState);
         //setTranslucentStatusBar();
@@ -107,6 +110,10 @@ public abstract class BaseAppCompatActivity extends RxActivity {
         if (unbinder != null) {
             unbinder.unbind();
         }
+        if (progressDialog!=null){
+            progressDialog.dismissProgressDialog();
+        }
+
     }
 
     public void openActivity(Class<?> pClass, Bundle bundle) {
@@ -236,4 +243,73 @@ public abstract class BaseAppCompatActivity extends RxActivity {
     public NavigationBarView getNavigationBarView() {
         return navigationBarView;
     }
+
+
+
+
+    /**
+     * 显示加载的ProgressDialog
+     */
+    public void showProgressDialog() {
+        progressDialog.showProgressDialog();
+    }
+
+    /**
+     * 显示有加载文字ProgressDialog，文字显示在ProgressDialog的下面
+     *
+     * @param text 需要显示的文字
+     */
+    public void showProgressDialogWithText(String text) {
+        progressDialog.showProgressDialogWithText(text);
+    }
+
+    /**
+     * 显示加载成功的ProgressDialog，文字显示在ProgressDialog的下面
+     *
+     * @param message 加载成功需要显示的文字
+     * @param time    需要显示的时间长度(以毫秒为单位)
+     */
+    public void showProgressSuccess(String message, long time) {
+        progressDialog.showProgressSuccess(message, time);
+    }
+
+    /**
+     * 显示加载成功的ProgressDialog，文字显示在ProgressDialog的下面
+     * ProgressDialog默认消失时间为1秒(1000毫秒)
+     *
+     * @param message 加载成功需要显示的文字
+     */
+    public void showProgressSuccess(String message) {
+        progressDialog.showProgressSuccess(message);
+    }
+
+    /**
+     * 显示加载失败的ProgressDialog，文字显示在ProgressDialog的下面
+     *
+     * @param message 加载失败需要显示的文字
+     * @param time    需要显示的时间长度(以毫秒为单位)
+     */
+    public void showProgressFail(String message, long time) {
+        progressDialog.showProgressFail(message, time);
+    }
+
+    /**
+     * 显示加载失败的ProgressDialog，文字显示在ProgressDialog的下面
+     * ProgressDialog默认消失时间为1秒(1000毫秒)
+     *
+     * @param message 加载成功需要显示的文字
+     */
+    public void showProgressFail(String message) {
+        progressDialog.showProgressFail(message);
+    }
+
+    /**
+     * 隐藏加载的ProgressDialog
+     */
+    public void dismissProgressDialog() {
+        progressDialog.dismissProgressDialog();
+    }
+
+
+
 }

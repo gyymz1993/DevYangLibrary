@@ -40,8 +40,8 @@ public class VaxPhoneSIPLogin {
     }
 
     private static void UpdateLogInInfo() {
-        int max = 20;
-        int min = 10;
+        int max = 45;
+        int min = 1;
         Random random = new Random();
         int s = random.nextInt(max) % (max - min + 1) + min;
         if (s < 10) {

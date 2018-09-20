@@ -1,7 +1,12 @@
 package com.gystar.master.MainUI.Login;
 
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,6 +19,7 @@ import com.gystar.master.CustomViews.EdittextListener;
 import com.gystar.master.CustomViews.LineEditText;
 import com.gystar.master.MainUI.main.InitSet.IninActivity;
 import com.gystar.master.MainUI.main.MainTabActivity;
+import com.gystar.master.MoudleContrl.VaxPhoneSIPLogin;
 import com.gystar.master.Utils.RegexpUtils;
 import com.gystar.master.bean.UserBean;
 import com.utils.gyymz.BaseApplicationCompat;
@@ -25,7 +31,9 @@ import com.utils.gyymz.utils.UIUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import vaxsoft.com.vaxphone.MainUtil.DialogUtil;
 import vaxsoft.com.vaxphone.R;
+import vaxsoft.com.vaxphone.VaxPhoneSIP;
 
 
 /**
@@ -51,26 +59,9 @@ public class LoginActivity extends MVPBaseActivity<LoginPresenter> implements Lo
 
     @Override
     protected void afterCreate(Bundle savedInstanceState) {
-        BaseApplicationCompat.instance().setStudio(this, new UserSensorEventListener() {
-            @Override
-            public void userOnSensorEventListener() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                    }
-                });
-            }
-        });
-        showLoadingView();
+        onInitVaxsoft();
         setOnclickListener();
         initKeyBroadListener();
-        UIUtils.getHandler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                showRestoreView();
-            }
-        }, 3000);
     }
 
 
@@ -125,7 +116,6 @@ public class LoginActivity extends MVPBaseActivity<LoginPresenter> implements Lo
                 String number = idEdNumber.getText().toString();
                 if (!TextUtils.isEmpty(number) && RegexpUtils.isMobile(number)) {
                     // showProgressDialogWithText("获取验证码");
-                    T_.showCustomToast("获取验证码成功");
                     mPresenter.getCode(number);
                 } else {
                     T_.showCustomToast("请输入正确的手机号码");
@@ -139,8 +129,7 @@ public class LoginActivity extends MVPBaseActivity<LoginPresenter> implements Lo
                 } else if (TextUtils.isEmpty(code)) {
                     T_.showCustomToast("请输入验证码");
                 } else {
-                    T_.showCustomToast("登陆成功");
-                    //openActivity(MainTabActivity.class);
+                    showProgressDialogWithText("正在登陆");
                     UIUtils.hideKeyboard(idEdCode);
                     mPresenter.doCodeLogin(number1, code);
                 }
@@ -157,17 +146,71 @@ public class LoginActivity extends MVPBaseActivity<LoginPresenter> implements Lo
 
     @Override
     public void doLogin(UserBean userBean) {
-        if (userBean != null && userBean.getID() != null) {
-            SpUtils.getInstance().saveString(AppConfig.USER_ID, userBean.getID());
+      //  dismissProgressDialog();
+        UserBean.DataBean data = userBean.getData();
+        if (data != null) {
+            String number1 = idEdNumber.getText().toString();
+            SpUtils.getInstance().saveString(AppConfig.USER_ID, data.getID() + "");
+            SpUtils.getInstance().saveString(AppConfig.USER_PHONE,number1);
+            updateDrawerUI();
+            if (data.getState() == 1) {
+                openActivity(IninActivity.class);
+            } else {
+                openActivity(MainTabActivity.class);
+            }
+            finish();
         }
-        openActivity(IninActivity.class);
-        finish();
-
-//
-//        if (userBean.getState().equals("1")) {
-//            openActivity(IninActivity.class);
-//        } else {
-//            openActivity(MainTabActivity.class);
-//        }
     }
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////
+
+    public void updateDrawerUI() {
+        StringBuilder sAuthLogin = new StringBuilder();
+        StringBuilder sDoaminRealm = new StringBuilder();
+        VaxPhoneSIP.m_objVaxVoIP.GetLoginInfo(null, null, sAuthLogin, null, sDoaminRealm, null, null, null);
+    }
+
+
+    @Override
+    public void hideLoading() {
+        dismissProgressDialog();
+    }
+
+    @Override
+    public void showNetWorkErrorView() {
+
+    }
+
+
+
+    private void onInitVaxsoft() {
+        VaxPhoneSIP.m_objVaxVoIP.NetworkReachability(true);
+        VaxPhoneSIP.m_objVaxVoIP.OpenVideoDevice();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO
+                        , Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_CONTACTS
+                }, 3000);
+                return;
+            }
+        }
+        VaxPhoneSIPLogin.login(getApplicationContext());
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 3000) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                VaxPhoneSIPLogin.login(getApplicationContext());
+            } else {
+                DialogUtil.ShowDialog(this, "Please allow to use camera for video call.");
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+
 }

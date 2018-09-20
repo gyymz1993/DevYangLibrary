@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.utils.gyymz.utils.UIUtils;
 
 
-
 public class CodeButton extends CountDownTimer {
 
 
@@ -40,7 +39,7 @@ public class CodeButton extends CountDownTimer {
         isOnTick = true;
         mBtnCode.setClickable(false);
         mBtnCode.setEnabled(false);
-        mBtnCode.setText(millisUntilFinished / 1000 + "s" + "后再发送");
+        mBtnCode.setText(millisUntilFinished / 1000 + "秒" + "后再发送");
         mBtnCode.setTextColor(UIUtils.getColor("#FFFFFF"));
         //mBtnCode.setTextSize(UIUtils.dp2px(12));
         SpannableString spannableString = new SpannableString(mBtnCode.getText().toString());

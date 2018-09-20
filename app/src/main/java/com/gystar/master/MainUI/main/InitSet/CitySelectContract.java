@@ -9,6 +9,8 @@ import java.util.List;
 public class CitySelectContract {
     interface View extends BaseView {
         void setCityData( List<CityListBean.DataBean> data);
+
+        void regesterSuccess();
     }
 
     interface Presenter extends BasePresenter<View> {

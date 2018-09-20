@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/gy_bg_color">
+
+    <!--
+    2、当NestedScrollView嵌套RecycleView布局由Fragment管理，Fragment切换时会自动滑动到ReycleView的顶部。
+    解决方法：在NestedScrollView唯一子布局中加入 android:descendantFocusability=“blocksDescendants”
+    -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gy_bg_color"
+        android:descendantFocusability="blocksDescendants"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/id_fl_root"
+            android:layout_width="match_parent"
+            android:layout_height="250dp">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/home_head_bg"
+                android:paddingLeft="25dp">
+
+                <RelativeLayout
+                    android:id="@+id/id_ry_clinet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="25dp">
+
+
+                    <TextView
+                        android:id="@+id/id_tv_clinet_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/white"
+                        android:textSize="30dp" />
+
+
+                    <TextView
+                        android:id="@+id/id_tv_eare"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toRightOf="@+id/id_tv_clinet_name"
+                        android:gravity="bottom"
+                        android:textColor="@color/white" />
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/id_ry_clinet"
+                    android:layout_marginTop="25dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="剩余通话时长："
+                            android:textColor="@color/white"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/tv_remainder_call_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="16dp" />
+
+
+                        <TextView
+                            android:id="@+id/id_tv_top_up"
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:background="@drawable/login_code_shape_unenabled"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="充值"
+                            android:textColor="@color/white"
+                            android:textSize="15dp" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="今日/总呼出次数"
+                            android:textColor="@color/white"
+                            android:textSize="16dp" />
+
+
+                        <TextView
+                            android:id="@+id/id_tv_hu_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/id_fl_root"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="35dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="平均通话时长："
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+
+
+                <TextView
+                    android:id="@+id/id_tv_call_time_average"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="合计通话时长："
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+
+
+                <TextView
+                    android:id="@+id/id_tv_call_time_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="呼出次数："
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:text="100%"
+                    android:textSize="16dp"
+                    />
+
+                <com.zhouyou.view.segmentedbar.SegmentedBarView
+                    android:visibility="gone"
+                    android:layout_gravity="center"
+                    android:id="@+id/up_count_barView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    app:sbv_empty_segment_text="No segments"
+                    app:sbv_segment_gap_width="5dp"
+                    app:sbv_segment_rule="average"
+                    app:sbv_segment_text_size="15sp"
+                    app:sbv_show_description_text="true"
+                    app:sbv_side_style="rounded"
+                    app:sbv_side_text_style="twoSided"
+                    app:sbv_value_sign_height="30dp"
+                    app:sbv_value_sign_round="8dp"
+                    app:sbv_value_sign_width="100dp"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="接听率："
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:text="100%"
+                    android:textSize="16dp"
+                    />
+
+                <com.zhouyou.view.segmentedbar.SegmentedBarView
+                    android:visibility="gone"
+                    android:layout_gravity="center"
+                    android:id="@+id/barView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    app:sbv_empty_segment_text="No segments"
+                    app:sbv_segment_gap_width="5dp"
+                    app:sbv_segment_rule="average"
+                    app:sbv_segment_text_size="15sp"
+                    app:sbv_show_description_text="true"
+                    app:sbv_side_style="rounded"
+                    app:sbv_side_text_style="twoSided"
+                    app:sbv_value_sign_height="30dp"
+                    app:sbv_value_sign_round="8dp"
+                    app:sbv_value_sign_width="100dp"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/id_ig_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/home_head_logo" />
+
+    </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>

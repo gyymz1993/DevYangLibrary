@@ -25,6 +25,7 @@ public abstract class FragmentActivity<P extends BasePresenter> extends MVPBaseA
         }
     }
 
+
     public void pushFragment(BaseAppCompatFragment fragment) {
         if (fragment != null) {
             getSupportFragmentManager().beginTransaction()

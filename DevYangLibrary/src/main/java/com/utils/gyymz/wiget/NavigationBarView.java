@@ -21,7 +21,7 @@ import com.utils.gyymz.utils.UIUtils;
  * @author: gyymz1993
  * 创建时间：2017/4/26 16:54
  **/
-public class NavigationBarView extends TranslucentNavBar {
+public class NavigationBarView extends RelativeLayout {
     public String titleText;
     private String letfText;
     private String rightText;
@@ -37,6 +37,7 @@ public class NavigationBarView extends TranslucentNavBar {
     private TextView rightTv;
     private TextView titleTv;
     private ImageView rightImg;
+    public View mView;
 
     public enum NavigationViewType {
         LEFT_TEXT, RIGHT_TEXT, LEFT_IV, RIGHT_IV, CONTEXT_TV
@@ -53,16 +54,13 @@ public class NavigationBarView extends TranslucentNavBar {
 
     public NavigationBarView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        mView = View.inflate(context, R.layout.layout_navigation_default, this);
         // LayoutInflater.from(getContext()).inflate(R.layout.layout_navigation_default, this, false);
         // 将view添加。
         initTypedArray(context, attrs);
         initView();
     }
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.layout_navigation_default;
-    }
 
     public void initTypedArray(Context context, @Nullable AttributeSet attrs) {
         if (attrs != null) {// 得到自定义属性
@@ -81,15 +79,13 @@ public class NavigationBarView extends TranslucentNavBar {
     }
 
 
-    @Override
     protected void initView() {
-        setColor(UIUtils.getColor(R.color.gytheme));
         // 将view添加。
-        leftTv = findViewById(R.id.tv_left);
-        leftIv = findViewById(R.id.iv_left);
-        rightTv = findViewById(R.id.tv_right);
-        rightImg = findViewById(R.id.iv_right);
-        titleTv = findViewById(R.id.title_tv);
+        leftTv = mView.findViewById(R.id.tv_left);
+        leftIv = mView.findViewById(R.id.iv_left);
+        rightTv = mView.findViewById(R.id.tv_right);
+        rightImg = mView.findViewById(R.id.iv_right);
+        titleTv = mView.findViewById(R.id.title_tv);
 
         if (letfText != null) {
             leftTv.setText(letfText);

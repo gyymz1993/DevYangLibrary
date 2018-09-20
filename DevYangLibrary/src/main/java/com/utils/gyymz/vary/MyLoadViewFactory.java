@@ -19,6 +19,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,17 +29,10 @@ import com.utils.gyymz.wiget.GifView;
 
 public class MyLoadViewFactory implements ILoadViewFactory {
 
-    private RVLoadViewHelper rvLoadViewHelper;
     private LoadViewHelper loadViewHelper;
 
     public MyLoadViewFactory(View rootView) {
-        rvLoadViewHelper = new RVLoadViewHelper(rootView);
-       loadViewHelper = new LoadViewHelper(rootView);
-    }
-
-    @Override
-    public ILoadView madeLoadMoreView() {
-        return rvLoadViewHelper;
+        loadViewHelper = new LoadViewHelper(rootView);
     }
 
     @Override
@@ -46,105 +40,6 @@ public class MyLoadViewFactory implements ILoadViewFactory {
         return loadViewHelper;
     }
 
-
-
-    private static class RVLoadViewHelper implements ILoadView {
-        private VaryViewHelper helper;
-        private OnClickListener onClickRefreshListener;
-        private Context context;
-
-        public RVLoadViewHelper(View switchView) {
-            this.context = switchView.getContext();
-            helper = new VaryViewHelper(switchView);
-        }
-
-
-        @Override
-        public void init(View switchView, OnClickListener onClickRefreshListener) {
-            this.context = switchView.getContext();
-            this.onClickRefreshListener = onClickRefreshListener;
-            helper = new VaryViewHelper(switchView);
-        }
-
-        @Override
-        public void restore() {
-            helper.restoreView();
-        }
-
-        @Override
-        public void showLoading() {
-            View mLoadingView = helper.inflate(R.layout.layout_view_loading);
-            if (null != mLoadingView) {
-                GifView gif_loading = mLoadingView.findViewById(R.id.gif_loading);
-                gif_loading.setMovieResource(R.raw.loading_one_touch);
-            }
-            helper.showLayout(mLoadingView);
-        }
-
-        @Override
-        public void tipFail(Exception exception) {
-            Toast.makeText(context.getApplicationContext(), "网络加载失败", Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void showFail(Exception exception) {
-//			View layout = helper.inflate(R.layout.load_error);
-//			layout.setOnClickListener(onClickRefreshListener);
-//			helper.showLayout(layout);
-        }
-
-        @Override
-        public void showEmpty() {
-//			View layout = helper.inflate(R.layout.load_empty);
-//			layout.setOnClickListener(onClickRefreshListener);
-//			helper.showLayout(layout);
-        }
-
-    }
-
-//    private static class LoadMoreHelper implements ILoadMoreView {
-//
-//        protected TextView footView;
-//        protected View mRootView;
-//
-//        protected OnClickListener onClickRefreshListener;
-//
-//        public LoadMoreHelper(View rootView) {
-//            mRootView = rootView;
-//        }
-//
-//        @Override
-//        public void init(View rootView, OnClickListener onClickRefreshListener) {
-////			footView = (TextView) footViewHolder.addFootView(R.layout.layout_listview_foot);
-////			this.onClickRefreshListener = onClickRefreshListener;
-////			showNormal();
-//        }
-//
-//        @Override
-//        public void showNormal() {
-//            footView.setText("点击加载更多");
-//            footView.setOnClickListener(onClickRefreshListener);
-//        }
-//
-//        @Override
-//        public void showLoading() {
-//            footView.setText("正在加载中..");
-//            footView.setOnClickListener(null);
-//        }
-//
-//        @Override
-//        public void showFail(Exception exception) {
-//            footView.setText("加载失败，点击重新加载");
-//            footView.setOnClickListener(onClickRefreshListener);
-//        }
-//
-//        @Override
-//        public void showNomore() {
-//            footView.setText("已经加载完毕");
-//            footView.setOnClickListener(null);
-//        }
-//
-//    }
 
     private static class LoadViewHelper implements ILoadView {
         private VaryViewHelper helper;
@@ -180,22 +75,32 @@ public class MyLoadViewFactory implements ILoadViewFactory {
         }
 
         @Override
-        public void tipFail(Exception exception) {
+        public void tipFail(String exception) {
             Toast.makeText(context.getApplicationContext(), "网络加载失败", Toast.LENGTH_SHORT).show();
+
         }
 
         @Override
-        public void showFail(Exception exception) {
-//			View layout = helper.inflate(R.layout.load_error);
-//			layout.setOnClickListener(onClickRefreshListener);
-//			helper.showLayout(layout);
+        public void showFail(String exception) {
+            View layout = helper.inflate(R.layout.layout_status_layout_manager_error);
+            layout.setOnClickListener(onClickRefreshListener);
+            helper.showLayout(layout);
         }
 
         @Override
         public void showEmpty() {
-//			View layout = helper.inflate(R.layout.load_empty);
-//			layout.setOnClickListener(onClickRefreshListener);
-//			helper.showLayout(layout);
+            View layout = helper.inflate(R.layout.layout_status_layout_manager_empty);
+            layout.setOnClickListener(onClickRefreshListener);
+            helper.showLayout(layout);
+        }
+
+        @Override
+        public void showEmptSrc(int imageResourceId) {
+            View layout = helper.inflate(R.layout.layout_status_layout_manager_empty);
+            ImageView imageView = layout.findViewById(R.id.iv_status_empty_img);
+            imageView.setImageResource(imageResourceId);
+            layout.setOnClickListener(onClickRefreshListener);
+            helper.showLayout(layout);
         }
 
     }

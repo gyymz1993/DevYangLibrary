@@ -9,6 +9,11 @@ public class LoginContract {
     interface View extends BaseView {
         void getCode();
         void doLogin(UserBean userBean);
+
+        /**
+         * 加载完成时隐藏加载框
+         */
+        void hideLoading();
     }
 
     interface Presenter extends BasePresenter<View> {
