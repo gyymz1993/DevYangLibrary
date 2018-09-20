@@ -93,14 +93,14 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
     testImplementation 'junit:junit:4.12'
     implementation 'com.just.agentwebX5:agentwebX5:2.0.0'
-    implementation files('libs/tbs_sdk_thirdapp_v3.6.0.1183_43604_sharewithdownload_withoutGame_obfs_20180211_105126.jar')
-    //implementation project(':paylibrary')
-    //implementation project(':DevYangLibrary')
-    implementation 'com.github.gyymz1993:DevYangLibrary:v1.0.0'
+    implementation files('libs/tbs_sdk_thirdapp_v3.6.0.jar')
+
+   // implementation 'com.github.gyymz1993:DevYangLibrary:v1.0.0'
+    //implementation 'com.github.gyymz1993:DevYangLibrary:v1.0.1'
+    compile 'com.github.gyymz1993:uiLibrary:v1.0.1'
+    implementation project(':DevYangLibrary')
     implementation project(':libPay')
     //implementation project(':UILibrary')
-    compile 'com.github.gyymz1993:uiLibrary:v1.0.1'
-   // implementation project(':baselibrary')
 
     /*没有这句会爆出空*/
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
