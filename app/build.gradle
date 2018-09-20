@@ -95,7 +95,8 @@ dependencies {
     implementation 'com.just.agentwebX5:agentwebX5:2.0.0'
     implementation files('libs/tbs_sdk_thirdapp_v3.6.0.1183_43604_sharewithdownload_withoutGame_obfs_20180211_105126.jar')
     //implementation project(':paylibrary')
-    implementation project(':DevYangLibrary')
+    //implementation project(':DevYangLibrary')
+    implementation 'com.github.gyymz1993:DevYangLibrary:v1.0.0'
     implementation project(':libPay')
     //implementation project(':UILibrary')
     compile 'com.github.gyymz1993:uiLibrary:v1.0.1'
